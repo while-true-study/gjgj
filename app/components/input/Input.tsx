@@ -12,6 +12,7 @@ interface InputProps {
   classname?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  maxLength?: number;
 }
 
 const Input = ({

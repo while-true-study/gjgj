@@ -10,6 +10,8 @@ export default {
     extend: {
       fontFamily: {
         "ef-aone": ["EF_AONE"],
+        notoSans: ["NotoSans"],
+        notoSansKR: ["NotoSansKR"],
       },
       fontSize: {
         "1.5xl": "22px",
