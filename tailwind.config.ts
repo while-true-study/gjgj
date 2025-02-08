@@ -8,7 +8,14 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "ef-aone": ["EF_AONE"],
+      },
+      fontSize: {
+        "1.5xl": "22px",
+      },
       colors: {
+        fontcolor: "#3744FB",
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
