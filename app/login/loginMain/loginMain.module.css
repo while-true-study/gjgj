@@ -1,0 +1,72 @@
+.container {
+    background-color: #3744FB;
+    height: 100vh;
+}
+
+.innerContainer {
+    align-content: center;
+    justify-items: center;
+}
+
+.line1 {
+    font-size: 24px;
+    color: #FFFFFF;
+    padding-top: 116px;
+}
+
+.line2 {
+    font-size: 24px;
+    color: #FFFFFF;
+    padding-top: 4px;
+}
+
+.mainTitle {
+    font-size: 60px;
+    color: #FFFFFF;
+    padding-top: 16px;
+}
+
+.mainLogo {
+    padding-top: 13px;
+}
+
+.kakao{
+    padding-top: 33px;
+}
+
+.kakaoButton {
+    background-color: #FEE500;
+    color: #000000;
+}
+
+.kakaoContent {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.naver{
+    padding-top: 16px;
+}
+
+.naverButton {
+    background-color: #03c75a;
+    color: #FFFFFF;
+}
+
+.naverContent {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    gap: 16px;
+}
+
+.email {
+    padding-top: 12.5px;
+}
+
+.emailButton {
+    color: #FFFFFF;
+    background-color: transparent;
+}
