@@ -1,18 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import styles from "./Input.module.css";
 
 interface InputProps {
   type: string;
   name: string;
   label: string;
-  id: string;
+  id: string; // labeling
+  rightBox?: ReactNode; // input 오른쪽에 넣을 것
   classname?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
 }
 
-const Input = ({ type, label = "", name, classname, ...rest }: InputProps) => {
+const Input = ({
+  label = "",
+  classname,
+  rightBox,
+  onChange,
+  ...rest
+}: InputProps) => {
   const [inputState, setInputState] = useState(false);
   const [viewPW, setViewPW] = useState(false);
   return (
@@ -21,17 +29,11 @@ const Input = ({ type, label = "", name, classname, ...rest }: InputProps) => {
         {label}
       </label>
       <input
-        onChange={(e) => setInputState(e.target.value.length > 0)}
+        onChange={onChange}
         className={`${styles.input} ${inputState ? styles.inputIn : null}`}
-        type={viewPW && type === "password" ? "text" : type}
-        name={name}
         {...rest}
       />
-      {type === "password" && inputState == true && (
-        <div onClick={() => setViewPW(!viewPW)} className={styles.EyeBox}>
-          <img src={viewPW ? "/CloseEye.png" : "/OpenEye.png"}></img>
-        </div>
-      )}
+      {rightBox}
     </div>
   );
 };

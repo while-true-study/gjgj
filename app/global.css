@@ -19,3 +19,14 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@font-face {
+  font-family: "EF_AONE";
+  src: url("./fonts/EF_AONE.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+h3 {
+  font-family: "EF_AONE";
+}
