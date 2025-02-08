@@ -1,7 +1,7 @@
 "use client";
 
 import Input from "@/app/components/input/Input";
-import { Button } from "@/app/components/button/Button";
+import { Button } from "@/app/components/button/button";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import { useState } from "react";
 import styles from "./input.module.css";

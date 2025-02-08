@@ -1,16 +1,16 @@
-'use client'
+"use client";
 
-import { Button } from "./components/button/Button";
+import { Button } from "./components/button/button";
 
 export default function LoginMain() {
   return (
     <main>
-      <h1>페이지</h1>
-      <p>페이지입니다.</p>
-      <Button label={'활성화된 버튼'} />
-      <hr/>
-    
-      <Button label={'비활성화 버튼'} isActive={false}/>
+      <h1 className="font-notoSans">페이지</h1>
+      <p className="font-notoSansKR">페이지입니다.</p>
+      <Button label={"활성화된 버튼"} />
+      <hr />
+
+      <Button label={"비활성화 버튼"} isActive={false} />
     </main>
   );
 }
