@@ -4,10 +4,17 @@ import BackHeader from "@/app/components/backHeader/BackHeader";
 import { Button } from "@/app/components/button/Button";
 import Input from "@/app/components/input/Input";
 import styles from "./signUp.module.css";
+import React, { useState } from "react";
 
 export default function LoginInput() {
   const ClickReqCall = () => {
     console.log("인증요청");
+  };
+
+  const [phoneNum, setphoneNum] = useState("");
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setphoneNum(e.target.value);
   };
 
   return (
@@ -26,12 +33,15 @@ export default function LoginInput() {
           type="tel"
           id="Number"
           name="Number"
+          onChange={handlePhoneChange} // 입력 시 자동 변환
           placeholder="전화번호를 적어주세요."
+          maxLength={13}
           rightBox={
             <div className={styles.Reqcall} onClick={ClickReqCall}>
               <span>인증요청</span>
             </div>
           }
+          value={phoneNum}
           classname="mb-6"
         ></Input>
         <Input
