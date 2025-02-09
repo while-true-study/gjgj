@@ -5,6 +5,7 @@ import { Button } from "@/app/components/button/button";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import { useState } from "react";
 import styles from "./input.module.css";
+import TopBarHome from "@/app/components/TopBarHome/TopBarHome";
 
 export default function LoginInput() {
   const findIdClcik = () => {
@@ -33,6 +34,7 @@ export default function LoginInput() {
 
   return (
     <div className="flex flex-col h-full p-6 ">
+      <TopBarHome></TopBarHome>
       <BackHeader></BackHeader>
       <p className="text-4xl font-normal mb-14 mr-auto ml-auto text-fontcolor mt-12 font-ef-aone">
         끄적끄적
