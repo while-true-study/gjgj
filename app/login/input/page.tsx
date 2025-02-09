@@ -41,7 +41,7 @@ export default function LoginInput() {
       <form className="w-full max-w-sm flex flex-col gap-4">
         {/* 아이디 입력창 */}
         <Input
-          classname="mb-8"
+          classname={`mb-8 ${password.length > 0 && "inputIn"}`}
           type="email"
           label="아이디"
           name="id"
