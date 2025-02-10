@@ -1,7 +1,8 @@
 "use client";
 
 import { Button } from "./components/button/button";
-import NavigationBar from "./components/NavigationBar/NavigationBar";
+import TopBarHome from "./components/TopBarHome/TopBarHome";
+import BackHeader from "./components/backHeader/BackHeader";
 
 export default function LoginMain() {
   return (
@@ -11,7 +12,7 @@ export default function LoginMain() {
       <Button label={"활성화된 버튼"} />
       <hr />
       <Button label={"비활성화 버튼"} isActive={false} />
-      <NavigationBar></NavigationBar>
+      <TopBarHome></TopBarHome>
     </main>
   );
 }
