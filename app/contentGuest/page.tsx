@@ -6,7 +6,7 @@ import styles from "./contentGuest.module.css";
 import { Button } from "../components/button/button";
 import ContentNavigation from "./components/ContentNavigation/ContentNavigation";
 
-const page = () => {
+const ContentGuest = () => {
   return (
     <>
       <BackHeader></BackHeader>
@@ -52,4 +52,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ContentGuest;

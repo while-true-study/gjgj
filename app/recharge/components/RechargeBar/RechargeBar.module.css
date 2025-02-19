@@ -1,0 +1,38 @@
+.contentbar {
+  display: flex;
+  border: 1px solid #d9d9d9;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+  padding: 24px 16px;
+}
+
+.cash {
+  flex-grow: 1;
+  font-size: 20px;
+  font-weight: 600;
+  color: #3744fb;
+  display: flex;
+}
+.cash img {
+  width: 36px;
+  height: 18px;
+}
+
+.money {
+  color: #fff;
+  background-color: #3744fb;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 8px 4px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+.hot {
+  border: 1px solid #7780fc !important;
+}
