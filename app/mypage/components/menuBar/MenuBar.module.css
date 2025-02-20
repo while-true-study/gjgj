@@ -1,0 +1,22 @@
+.content {
+  display: flex;
+  padding: 13px 18px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+.register {
+  background-color: #e63a47;
+  padding: 3px 6px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-left: 4px;
+}
