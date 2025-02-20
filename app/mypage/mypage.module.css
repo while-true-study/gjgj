@@ -1,0 +1,57 @@
+.content {
+  height: 90%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 12px;
+  background-color: #f1f1f2;
+}
+
+.loginbutton {
+  background-color: #231f20;
+  color: #f1f1f2;
+  width: 100%;
+  padding: 12px 8px;
+  border-radius: 8px;
+  font-size: 20px;
+  line-height: 27px;
+  font-weight: 600;
+}
+
+.cashBox {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 20px;
+}
+
+.cashbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cashbar span {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+.cashbar span:nth-child(1) {
+  color: #3744fb;
+}
+
+.cashbar span:nth-child(2) {
+  color: #231f20;
+}
+
+.cashBox button {
+  background-color: #d0d2d3;
+  width: 100%;
+  padding: 8px 4px;
+  border-radius: 8px;
+}
+
+.menuBox {
+  background-color: #fff;
+  border-radius: 20px;
+}

@@ -10,7 +10,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className="flex justify-center items-center min-h-screen bg-gray-100">
         <ReduxProvider>
-          <div className="w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide">
+          <div className="w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative">
             {children}
           </div>
         </ReduxProvider>
