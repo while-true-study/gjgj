@@ -3,13 +3,16 @@
   padding: 20px;
   flex-direction: column;
   display: flex;
-  gap: 12px;
 }
 
 .content span {
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
+}
+
+.content li {
+  padding-left: 20px;
 }
 
 .content p {

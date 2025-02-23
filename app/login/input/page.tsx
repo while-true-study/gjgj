@@ -34,7 +34,6 @@ export default function LoginInput() {
 
   return (
     <div className="flex flex-col h-full p-6 ">
-      <TopBarHome></TopBarHome>
       <BackHeader></BackHeader>
       <p className="text-4xl font-normal mb-14 mr-auto ml-auto text-fontcolor mt-12 font-ef-aone">
         끄적끄적
