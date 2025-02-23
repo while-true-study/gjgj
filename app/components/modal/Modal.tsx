@@ -10,7 +10,7 @@ interface modal {
   backLabel: string; // 돌아가는 label
   setView: boolean; // 렌더할지말지
   setClose: (open: boolean) => void; // 닫기
-  onClick: () => void;
+  onClick: () => void; // 버튼 이벤트
 }
 
 const Modal = ({
