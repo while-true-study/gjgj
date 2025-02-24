@@ -1,8 +1,8 @@
-import Contest from "@/app/components/Contest/Contest";
 import React, { useEffect, useState } from "react";
 import styles from "./IngContests.module.css";
 import axios from "axios";
 import Link from "next/link";
+import Contest from "@/app/components/Contest/Contest";
 
 interface HomeListItem {
   boardId: number;
@@ -78,7 +78,7 @@ const IngContests = () => {
           <div>불러오는 중...</div>
         ) : (
           data &&
-          data.map((i, id) => {
+          data.map((i) => {
             return (
               <Contest
                 key={i.boardId}

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./NavigationBar.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";

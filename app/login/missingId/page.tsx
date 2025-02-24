@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import styles from "./missingId.module.css"
+import styles from "./missingId.module.css";
 import Input from "@/app/components/input/Input";
 import BackHeader from "@/app/components/backHeader/BackHeader";
-import { Button } from "@/app/components/button/Button";
+import { Button } from "@/app/components/button/button";
 
 export default function MissingId() {
   const handleCertification = () => {
     console.log("인증요청");
-  } 
+  };
   const handleOkay = () => {
     console.log("확인");
-  }    
-  
+  };
+
   return (
     <div className={styles.container}>
       <BackHeader />
@@ -21,7 +21,7 @@ export default function MissingId() {
         <p>아이디 찾기</p>
       </div>
       <form className={styles.phoneNumber}>
-        <Input 
+        <Input
           label="전화번호"
           type="tel"
           id="Number"
@@ -35,7 +35,7 @@ export default function MissingId() {
         />
       </form>
       <form className={styles.certification}>
-        <Input 
+        <Input
           label="인증번호"
           type="text"
           id="getNumber"
@@ -48,7 +48,7 @@ export default function MissingId() {
           }
         />
       </form>
-      <Button label="아이디 전송받기" className={styles.button}/>
+      <Button label="아이디 전송받기" className={styles.button} />
     </div>
   );
 }
