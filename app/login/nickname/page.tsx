@@ -2,10 +2,10 @@
 
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import Input from "@/app/components/input/Input";
-import { Button } from "@/app/components/button/Button";
 import styles from "./nickname.module.css";
 import React, { useState } from "react";
 import Image from "next/image";
+import { Button } from "@/app/components/button/button";
 
 export default function Nickname() {
   const [nickname, setNickname] = useState("");

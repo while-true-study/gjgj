@@ -1,12 +1,9 @@
 "use client";
 
-import Contest from "../components/Contest/Contest";
-import Input from "../components/input/Input";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import TopBarHome from "../components/TopBarHome/TopBarHome";
 import styles from "./home.module.css";
 import IngContests from "./IngContests/IngContests";
-import Inspiration from "./inspiration/inspiration";
 
 export default function LoginMain() {
   return (

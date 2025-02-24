@@ -32,11 +32,11 @@ const ContentBox = ({
       </div>
       <div className={styles.thiLine}>
         <span className={styles.Heart}>
-          <img src="/IngContests/noHeart.svg"></img>
+          <img src="/IngContests/noHeart.svg" alt="좋아요수"></img>
           <span>{loveit}</span>
         </span>
         <span className={styles.comment}>
-          <img src="/IngContests/coment.svg"></img>
+          <img src="/IngContests/coment.svg" alt="댓글수"></img>
           <span>{comment}</span>
         </span>
       </div>

@@ -1,10 +1,10 @@
 "use client";
 
-import BackHeader from "@/app/components/backHeader/BackHeader";
-import Contest from "@/app/components/Contest/Contest";
 import React, { useEffect, useState } from "react";
 import styles from "./homeListAll.module.css";
 import axios from "axios";
+import BackHeader from "@/app/components/backHeader/BackHeader";
+import Contest from "@/app/components/Contest/Contest";
 
 interface HomeListItem {
   boardId: number;
@@ -19,7 +19,7 @@ interface HomeListItem {
   title: string;
 }
 
-const page = () => {
+const Page = () => {
   const [data, setData] = useState<HomeListItem[]>([]);
   useEffect(() => {
     axios
@@ -41,7 +41,7 @@ const page = () => {
     <div className={styles.content}>
       <BackHeader></BackHeader>
       {data ? (
-        data.map((i, id) => {
+        data.map((i) => {
           return (
             <Contest
               key={i.boardId}
@@ -61,4 +61,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

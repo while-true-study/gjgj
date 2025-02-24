@@ -1,10 +1,10 @@
 "use client";
 
 import BackHeader from "@/app/components/backHeader/BackHeader";
-import { Button } from "@/app/components/button/Button";
 import Input from "@/app/components/input/Input";
 import styles from "./signUp.module.css";
 import React, { useState } from "react";
+import { Button } from "@/app/components/button/button";
 
 export default function LoginInput() {
   const ClickReqCall = () => {

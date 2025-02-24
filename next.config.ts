@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
-module.exports = {
+import path from "path";
+
+const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
@@ -9,10 +11,12 @@ module.exports = {
       },
     ];
   },
-  reactStrictMode: false, // false로 변경
-};
-const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: false, // reactStrictMode는 nextConfig 내부로 이동
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.join(__dirname, "app");
+    config.resolve.alias["@redux"] = path.join(__dirname, "redux");
+    return config;
+  },
 };
 
 export default nextConfig;
