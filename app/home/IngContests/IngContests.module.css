@@ -7,20 +7,22 @@
   font-size: 14px;
   font-weight: 500;
   color: #231f20;
+  cursor: pointer;
 }
 
-.TopBox span:nth-child(1) {
+.ing {
   flex-grow: 1;
   font-size: 20px;
   font-weight: 600;
   color: #231f20;
 }
-.TopBox span:nth-child(2) {
+.allview {
   justify-content: end;
   color: #a6a8ab;
   font-size: 14px;
   font-weight: 600;
   font-family: "NotoSans";
+  cursor: pointer;
 }
 
 .TopBox {
@@ -31,4 +33,13 @@
 .selBox {
   color: #7780fc !important;
   font-weight: 500;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  max-height: 600px;
 }

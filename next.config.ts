@@ -1,6 +1,15 @@
 import type { NextConfig } from "next";
 module.exports = {
-  reactStrictMode: false, // true → false로 변경
+  async redirects() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap",
+        permanent: true,
+      },
+    ];
+  },
+  reactStrictMode: false, // false로 변경
 };
 const nextConfig: NextConfig = {
   /* config options here */
