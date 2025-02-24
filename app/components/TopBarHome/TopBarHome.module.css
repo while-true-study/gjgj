@@ -1,0 +1,27 @@
+.topMenu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 12px;
+}
+.topMenu span {
+  flex-grow: 1;
+}
+
+.rigthbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.rigthbox img {
+  height: 30px;
+  width: 30px;
+}

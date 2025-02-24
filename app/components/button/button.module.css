@@ -1,0 +1,19 @@
+.button {
+  background-color: #3744fb;
+  color: #f1f1f2;
+  border: none;
+  border-radius: 8px;
+  width: 335px;
+  height: 47px;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Noto Sans KR Medium", sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button.inactive {
+  background-color: #d0d2d3;
+  color: #f1f1f2;
+  pointer-events: none;
+}

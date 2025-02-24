@@ -1,0 +1,73 @@
+.outbox {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.firLine {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.firLine > span:nth-child(1) {
+  padding: 4px;
+  background-color: #f1f1f2;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.firLine span:nth-child(2) {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.firLine span:nth-child(3) {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3744fb;
+}
+
+.thiLine {
+  display: flex;
+  gap: 4px;
+}
+
+.thiLine > span {
+  display: flex;
+  width: 46px;
+  height: 24px;
+  gap: 2px;
+}
+.Heart img {
+  width: 24px;
+  height: 24px;
+}
+
+.Heart span {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.comment span {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.titleBox {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #000000;
+}
