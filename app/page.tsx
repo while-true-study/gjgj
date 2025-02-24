@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Complete from "./components/Complete/Complete";
 import Modal from "./components/modal/Modal";
 
 export default function LoginMain() {

@@ -4,7 +4,7 @@ import BackHeader from "@/app/components/backHeader/BackHeader";
 import React, { useState } from "react";
 import styles from "./homeSearch.module.css";
 
-const page = () => {
+const Page = () => {
   const [query, setQuery] = useState("");
   const handleSubmit = () => {
     console.log("검색하기");
@@ -39,4 +39,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

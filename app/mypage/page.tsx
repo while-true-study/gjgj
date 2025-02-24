@@ -7,9 +7,9 @@ import MenuBar from "./components/menuBar/MenuBar";
 import Profile from "./components/profile/Profile";
 
 const page = () => {
-  const loginClick = () => {
-    console.log("로그인하기");
-  };
+  // const loginClick = () => {
+  //   console.log("로그인하기");
+  // };
   return (
     <>
       <div className={`${styles.content} overflow-auto scrollbar-hide`}>

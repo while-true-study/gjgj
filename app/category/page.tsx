@@ -10,10 +10,10 @@ import Link from "next/link";
 const page = () => {
   return (
     <div className="h-full relative">
-      <img src="/category/fullimg.svg" alt="" />
+      <img src="/category/fullimg.svg" alt="사진" />
       <div className={styles.search}>
         <Link href="/home/homeSearch">
-          <img src="/TopBarHome/search.svg"></img>
+          <img src="/TopBarHome/search.svg" alt="검색"></img>
         </Link>
       </div>
       <div className={styles.category}>

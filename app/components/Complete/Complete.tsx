@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { Button } from "../button/button";
 import styles from "./Complete.module.css";
 import Link from "next/link";
+import { Button } from "../button/button";
 
 interface complete {
   title: string;
