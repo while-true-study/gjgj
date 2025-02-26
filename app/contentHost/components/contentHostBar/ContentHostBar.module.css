@@ -1,0 +1,28 @@
+.Box {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 9px 12px;
+}
+
+.Box textarea {
+  resize: none;
+}
+
+.Box input {
+  width: 100%;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #231f20;
+  line-height: 21px;
+}
+
+.Box input::-webkit-outer-spin-button,
+.Box input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
