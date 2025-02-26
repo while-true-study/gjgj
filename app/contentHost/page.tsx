@@ -8,14 +8,19 @@ import { Button } from "../components/button/button";
 import axios from "axios";
 import CategoryBox from "./components/categoryBox/CategoryBox";
 
-const contentHost = () => {
+interface Category {
+  categoryId: number;
+  categoryName: string;
+}
+
+const ContentHost = () => {
   const [title, setTitle] = useState<string>(""); // 제목
   const [selectedDate, setSelectedDate] = useState<string>(""); // end 날짜
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null); // 카테고리 선택
   const [cash, setCash] = useState<string>(""); // 상금
   const [content, setcontent] = useState<string>(""); // 공모전 내용
   const [images, setImages] = useState<string[]>([]); // 사진
-  const [category, setCategory] = useState<any[]>([]); // 카테고리 get한거
+  const [category, setCategory] = useState<Category[]>([]); // 카테고리 get한거
 
   const endDate = new Date(selectedDate);
 
@@ -69,9 +74,9 @@ const contentHost = () => {
     setcontent(e.target.value);
   };
 
-  const formattedCash = cash
-    ? Intl.NumberFormat("ko-KR").format(Number(cash)) + "(캐시)"
-    : "";
+  // const formattedCash = cash
+  //   ? Intl.NumberFormat("ko-KR").format(Number(cash)) + "(캐시)"
+  //   : "";
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -217,4 +222,4 @@ const contentHost = () => {
   );
 };
 
-export default contentHost;
+export default ContentHost;
