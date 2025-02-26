@@ -1,0 +1,107 @@
+.dateBox {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 9px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.dateInput {
+  flex-grow: 1;
+  color: #231f20;
+  line-height: 21px;
+}
+
+.dateBox span {
+  font-size: 16px;
+  color: #231f20;
+  line-height: 21px;
+}
+
+.dateInput::-webkit-calendar-picker-indicator {
+  background-position: right 0px center; /* 기본 아이콘을 더 오른쪽으로 이동 */
+  padding-left: 10px; /* 글자와의 간격 조정 */
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #231f20;
+  line-height: 21px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.imgInput {
+  display: none; /* 기본 input을 숨김 */
+}
+
+.flexBox {
+  display: flex;
+  gap: 4px;
+}
+
+.flexBox span {
+  font-size: 16px;
+  color: #fff;
+  font-family: "NotoSans";
+  font-weight: 500;
+  line-height: 21px;
+}
+
+.flexBox span {
+  cursor: pointer;
+}
+
+.inputButton {
+  display: block;
+  width: 138px;
+  padding: 8px 12px;
+  background-color: #3744fb;
+  border-radius: 8px;
+  margin-top: 52px;
+}
+
+.imgBox {
+  position: relative;
+  width: 100px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.imgBox button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.initBox {
+  border: 1px solid #d0d2d3;
+  border-radius: 8px;
+  width: 100px;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.categoryBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  row-gap: 14px;
+  margin-top: -12px;
+}

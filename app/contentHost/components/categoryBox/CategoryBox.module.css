@@ -1,0 +1,16 @@
+.category {
+  border: 1px solid #d0d2d3;
+  border-radius: 20px;
+  color: #3744fb;
+  font-size: 16px;
+  line-height: 21px;
+  padding: 6px 12px;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.sel {
+  color: #fff !important;
+  background-color: #3744fb !important;
+}

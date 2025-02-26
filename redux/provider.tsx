@@ -1,8 +1,12 @@
-"use client"; // 클라이언트 컴포넌트로 선언
+"use client";
 
 import { Provider } from "react-redux";
 import { store } from "./store";
 
-export default function ReduxProvider({ children }: { children: React.ReactNode }) {
+export default function ReduxProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return <Provider store={store}>{children}</Provider>;
 }
