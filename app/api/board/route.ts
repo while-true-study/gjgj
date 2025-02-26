@@ -23,6 +23,7 @@ export async function GET() {
         isSuccess: false,
         code: "COMMON500",
         message: "서버 에러 발생",
+        error: error,
       },
       { status: 500 }
     );
