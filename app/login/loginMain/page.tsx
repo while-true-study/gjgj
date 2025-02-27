@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import styles from "./loginMain.module.css";
 import { Button } from "@/app/components/button/button";
+import Link from "next/link";
 
 export default function LoginMain() {
   const handleKaKaoLogin = () => {
@@ -60,11 +61,13 @@ export default function LoginMain() {
           />
         </div>
         <div className={styles.email}>
-          <Button
-            label="이메일 로그인"
-            className={styles.emailButton}
-            onClick={handleEmailLogin}
-          />
+          <Link href="/login/agree">
+            <Button
+              label="이메일 로그인"
+              className={styles.emailButton}
+              onClick={handleEmailLogin}
+            />
+          </Link>
         </div>
       </div>
     </div>
