@@ -128,7 +128,6 @@ export default function SignUp2() {
               id="email"
               name="email"
               placeholder="이메일을 적어주세요."
-              maxLength={13}
               rightBox={
                 <div className={styles.Reqcall} onClick={ClickReqCall}>
                   <span>인증요청</span>
