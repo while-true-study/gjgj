@@ -19,6 +19,7 @@ export default function SignUp2() {
   const [verPassword, setVerPassword] = useState(""); // 비밀번호 확인
   const [nickname, setNickname] = useState(""); // 닉네임
   const [selectedImage, setSelectedImage] = useState<number | null>(null); // 프로필 이미지
+  const url = "http://211.188.52.119:8080";
 
   const buttonActive =
     Name.trim() !== "" && // 본명 차있고
@@ -30,12 +31,12 @@ export default function SignUp2() {
 
   const ClickReqCall = () => {
     // 이메일 인증요청
-    axios.post("http://211.188.52.119:8080/api/emails", { email: email });
+    axios.post(`${url}/api/emails`, { email: email });
   };
 
   const verifyEmail = () => {
     axios
-      .post("http://211.188.52.119:8080/api/emails/verify", {
+      .post(`${url}/api/emails/verify`, {
         email: email,
         authCode: verEmail,
       })
@@ -96,7 +97,7 @@ export default function SignUp2() {
   const handleRegisterClick = () => {
     console.log("가입하기 버튼 클릭");
     // 여기에 서버 요청 등 처리
-    axios.post("http://211.188.52.119:8080/api/signup", signUpData);
+    axios.post(`${url}/api/signup`, signUpData);
   };
 
   return (
@@ -111,10 +112,7 @@ export default function SignUp2() {
             <span className="text-2xl font-bold ">회원이 아니신가요?</span>
           </div>
           <p className="text-2xl font-bold mr-auto mb-14">1분이면 충분해요!</p>
-          <form
-            className="w-full h-full max-w-sm flex flex-col gap-4 items-start"
-            onSubmit={(e) => e.preventDefault()}
-          >
+          <div className="w-full h-full max-w-sm flex flex-col gap-4 items-start">
             <Input
               label="이름"
               type="text"
@@ -200,7 +198,7 @@ export default function SignUp2() {
               onClick={handleNextStep}
               className="mb-5 mt-5"
             />
-          </form>
+          </div>
         </>
       )}
 
