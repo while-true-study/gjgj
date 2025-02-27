@@ -5,20 +5,14 @@ import BackHeader from "@/app/components/backHeader/BackHeader";
 import { useState } from "react";
 import styles from "./input.module.css";
 import { Button } from "@/app/components/button/button";
+import Link from "next/link";
+import axios from "axios";
 
 export default function LoginInput() {
-  const findIdClcik = () => {
-    console.log("아이디 찾기 버튼");
-  };
-  const findPwClcik = () => {
-    console.log("비밀번호 찾기 버튼");
-  };
-  const sighUpClcik = () => {
-    console.log("회원가입 버튼");
-  };
-
-  const [email, setEmail] = useState(""); // 아이디
-  const [password, setPassword] = useState(""); // 비밀번호
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [viewPW, setViewPW] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -29,10 +23,25 @@ export default function LoginInput() {
   };
 
   const isButtonActive = email.length > 0 && password.length > 0;
-  const [viewPW, setViewPW] = useState(false);
+
+  const jsonData = {
+    accountId: email,
+    password: password,
+  };
+
+  const buttonClick = () => {
+    axios
+      .post("http://211.188.52.119:8080/api/login", jsonData)
+      .then((res) => {
+        console.log("Success:", res);
+      })
+      .catch((err) => {
+        setErrMsg(err.message);
+      });
+  };
 
   return (
-    <div className="flex flex-col h-full p-6 ">
+    <div className="flex flex-col h-full p-5 ">
       <BackHeader></BackHeader>
       <p className="text-4xl font-normal mb-14 mr-auto ml-auto text-fontcolor mt-12 font-ef-aone">
         끄적끄적
@@ -50,7 +59,7 @@ export default function LoginInput() {
         />
         <Input
           onChange={handlePasswordChange}
-          classname="mb-8"
+          classname=""
           type={viewPW ? "text" : "password"}
           label="비밀번호"
           name="password"
@@ -63,7 +72,9 @@ export default function LoginInput() {
             )
           }
         />
+        {<p className={styles.errmsg}>{errMsg}</p>}
         <Button
+          onClick={buttonClick}
           label="로그인"
           isActive={isButtonActive}
           className="mb-8"
@@ -73,22 +84,25 @@ export default function LoginInput() {
       {/* footer 바 */}
       <div className={`${styles.footerbox} ${"w-full"}`}>
         <div
-          onClick={findIdClcik}
           className={`${styles.footerbox} ${styles.box} ${styles.rightline}`}
         >
-          <span>아이디 찾기</span>
+          <Link href="/login/missingId">
+            <span>아이디 찾기</span>
+          </Link>
         </div>
+
         <div
-          onClick={findPwClcik}
           className={`${styles.footerbox} ${styles.box} ${styles.rightline}`}
         >
-          <span>비번 찾기</span>
+          <Link href="/login/missingPw">
+            <span>비번 찾기</span>
+          </Link>
         </div>
-        <div
-          onClick={sighUpClcik}
-          className={`${styles.footerbox} ${styles.box}`}
-        >
-          <span>회원가입</span>
+
+        <div className={`${styles.footerbox} ${styles.box}`}>
+          <Link href="/login/signUp">
+            <span>회원가입</span>
+          </Link>
         </div>
       </div>
     </div>

@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import styles from "./AgreeBar.module.css";
 
 interface AgreeBarProps {
+  title: string;
   onChange: (isChecked: boolean) => void;
 }
 
-const AgreeBar = ({ onChange }: AgreeBarProps) => {
+const AgreeBar = ({ title, onChange }: AgreeBarProps) => {
   const [check, setCheck] = useState(false); // 기본값을 false로 설정
 
   const checkClick = () => {
@@ -21,7 +22,7 @@ const AgreeBar = ({ onChange }: AgreeBarProps) => {
         src={check ? `/agreecheck.svg` : "/agreenocheck.svg"}
         alt="check-box"
       />
-      <p>서비스 운영약관 동의(필수)</p>
+      <p>{title}</p>
       <img src="/down.svg" alt="down-arrow" />
     </div>
   );
