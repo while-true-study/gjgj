@@ -111,7 +111,10 @@ export default function SignUp2() {
             <span className="text-2xl font-bold ">회원이 아니신가요?</span>
           </div>
           <p className="text-2xl font-bold mr-auto mb-14">1분이면 충분해요!</p>
-          <form className="w-full h-full max-w-sm flex flex-col gap-4 items-start">
+          <form
+            className="w-full h-full max-w-sm flex flex-col gap-4 items-start"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <Input
               label="이름"
               type="text"
