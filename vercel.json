@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/api/:path*",
-      "destination": "http://211.188.52.119:8080/api/:path*"
+      "source": "http://211.188.52.119:8080/(.*)",
+      "destination": "https://211.188.52.119:8080/$1",
+      "permanent": true
     }
   ]
 }
