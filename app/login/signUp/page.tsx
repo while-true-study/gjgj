@@ -19,7 +19,7 @@ export default function SignUp2() {
   const [verPassword, setVerPassword] = useState(""); // 비밀번호 확인
   const [nickname, setNickname] = useState(""); // 닉네임
   const [selectedImage, setSelectedImage] = useState<number | null>(null); // 프로필 이미지
-  const url = "http://211.188.52.119:8080";
+  const url = "https://gjgj-front.vercel.app";
 
   const buttonActive =
     Name.trim() !== "" && // 본명 차있고
