@@ -31,7 +31,7 @@ export default function LoginInput() {
 
   const buttonClick = () => {
     axios
-      .post("http://211.188.52.119:8080/api/login", jsonData)
+      .post("https://gjgj-front.vercel.app/api/login", jsonData)
       .then((res) => {
         console.log("Success:", res);
       })
