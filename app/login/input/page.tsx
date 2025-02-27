@@ -47,7 +47,7 @@ export default function LoginInput() {
         끄적끄적
       </p>
 
-      <form className="w-full max-w-sm flex flex-col gap-4">
+      <div className="w-full max-w-sm flex flex-col gap-4">
         {/* 아이디 입력창 */}
         <Input
           classname={`mb-8 ${password.length > 0 && "inputIn"}`}
@@ -79,7 +79,7 @@ export default function LoginInput() {
           isActive={isButtonActive}
           className="mb-8"
         ></Button>
-      </form>
+      </div>
 
       {/* footer 바 */}
       <div className={`${styles.footerbox} ${"w-full"}`}>
