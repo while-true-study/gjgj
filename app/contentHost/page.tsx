@@ -80,18 +80,18 @@ const ContentHost = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files); // 선택된 파일들
+      const selectedFiles = Array.from(e.target.files); // 선택된 파일
       if (selectedFiles.length + images.length > 5) {
         alert("최대 5개의 이미지만 업로드할 수 있습니다.");
         return;
       }
-      const newImages = selectedFiles.map((file) => URL.createObjectURL(file)); // 파일을 URL로 변환
-      setImages((prevImages) => [...prevImages, ...newImages]); // 기존 이미지에 새 이미지 추가
+      const newImages = selectedFiles.map((file) => URL.createObjectURL(file)); // URL 변환
+      setImages((prevImages) => [...prevImages, ...newImages]); // 추가
     }
   };
 
   const handleRemoveImage = (index: number) => {
-    setImages(images.filter((_, i) => i !== index)); // 해당 이미지 제거
+    setImages(images.filter((_, i) => i !== index)); // 제거
   };
 
   const handleCategoryClick = (categoryId: number) => {
