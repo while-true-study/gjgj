@@ -17,16 +17,16 @@ export default function MissingId() {
     <div className={styles.container}>
       <BackHeader />
       <div className={styles.title}>
-        <p>아이디로</p>
+        <p>이메일로</p>
         <p>비밀번호 찾기</p>
       </div>
       <form className={styles.phoneNumber}>
         <Input
-          label="전화번호"
+          label="이메일"
           type="tel"
           id="Number"
           name="Number"
-          placeholder="전화번호를 적어주세요."
+          placeholder="이메일을 적어주세요"
           rightBox={
             <div className={styles.Reqcall} onClick={handleCertification}>
               <span>인증요청</span>
@@ -40,7 +40,7 @@ export default function MissingId() {
           type="text"
           id="getNumber"
           name="getNumber"
-          placeholder="문자로 받은 인증번호를 적어주세요."
+          placeholder="이메일로 받은 인증번호를 적어주세요."
           rightBox={
             <div className={styles.Reqcall} onClick={handleOkay}>
               <span>확인</span>
@@ -48,22 +48,7 @@ export default function MissingId() {
           }
         />
       </form>
-      <form className={styles.id}>
-        <Input
-          label="아이디"
-          type="text"
-          id="getNumber"
-          name="getNumber"
-          placeholder="이메일을 적어주세요."
-          rightBox={
-            <div className={styles.Reqcall} onClick={handleOkay}>
-              <span>확인</span>
-            </div>
-          }
-        />
-      </form>
-
-      <Button label="비밀번호 전송받기" className={styles.button} />
+      <Button label="메일로 비밀번호 전송" className={styles.button} />
     </div>
   );
 }

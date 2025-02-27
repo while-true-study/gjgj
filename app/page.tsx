@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 import Modal from "./components/modal/Modal";
+import { redirect } from "next/navigation";
 
 export default function LoginMain() {
   const [modal, setModal] = useState(false);
   const testClick = () => {
     console.log("모달 클릭했다");
   };
+  redirect("/login/loginMain");
   return (
     <main style={{ height: "100%" }}>
       <Modal

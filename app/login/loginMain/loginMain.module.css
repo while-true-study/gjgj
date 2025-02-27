@@ -1,72 +1,79 @@
 .container {
-    background-color: #3744FB;
-    height: 100vh;
+  background-color: #3744fb;
+  height: 100vh;
 }
 
 .innerContainer {
-    align-content: center;
-    justify-items: center;
+  align-content: center;
+  justify-items: center;
 }
 
 .line1 {
-    font-size: 24px;
-    color: #FFFFFF;
-    padding-top: 116px;
+  font-size: 24px;
+  color: #ffffff;
+  padding-top: 116px;
+  font-weight: 600;
+  line-height: 32px;
 }
 
 .line2 {
-    font-size: 24px;
-    color: #FFFFFF;
-    padding-top: 4px;
+  font-size: 24px;
+  color: #ffffff;
+  padding-top: 4px;
+  font-weight: 600;
+  line-height: 32px;
 }
 
 .mainTitle {
-    font-size: 60px;
-    color: #FFFFFF;
-    padding-top: 16px;
+  font-size: 60px;
+  color: #ffffff;
+  padding-top: 16px;
+  font-family: "EF_AONE";
+  line-height: 66px;
+  font-weight: 400;
 }
 
 .mainLogo {
-    padding-top: 13px;
+  padding-top: 13px;
 }
 
-.kakao{
-    padding-top: 33px;
+.kakao {
+  padding-top: 33px;
 }
 
 .kakaoButton {
-    background-color: #FEE500;
-    color: #000000;
+  background-color: #fee500 !important;
+  color: #000000 !important;
 }
 
 .kakaoContent {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    gap: 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 16px;
 }
 
-.naver{
-    padding-top: 16px;
+.naver {
+  padding-top: 16px;
 }
 
 .naverButton {
-    background-color: #03c75a;
-    color: #FFFFFF;
+  background-color: #03c75a !important;
+  color: #ffffff !important;
 }
 
 .naverContent {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    gap: 16px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  gap: 16px;
 }
 
 .email {
-    padding-top: 12.5px;
+  padding-top: 12.5px;
 }
 
 .emailButton {
-    color: #FFFFFF;
-    background-color: transparent;
+  color: #ffffff;
+  background-color: transparent;
 }

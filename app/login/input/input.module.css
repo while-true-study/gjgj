@@ -37,3 +37,9 @@
 .rightline {
   border-right: 2px solid #6b7280;
 }
+
+.errmsg {
+  font-size: 13px;
+  color: #e63a47;
+  line-height: 17px;
+}
