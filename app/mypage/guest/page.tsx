@@ -1,25 +1,25 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import styles from "./scrap.module.css";
+import styles from "./guest.module.css";
 import axios from "axios";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import Cookies from "js-cookie";
-// import Contest from "@/app/components/Contest/Contest";
+//import Contest from "@/app/components/Contest/Contest";
 
 const Page = () => {
-  const [scrapData, setScrapData] = useState([]);
+  const [guestData, setGuestData] = useState([]);
   const [load, setLoad] = useState(true);
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
     axios
-      .get("http://211.188.52.119:8080/api/mypage/scraplist", {
+      .get("http://211.188.52.119:8080/api/mypage/mycommentlist", {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       })
       .then((res) => {
-        setScrapData(res.data.result);
+        setGuestData(res.data.result);
         setLoad(false);
       });
   }, []);
@@ -29,8 +29,8 @@ const Page = () => {
       {load ? (
         <div>불러오는 중...</div>
       ) : (
-        scrapData && <p>test</p>
-        // scrapData.map((i) => {
+        guestData && <p>test</p>
+        // guestData.map((i) => {
         //   return (
         //     <Contest
         //     category={Number(i.category)}

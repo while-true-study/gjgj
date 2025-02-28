@@ -1,13 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import styles from "./AgreeBar.module.css";
+import Link from "next/link";
 
 interface AgreeBarProps {
   title: string;
   onChange: (isChecked: boolean) => void;
+  type: number;
 }
 
-const AgreeBar = ({ title, onChange }: AgreeBarProps) => {
+const AgreeBar = ({ title, onChange, type }: AgreeBarProps) => {
   const [check, setCheck] = useState(false); // 기본값을 false로 설정
 
   const checkClick = () => {
@@ -23,7 +25,9 @@ const AgreeBar = ({ title, onChange }: AgreeBarProps) => {
         alt="check-box"
       />
       <p>{title}</p>
-      <img src="/down.svg" alt="down-arrow" />
+      <Link href={type === 1 ? "/mypage/termsOfUse" : "/mypage/personalPolicy"}>
+        <img src="/down.svg" alt="down-arrow" />
+      </Link>
     </div>
   );
 };

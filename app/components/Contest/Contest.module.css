@@ -15,10 +15,19 @@
   margin-bottom: 5px;
 }
 
-.category span {
+.category span:nth-child(2) {
   font-size: 12px;
   color: #404041;
   font-family: "NotoSans";
+  font-weight: 700;
+}
+
+.categoryBox {
+  font-size: 10px;
+  padding: 4px;
+  background-color: #f1f1f2;
+  border-radius: 8px;
+  color: #6d6e70;
   font-weight: 700;
 }
 

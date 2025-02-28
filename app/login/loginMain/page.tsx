@@ -61,7 +61,7 @@ export default function LoginMain() {
           />
         </div>
         <div className={styles.email}>
-          <Link href="/login/agree">
+          <Link href="/login/input">
             <Button
               label="이메일 로그인"
               className={styles.emailButton}
