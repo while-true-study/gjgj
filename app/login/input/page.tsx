@@ -7,6 +7,7 @@ import styles from "./input.module.css";
 import { Button } from "@/app/components/button/button";
 import Link from "next/link";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 export default function LoginInput() {
   const [email, setEmail] = useState("");
@@ -34,6 +35,8 @@ export default function LoginInput() {
       .post("http://211.188.52.119:8080/api/login", jsonData)
       .then((res) => {
         console.log("Success:", res);
+        const token = res.data.result.accessToken; // 직접 변수로 저장
+        Cookies.set("accessToken", token, { expires: 1 }); // 쿠키에 저장
       })
       .catch((err) => {
         setErrMsg(err.message);
@@ -100,7 +103,7 @@ export default function LoginInput() {
         </div>
 
         <div className={`${styles.footerbox} ${styles.box}`}>
-          <Link href="/login/signUp">
+          <Link href="/login/agree">
             <span>회원가입</span>
           </Link>
         </div>

@@ -18,7 +18,14 @@ export default function SignUp2() {
   const [password, setPassword] = useState(""); // 비밀번호
   const [verPassword, setVerPassword] = useState(""); // 비밀번호 확인
   const [nickname, setNickname] = useState(""); // 닉네임
-  const [selectedImage, setSelectedImage] = useState<number | null>(null); // 프로필 이미지
+  const [selectedImage, setSelectedImage] = useState<number>(1); // 프로필 이미지
+  const [emailMsg, setEmailMsg] = useState<string>(""); // 이메일 메시지
+  const profileImage = [
+    "https://kr.object.ncloudstorage.com/profile-img/basic/B9CBB4D7-18A0-49BC-84A1-E0D5EC1F8112.png",
+    "https://kr.object.ncloudstorage.com/profile-img/basic/EEA39F71-0CA1-4FCA-A0DE-090EB3956767.png",
+    "https://kr.object.ncloudstorage.com/profile-img/basic/9957A943-220E-4BF1-B319-F3BA8D122599.png",
+    "https://kr.object.ncloudstorage.com/profile-img/basic/6C7CC82D-CA70-4894-968B-44A344A85C94.png",
+  ];
   const url = "http://211.188.52.119:8080";
 
   const buttonActive =
@@ -29,15 +36,20 @@ export default function SignUp2() {
     password.trim() !== "" && // 패스워드 차있고
     password === verPassword; // 패스워드 일치하고
 
-  const ClickReqCall = () => {
-    // 이메일 인증요청
-    axios.post(`${url}/api/emails`, { email: email });
+  const ClickReqCall = async () => {
+    try {
+      await axios.post(`${url}/api/emails`, { email });
+      setEmailMsg("이메일 인증번호가 발송되었습니다.");
+    } catch (error) {
+      setEmailMsg("이메일 인증 요청에 실패했습니다.");
+      console.log(error);
+    }
   };
 
   const verifyEmail = () => {
     axios
       .post(`${url}/api/emails/verify`, {
-        email: email,
+        accountId: email,
         authCode: verEmail,
       })
       .then((res) => {
@@ -86,10 +98,9 @@ export default function SignUp2() {
     accountId: id,
     password: password,
     nameKo: Name,
-    nickname: nickname,
-    userBirth: "",
+    nickName: nickname,
     email: email,
-    userImg: `${selectedImage}`,
+    userImg: profileImage[selectedImage - 1],
     agreeService: true,
     agreeInfo: true,
   };
@@ -97,7 +108,9 @@ export default function SignUp2() {
   const handleRegisterClick = () => {
     console.log("가입하기 버튼 클릭");
     // 여기에 서버 요청 등 처리
-    axios.post(`${url}/api/signup`, signUpData);
+    axios.post(`${url}/api/signup`, signUpData).then((res) => {
+      console.log(res);
+    });
   };
 
   return (
@@ -136,8 +149,9 @@ export default function SignUp2() {
               }
               onChange={handleEmailChange}
               value={email}
-              classname="mb-6"
+              classname=""
             />
+            {<p className={styles.errMsg}>{emailMsg}</p>}
             <Input
               label="인증번호"
               type="text"
@@ -210,6 +224,7 @@ export default function SignUp2() {
           </div>
           <form className={styles.nicknameInput}>
             <Input
+              maxLength={10}
               type="text"
               label="닉네임"
               name="nickname"

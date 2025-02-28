@@ -5,8 +5,8 @@ import styles from "./termsOfUse.module.css";
 const page = () => {
   return (
     <>
-      <BackHeader></BackHeader>
       <div className={styles.content}>
+        <BackHeader></BackHeader>
         <span>이용 약관</span>
       </div>
     </>

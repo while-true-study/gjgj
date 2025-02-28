@@ -7,6 +7,7 @@ import ContentHostBar from "./components/contentHostBar/ContentHostBar";
 import { Button } from "../components/button/button";
 import axios from "axios";
 import CategoryBox from "./components/categoryBox/CategoryBox";
+import Cookies from "js-cookie";
 
 interface Category {
   categoryId: number;
@@ -21,8 +22,7 @@ const ContentHost = () => {
   const [content, setcontent] = useState<string>(""); // 공모전 내용
   const [images, setImages] = useState<string[]>([]); // 사진
   const [category, setCategory] = useState<Category[]>([]); // 카테고리 get한거
-
-  const endDate = new Date(selectedDate);
+  // const endDate = new Date(selectedDate);
 
   const today = new Date();
   const formatToday = new Intl.DateTimeFormat("ko-KR", {
@@ -34,31 +34,51 @@ const ContentHost = () => {
     .replace(/\. /g, "-") // yyyy. mm. dd. → yyyy-mm-dd 변환
     .replace(/\.$/, ""); // 마지막 마침표 제거
 
-  const jsonData = {
-    categoryId: selectedCategory, // 숫자 -> 문자열로 변환
-    title: title,
-    content: content,
-    boardPrize: cash, // 숫자 -> 문자열로 변환
-    startAt: today.getTime(),
-    endAt: endDate.getTime(),
-    boardFiles: images, // 파일 객체는 그대로
-  };
+  // const jsonData = {
+  //   categoryId: selectedCategory,
+  //   title: title,
+  //   content: content,
+  //   boardPrize: cash,
+  //   endAt: endDate,
+  //   boardFiles: images,
+  // };
 
   const boradButtonClick = async () => {
-    console.log(jsonData);
-    await axios.post("/api/board", jsonData);
+    const formData = new FormData();
+    formData.append("categoryId", selectedCategory?.toString() || ""); // 카테고리 ID
+    formData.append("title", title); // 제목
+    formData.append("content", content); // 내용
+    formData.append("boardPrize", cash); // 상금
+    formData.append("endAt", new Date(selectedDate).toISOString()); // 종료 시간 (ISO 형식으로 변환)
+
+    const boardFilesArray = images.map((image) => image);
+    formData.append("board_files", JSON.stringify(boardFilesArray));
+
+    try {
+      const accessToken = Cookies.get("accessToken");
+      await axios.post("http://211.188.52.119:8080/api/board", formData, {
+        headers: {
+          Authorization: `${accessToken}`, // Bearer
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("성공");
+    } catch (err) {
+      console.log("실패", err);
+    }
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("/api/board"); // http://211.188.52.119:8080/ 이걸로 변경
+    const accessToken = Cookies.get("accessToken");
+    axios
+      .get("http://211.188.52.119:8080/api/category", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
         setCategory(res.data.result);
-      } catch (err) {
-        console.log("카테고리 가져오기 실패", err);
-      }
-    };
-    fetchData();
+      }); // http://211.188.52.119:8080/ 이걸로 변경
   }, []);
 
   const cashChange = (e: React.ChangeEvent<HTMLInputElement>) => {

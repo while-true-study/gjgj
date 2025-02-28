@@ -7,14 +7,14 @@ import RechargeMenu from "./components/RechargeMenu/RechargeMenu";
 import TakeOut from "./components/TakeOut/TakeOut";
 
 const Recharge = () => {
-  const [activeTab, setActiveTab] = useState<string>("인출");
+  const [activeTab, setActiveTab] = useState<string>("충전");
   const recordClick = () => {
     console.log("recordClick");
   };
   return (
     <>
-      <BackHeader></BackHeader>
       <div className={styles.content}>
+        <BackHeader></BackHeader>
         <div className={styles.headBar}>
           <span
             className={activeTab === "충전" ? styles.select : ""}
