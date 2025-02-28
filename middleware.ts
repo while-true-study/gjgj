@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("token")?.value;
-  console.log("토큰 값:", token);
+  const token = req.cookies.get("accessToken")?.value;
 
   // if (!token && req.nextUrl.pathname.startsWith("")) {
   //   // / 경로 설정하면 token없이 못들어감

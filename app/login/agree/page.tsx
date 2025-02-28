@@ -33,10 +33,12 @@ const Page = () => {
         <img className="pb-24" src="/agree.svg" alt="agree" />
         <div className={styles.agreeBox}>
           <AgreeBar
-            title="서비스 운영약관 동의(필수)"
+            type={1}
+            title="서비스 이용약관 동의(필수)"
             onChange={(isChecked) => handleCheckboxChange(1, isChecked)}
           />
           <AgreeBar
+            type={2}
             title="개인정보 수집 및 이용동의(필수)"
             onChange={(isChecked) => handleCheckboxChange(2, isChecked)}
           />
@@ -48,7 +50,7 @@ const Page = () => {
           }`}
           disabled={isButtonDisabled}
           onClick={() => {
-            redirect("/login/input");
+            redirect("/login/signUp");
           }}
         >
           동의하고 계속하기

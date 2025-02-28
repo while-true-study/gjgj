@@ -8,6 +8,7 @@ interface inputprops {
   loveit: number; // 좋아요 수
   comment: number; //댓글수
   Iloveit: boolean; // 내 좋아요
+  category: number;
 }
 
 const Contest = ({
@@ -17,12 +18,25 @@ const Contest = ({
   loveit,
   comment,
   Iloveit,
+  category,
 }: inputprops) => {
+  const categoryNames = [
+    { categoryId: 1, categoryName: "슬로건" },
+    { categoryId: 2, categoryName: "네이밍" },
+    { categoryId: 3, categoryName: "포토샵" },
+    { categoryId: 4, categoryName: "로고" },
+    { categoryId: 5, categoryName: "아이디어" },
+    { categoryId: 6, categoryName: "기타" },
+  ];
+  const categoryName = categoryNames.find(
+    (item) => item.categoryId === category
+  )?.categoryName;
+
   return (
     <div className={styles.content}>
       <div className={styles.leftBox}>
         <div className={styles.category}>
-          <img src="/IngContests/category.svg"></img>
+          <span className={styles.categoryBox}>{categoryName}</span>
           <span>{organizer}</span>
         </div>
         <div className={styles.titleBox}>

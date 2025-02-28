@@ -1,0 +1,48 @@
+.content {
+  padding: 20px;
+  height: 100%;
+}
+
+.font {
+  font-size: 13px;
+  line-height: 17px;
+  color: #a6a8ab;
+  flex-grow: 1;
+}
+
+.logout {
+  border-right: 1.5px solid #a6a8ab;
+  width: 64px;
+  cursor: pointer;
+}
+
+.signout {
+  display: flex;
+  justify-content: flex-end;
+  width: 64px;
+  cursor: pointer;
+}
+
+.footer {
+  margin-top: 150px;
+  display: flex;
+  width: 124px;
+}
+
+.help {
+  font-size: 12px;
+  line-height: 16px;
+  color: #a6a8ab;
+  margin-bottom: 20px;
+}
+
+.rightBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+  font-size: 13px;
+  color: #6d6e70;
+}

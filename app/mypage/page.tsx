@@ -29,11 +29,11 @@ const page = () => {
           </div>
         </div>
         <div className={styles.menuBox}>
-          <MenuBar title="주최한 공모전" linkTo="/"></MenuBar>
-          <MenuBar title="출품한 공모전" linkTo="/"></MenuBar>
-          <MenuBar title="스크랩" linkTo="/home"></MenuBar>
+          <MenuBar title="주최한 공모전" linkTo="/mypage/host"></MenuBar>
+          <MenuBar title="출품한 공모전" linkTo="/mypage/guest"></MenuBar>
+          <MenuBar title="스크랩" linkTo="/mypage/scrap"></MenuBar>
           <MenuBar title="계좌 관리" linkTo="/home" register={true}></MenuBar>
-          <MenuBar title="충전/인출" linkTo="/home"></MenuBar>
+          <MenuBar title="충전/인출" linkTo="/recharge"></MenuBar>
           <MenuBar title="공지사항" linkTo="/home"></MenuBar>
           <MenuBar title="고객센터" linkTo="/home"></MenuBar>
           <MenuBar
