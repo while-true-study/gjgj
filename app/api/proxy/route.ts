@@ -2,11 +2,11 @@ import { NextResponse } from "next/server";
 import http from "http";
 import https from "https";
 
-interface ProxyResponse {
-  statusCode: number;
-  headers: Record<string, string | string[] | undefined>;
-  data: Buffer;
-}
+// interface ProxyResponse {
+//   statusCode: number;
+//   headers: Record<string, string | string[] | undefined>;
+//   data: Buffer;
+// }
 
 export async function GET(request: Request): Promise<NextResponse> {
   const { searchParams } = new URL(request.url);
