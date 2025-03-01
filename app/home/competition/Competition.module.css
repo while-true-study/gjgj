@@ -1,0 +1,36 @@
+.content {
+  width: 100%;
+  background: #3744fb;
+  padding: 24px 20px;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.cardsContainer {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  cursor: grab;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.card {
+  min-width: 150px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: black;
+}
+
+.title {
+  text-align: left;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  margin-bottom: 16px;
+}
