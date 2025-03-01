@@ -26,7 +26,7 @@ export default function MissingId() {
     axios
       .post(
         `/api/proxy?url=${encodeURIComponent(
-          "http://211.188.52.119:8080/api/emails"
+          "https://211.188.52.119:8080/api/emails"
         )}`,
         { email }
       ) // http://211.188.52.119:8080/api/emails
@@ -39,7 +39,7 @@ export default function MissingId() {
     axios
       .post(
         `/api/proxy?url=${encodeURIComponent(
-          "http://211.188.52.119:8080/api/emails/verify"
+          "https://211.188.52.119:8080/api/emails/verify"
         )}`,
         {
           // http://211.188.52.119:8080/api/emails/verify
