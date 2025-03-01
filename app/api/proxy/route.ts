@@ -1,40 +1,70 @@
 import { NextResponse } from "next/server";
 import http from "http";
-import https from "https";
-
-// interface ProxyResponse {
-//   statusCode: number;
-//   headers: Record<string, string | string[] | undefined>;
-//   data: Buffer;
-// }
 
 export async function GET(request: Request): Promise<NextResponse> {
-  const { searchParams } = new URL(request.url);
-  const url = searchParams.get("url");
+  return handleProxy(request, "GET");
+}
 
-  if (!url) {
-    return NextResponse.json({ error: "URL is required" }, { status: 400 });
+export async function POST(request: Request): Promise<NextResponse> {
+  return handleProxy(request, "POST");
+}
+
+async function handleProxy(
+  request: Request,
+  method: "GET" | "POST"
+): Promise<NextResponse> {
+  const { searchParams } = new URL(request.url);
+  const targetUrl = searchParams.get("url");
+
+  if (!targetUrl) {
+    return NextResponse.json({ error: "url is required" }, { status: 400 });
   }
 
-  const protocol = url.startsWith("https") ? https : http;
+  // 🔥 HTTPS → HTTP 변환
+  const httpTargetUrl = targetUrl.replace(/^https:\/\//i, "http://");
 
-  return new Promise((resolve) => {
-    protocol
-      .get(url, (proxyRes) => {
-        const chunks: Buffer[] = [];
-        proxyRes.on("data", (chunk: Buffer) => chunks.push(chunk));
-        proxyRes.on("end", () => {
-          const buffer = Buffer.concat(chunks);
-          const headers = new Headers(
-            proxyRes.headers as Record<string, string>
-          );
-          resolve(
-            new NextResponse(buffer, { status: proxyRes.statusCode, headers })
-          );
+  return new Promise<NextResponse>(async (resolve) => {
+    const options = {
+      method,
+      headers: {
+        "Content-Type":
+          request.headers.get("Content-Type") || "application/json",
+      },
+    };
+
+    const proxyReq = http.request(httpTargetUrl, options, (proxyRes) => {
+      const chunks: Buffer[] = [];
+      proxyRes.on("data", (chunk: Buffer) => chunks.push(chunk));
+      proxyRes.on("end", () => {
+        const buffer = Buffer.concat(chunks);
+
+        // Headers 변환
+        const headers = new Headers();
+        Object.entries(proxyRes.headers).forEach(([key, value]) => {
+          if (value) {
+            if (Array.isArray(value)) {
+              value.forEach((v) => headers.append(key, v));
+            } else {
+              headers.set(key, value);
+            }
+          }
         });
-      })
-      .on("error", (e: Error) => {
-        resolve(NextResponse.json({ error: e.message }, { status: 500 }));
+
+        resolve(
+          new NextResponse(buffer, { status: proxyRes.statusCode, headers })
+        );
       });
+    });
+
+    proxyReq.on("error", (e: Error) => {
+      resolve(NextResponse.json({ error: e.message }, { status: 500 }));
+    });
+
+    if (method === "POST") {
+      const body = await request.text();
+      proxyReq.write(body);
+    }
+
+    proxyReq.end();
   });
 }
