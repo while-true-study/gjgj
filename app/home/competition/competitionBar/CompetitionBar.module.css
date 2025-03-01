@@ -1,0 +1,51 @@
+.content {
+  width: 200px;
+
+  height: 150px;
+  background-color: #fff;
+  color: black;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 4px;
+}
+
+.title {
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word; /* 안전한 줄 바꿈 */
+  white-space: normal; /* 자동 줄 바꿈 허용 */
+  font-size: 14px;
+  text-align: left;
+  font-weight: 600;
+  line-height: 19px;
+  margin-bottom: 20px;
+}
+
+.headline {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 4px;
+}
+
+.category {
+  background-color: #f1f1f2;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.font {
+  color: #6d6e70;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}

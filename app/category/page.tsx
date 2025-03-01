@@ -60,7 +60,7 @@ const page = () => {
           loveit={5}
           comment={12}
         ></ContentBox>
-        <NavigationBar></NavigationBar>
+        <NavigationBar state={2}></NavigationBar>
       </div>
     </div>
   );

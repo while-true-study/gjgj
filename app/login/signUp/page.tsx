@@ -107,7 +107,6 @@ export default function SignUp2() {
 
   const handleRegisterClick = () => {
     console.log("가입하기 버튼 클릭");
-    // 여기에 서버 요청 등 처리
     axios.post(`${url}/api/signup`, signUpData).then((res) => {
       console.log(res);
     });
