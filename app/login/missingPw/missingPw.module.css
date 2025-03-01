@@ -22,31 +22,42 @@
   justify-content: center;
   position: absolute;
   right: 8px;
-  bottom: 15px;
+  bottom: 12px;
   font-size: 13px;
-  border: 1.5px solid #6d6e70;
-  border-radius: 8px;
-  padding: 3px;
-  cursor: pointer;
-  font-weight: 600;
 }
 
 .Reqcall span {
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px;
+  border: 1.5px solid #6d6e70;
   color: #6d6e70;
+  border-radius: 8px;
 }
 
-.Reqcall:hover {
+.Reqcall span:hover {
   background-color: #6d6e70;
-}
-
-.Reqcall:hover span {
   color: #fff;
 }
 
+.checkimg {
+  width: 30px;
+  height: 30px;
+}
 .button {
   margin-top: 400px;
 }
 
 .container {
   padding: 20px;
+}
+
+.msg {
+  color: #e63a47;
+  font-size: 13px;
+  line-height: 17px;
+}
+
+.certification input::placeholder {
+  font-size: 15px;
 }

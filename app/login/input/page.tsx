@@ -8,6 +8,7 @@ import { Button } from "@/app/components/button/button";
 import Link from "next/link";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function LoginInput() {
   const [email, setEmail] = useState("");
@@ -30,6 +31,8 @@ export default function LoginInput() {
     password: password,
   };
 
+  const router = useRouter();
+
   const buttonClick = () => {
     axios
       .post("http://211.188.52.119:8080/api/login", jsonData)
@@ -37,6 +40,7 @@ export default function LoginInput() {
         console.log("Success:", res);
         const token = res.data.result.accessToken; // 직접 변수로 저장
         Cookies.set("accessToken", token, { expires: 1 }); // 쿠키에 저장
+        router.push("/home");
       })
       .catch((err) => {
         setErrMsg(err.message);

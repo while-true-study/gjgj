@@ -46,7 +46,7 @@ const page = () => {
           ></MenuBar>
         </div>
       </div>
-      <NavigationBar></NavigationBar>
+      <NavigationBar state={3}></NavigationBar>
     </>
   );
 };

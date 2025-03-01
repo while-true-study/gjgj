@@ -33,6 +33,32 @@ const Page = () => {
     setViewModal();
   };
 
+  const logout = async () => {
+    const accessToken = Cookies.get("accessToken");
+    try {
+      const response = await axios.post(
+        "http://211.188.52.119:8080/api/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+
+      // 성공하면 쿠키 삭제
+      if (response.data.isSuccess) {
+        Cookies.remove("accessToken");
+        console.log("로그아웃 성공: 쿠키 삭제 완료");
+        alert("로그아웃 되었습니다.");
+        window.location.href = "/home"; // 로그인 페이지 또는 메인 페이지로 이동
+      }
+    } catch (error) {
+      console.log(error);
+      alert("로그아웃 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <>
       {viewComplete && <Complete title="탈퇴"></Complete>}
@@ -65,7 +91,9 @@ const Page = () => {
         <p className={styles.help}>10자리 이내,문자/숫자로 작성해주세요.</p>
         <Button label="저장하기"></Button>
         <div className={styles.footer}>
-          <span className={`${styles.logout} ${styles.font}`}>로그아웃</span>
+          <span className={`${styles.logout} ${styles.font}`} onClick={logout}>
+            로그아웃
+          </span>
           <span
             onClick={setViewModal}
             className={`${styles.signout} ${styles.font}`}

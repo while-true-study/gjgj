@@ -10,13 +10,13 @@ const Page = () => {
     console.log("검색하기");
   };
   return (
-    <div className="searchBox">
+    <div className={styles.searchBox}>
       <BackHeader></BackHeader>
       <div className={styles.headText}>
         <p>찾으시는 공모전이</p>
         <p>있으신가요?</p>
       </div>
-      <form className={styles.searchBar} onSubmit={handleSubmit}>
+      <div className={styles.searchBar} onSubmit={handleSubmit}>
         <input
           className={styles.searchInput}
           type="text"
@@ -24,10 +24,10 @@ const Page = () => {
           placeholder="제목이나 카테고리를 검색해보세요."
           onChange={(e) => setQuery(e.target.value)}
         ></input>
-        <button className={styles.searchButton} type="submit">
+        <button className={styles.searchButton}>
           <img src="/TopBarHome/search.svg" />
         </button>
-      </form>
+      </div>
       <div className={styles.content}>
         <div className={styles.box}>
           <img src="/home/!.svg"></img>

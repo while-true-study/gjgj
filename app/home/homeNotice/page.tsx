@@ -4,9 +4,9 @@ import Notice from "../Notice/Notice";
 
 const page = () => {
   return (
-    <div>
+    <div className="p-5">
       <BackHeader></BackHeader>
-      <div>
+      <div className="pt-5">
         <Notice
           text="다른 사용자가 회원님의 출품작을 좋아합니다."
           time="방금"

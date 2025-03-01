@@ -1,6 +1,7 @@
 import ReduxProvider from "@/redux/provider";
 import "@/app/global.css";
 import { Metadata } from "next";
+import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "끄적끄적",
@@ -18,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <head>
+      <Head>
         <script
           defer
           src="https://cdn.swygbro.com/public/widget/swyg-widget.js"
@@ -27,7 +28,7 @@ export default function RootLayout({
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-      </head>
+      </Head>
       <body className="flex justify-center items-center min-h-screen bg-gray-100">
         <ReduxProvider>
           <div className="w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative">
