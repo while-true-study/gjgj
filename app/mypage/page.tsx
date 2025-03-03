@@ -6,7 +6,7 @@ import styles from "./mypage.module.css";
 import MenuBar from "./components/menuBar/MenuBar";
 import Profile from "./components/profile/Profile";
 
-const page = () => {
+const Page = () => {
   // const loginClick = () => {
   //   console.log("로그인하기");
   // };
@@ -51,4 +51,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

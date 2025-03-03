@@ -6,9 +6,10 @@ import { HomeListItem } from "@/types";
 
 interface CompetitionProps {
   competData: HomeListItem[];
+  loveChange: () => void;
 }
 
-const Competition = ({ competData }: CompetitionProps) => {
+const Competition = ({ competData, loveChange }: CompetitionProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -51,6 +52,8 @@ const Competition = ({ competData }: CompetitionProps) => {
           // competData가 배열이고 데이터가 있을 때 map 실행
           competData?.map((i) => (
             <CompetitionBar
+              Iloveit={i.goodChk}
+              boardId={i.boardId}
               key={i.boardId} // key 추가
               category={1}
               nickName={i.nickName}
@@ -58,6 +61,7 @@ const Competition = ({ competData }: CompetitionProps) => {
               goodCount={i.goodCount}
               replyCount={i.replyCount}
               goodChk={i.goodChk}
+              loveChange={loveChange}
             />
           ))
         )}

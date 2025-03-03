@@ -2,7 +2,7 @@ import BackHeader from "@/app/components/backHeader/BackHeader";
 import React from "react";
 import Notice from "../Notice/Notice";
 
-const page = () => {
+const Page = () => {
   return (
     <div className="p-5">
       <BackHeader></BackHeader>
@@ -32,4 +32,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

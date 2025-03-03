@@ -83,3 +83,7 @@
   align-items: center;
   justify-content: center;
 }
+
+.red {
+  color: #ff4040 !important;
+}

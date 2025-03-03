@@ -1,10 +1,14 @@
+"use client";
 import React from "react";
 import styles from "./RechargeMenu.module.css";
 import RechargeBar from "../RechargeBar/RechargeBar";
+import {} from "next/router";
+import { useRouter } from "next/navigation";
 
 const RechargeMenu = () => {
-  const RechargeHandle = () => {
-    console.log("충전");
+  const router = useRouter();
+  const RechargeHandle = (cash: number) => {
+    router.push(`/recharge/priceselect?amount=${cash}`);
   };
 
   return (
@@ -12,23 +16,23 @@ const RechargeMenu = () => {
       <RechargeBar
         cash={1000}
         money={1000}
-        onClick={RechargeHandle}
+        onClick={() => RechargeHandle(1000)}
       ></RechargeBar>
       <RechargeBar
         cash={3000}
         money={3000}
-        onClick={RechargeHandle}
+        onClick={() => RechargeHandle(3000)}
       ></RechargeBar>
       <RechargeBar
         cash={5000}
         money={5000}
         hot={true}
-        onClick={RechargeHandle}
+        onClick={() => RechargeHandle(5000)}
       ></RechargeBar>
       <RechargeBar
         cash={10000}
         money={10000}
-        onClick={RechargeHandle}
+        onClick={() => RechargeHandle(10000)}
       ></RechargeBar>
     </div>
   );

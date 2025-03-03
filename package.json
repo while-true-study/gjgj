@@ -13,11 +13,13 @@
     "axios": "^1.7.9",
     "cookie": "^1.0.2",
     "js-cookie": "^3.0.5",
-    "next": "15.1.6",
+    "next": "^15.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
+    "react-slick": "^0.30.3",
     "redux-persist": "^6.0.0",
+    "slick-carousel": "^1.8.1",
     "tailwind-scrollbar-hide": "^2.0.0"
   },
   "devDependencies": {
@@ -26,6 +28,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-slick": "^0.23.13",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
     "postcss": "^8",

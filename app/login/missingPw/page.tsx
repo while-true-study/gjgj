@@ -10,7 +10,7 @@ import axios from "axios";
 export default function MissingId() {
   const [email, setEmail] = useState("");
   const [verEmail, setVerEmail] = useState(""); // 인증번호
-  const [verify, setVerify] = useState(true); // 인증확인
+  const [verify, setVerify] = useState(false); // 인증확인
   const [msg, setMsg] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -24,12 +24,7 @@ export default function MissingId() {
   const handleCertification = () => {
     console.log("인증요청");
     axios
-      .post(
-        `/api/proxy?url=${encodeURIComponent(
-          "https://211.188.52.119:8080/api/emails"
-        )}`,
-        { email }
-      ) // http://211.188.52.119:8080/api/emails
+      .post(`http://211.188.52.119:8080/api/emails `, { email }) // /api/proxy?url=${encodeURIComponent("https://211.188.52.119:8080/api/emails)"
       .then((res) => {
         setMsg(res.data.result);
         setIsSuccess(res.data.isSuccess);
@@ -37,16 +32,11 @@ export default function MissingId() {
   };
   const handleOkay = () => {
     axios
-      .post(
-        `/api/proxy?url=${encodeURIComponent(
-          "https://211.188.52.119:8080/api/emails/verify"
-        )}`,
-        {
-          // http://211.188.52.119:8080/api/emails/verify
-          accountId: email,
-          authCode: verEmail,
-        }
-      )
+      .post(`http://211.188.52.119:8080/api/emails/verify`, {
+        //  /api/proxy?url=${encodeURIComponent("https://211.188.52.119:8080/api/emails/verify")}
+        accountId: email,
+        authCode: verEmail,
+      })
       .then((res) => {
         setVerify(res.data.isSuccess);
       });

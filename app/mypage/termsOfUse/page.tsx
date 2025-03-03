@@ -2,7 +2,7 @@ import BackHeader from "@/app/components/backHeader/BackHeader";
 import React from "react";
 import styles from "./termsOfUse.module.css";
 
-const page = () => {
+const Page = () => {
   return (
     <>
       <div className={styles.content}>
@@ -13,4 +13,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

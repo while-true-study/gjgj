@@ -12,3 +12,26 @@
   -ms-overflow-style: none; /* 스크롤 없애기 */
   scrollbar-width: none;
 }
+
+.customDots {
+  position: absolute;
+  bottom: 20px; /* 위쪽으로 위치 조정 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  margin: 0;
+}
+
+.customDotsButton {
+  display: flex;
+  background-color: #fff; /* 기본 배경색 */
+  border-radius: 50%; /* 원형으로 만들기 */
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  margin: 0 5px;
+}
+
+.customDotsActiveButton {
+  background-color: #000; /* 선택된 dot 색상 */
+}
