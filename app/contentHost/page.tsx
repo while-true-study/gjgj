@@ -42,23 +42,25 @@ const ContentHost = () => {
   //   endAt: endDate,
   //   boardFiles: images,
   // };
-
   const boradButtonClick = async () => {
+    const accessToken = Cookies.get("accessToken");
     const formData = new FormData();
-    formData.append("categoryId", selectedCategory?.toString() || ""); // 카테고리 ID
-    formData.append("title", title); // 제목
-    formData.append("content", content); // 내용
-    formData.append("boardPrize", cash); // 상금
-    formData.append("endAt", new Date(selectedDate).toISOString()); // 종료 시간 (ISO 형식으로 변환)
 
+    formData.append("categoryId", String(selectedCategory || 0));
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("boardPrize", cash);
+    formData.append(
+      "endAt",
+      selectedDate ? new Date(selectedDate).toISOString().slice(0, 19) : ""
+    );
     const boardFilesArray = images.map((image) => image);
     formData.append("board_files", JSON.stringify(boardFilesArray));
 
     try {
-      const accessToken = Cookies.get("accessToken");
       await axios.post("http://211.188.52.119:8080/api/board", formData, {
         headers: {
-          Authorization: `${accessToken}`, // Bearer
+          Authorization: `Bearer ${accessToken}`, // Bearer
           "Content-Type": "multipart/form-data",
         },
       });

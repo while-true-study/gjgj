@@ -1,0 +1,50 @@
+.content {
+  padding: 20px;
+}
+
+.title {
+  margin-top: 40px;
+  color: #3744fb;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+}
+
+.bankname {
+  margin-top: 40px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.copy {
+  display: flex;
+}
+
+.Box {
+  display: flex;
+  align-items: center;
+}
+
+.amountBox {
+  display: flex;
+  flex-grow: 1;
+  gap: 8px;
+  font-weight: 500;
+  line-height: 21px;
+  font-size: 16px;
+}
+
+.amount {
+  font-weight: 600;
+}
+
+.call {
+  padding: 4px 8px;
+  background-color: #3744fb;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 21px;
+}

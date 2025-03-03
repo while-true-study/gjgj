@@ -44,6 +44,7 @@ const Page = () => {
         data.map((i) => {
           return (
             <Contest
+              boardId={i.boardId}
               category={1}
               key={i.boardId}
               organizer={i.nickName}

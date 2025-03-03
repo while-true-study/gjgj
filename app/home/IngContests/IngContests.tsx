@@ -5,27 +5,18 @@ import Link from "next/link";
 import Contest from "@/app/components/Contest/Contest";
 import Cookies from "js-cookie";
 import Competition from "../competition/Competition";
-
-interface HomeListItem {
-  title: string; // 제목
-  boardId: number; // 공모전 id
-  goodChk: number; // 좋아요 수?
-  nickName: string; // 주최자 이름
-  boardPrize: number; // 현상금
-  createdAt: string; // 시작 날짜
-  endCount: number; // dday
-  goodCount: number; // 좋아요 수
-  replyCount: number; // 댓글수
-  categoryName: string; // 카테고리 이름
-}
+import { HomeListItem } from "@/types";
 
 const IngContests = () => {
   const [sortState, setSortState] = useState(1);
   const [data, setData] = useState<HomeListItem[]>([]);
   const [competData, setCompetData] = useState<HomeListItem[]>([]);
   const [load, setLoad] = useState(true);
+  const [loveChange, setLoveChage] = useState(false);
+  const loveButton = () => {
+    setLoveChage(!loveChange);
+  };
 
-  const allView = () => {};
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
     axios
@@ -44,7 +35,7 @@ const IngContests = () => {
       .catch((err) => {
         console.log("Get Error", err);
       });
-  }, [sortState]);
+  }, [sortState, loveChange]);
 
   return (
     <>
@@ -53,9 +44,7 @@ const IngContests = () => {
           <div className={styles.TopBox}>
             <span className={styles.ing}>진행 중인 공모전🚀</span>
             <Link href="/home/homeListAll">
-              <span className={styles.allview} onClick={allView}>
-                전체보기
-              </span>
+              <span className={styles.allview}>전체보기</span>
             </Link>
           </div>
           <div className={styles.sortbox}>
@@ -87,6 +76,7 @@ const IngContests = () => {
             data.map((i) => {
               return (
                 <Contest
+                  boardId={i.boardId}
                   category={1}
                   key={i.boardId}
                   organizer={i.nickName}
@@ -95,13 +85,17 @@ const IngContests = () => {
                   loveit={i.goodCount}
                   comment={i.replyCount}
                   title={i.title}
+                  loveChange={loveButton}
                 ></Contest>
               );
             })
           )}
         </div>
       </div>
-      <Competition competData={competData}></Competition>
+      <Competition
+        competData={competData}
+        loveChange={loveButton}
+      ></Competition>
     </>
   );
 };

@@ -7,12 +7,17 @@ import { Button } from "@/app/components/button/button";
 import Link from "next/link";
 
 export default function LoginMain() {
+  const kakaoUrl =
+    "http://211.188.52.119:8080/oauth2/authorization/kakao?redirect_uri=http://gjgj-front.s3-website.ap-northeast-2.amazonaws.com/#/home&mode=login";
+  const naverUrl =
+    "http://211.188.52.119:8080/oauth2/authorization/naver?redirect_uri=http://gjgj-front.s3-website.ap-northeast-2.amazonaws.com/#/home&mode=login";
+
   const handleKaKaoLogin = () => {
-    console.log("카카오 로그인 클릭");
+    window.location.href = kakaoUrl;
   };
 
   const handleNaverLogin = () => {
-    console.log("네이버 로그인 클릭");
+    window.location.href = naverUrl;
   };
 
   const handleEmailLogin = () => {

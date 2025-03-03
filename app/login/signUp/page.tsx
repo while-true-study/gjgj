@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import { Button } from "@/app/components/button/button";
 import axios from "axios";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function SignUp2() {
   const [step, setStep] = useState(1); // 단계 관리
@@ -109,6 +110,7 @@ export default function SignUp2() {
     console.log("가입하기 버튼 클릭");
     axios.post(`${url}/api/signup`, signUpData).then((res) => {
       console.log(res);
+      redirect("/login/input");
     });
   };
 

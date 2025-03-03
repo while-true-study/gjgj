@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Button } from "../button/button";
 
 interface complete {
-  title: string;
+  title: string | null;
 }
 
 const Complete = ({ title }: complete) => {

@@ -5,10 +5,11 @@ import styles from "./guest.module.css";
 import axios from "axios";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import Cookies from "js-cookie";
-// import Contest from "@/app/components/Contest/Contest";
+import Contest from "@/app/components/Contest/Contest";
+import { HomeListItem } from "@/types";
 
 const Page = () => {
-  const [hostData, setHostData] = useState([]);
+  const [hostData, setHostData] = useState<HomeListItem[]>([]);
   const [load, setLoad] = useState(true);
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
@@ -29,21 +30,22 @@ const Page = () => {
       {load ? (
         <div>불러오는 중...</div>
       ) : (
-        hostData && <p>test</p>
-        // hostData.map((i) => {
-        //   return (
-        //     <Contest
-        //       category={Number(i.category)}
-        //       key={i.boardId}
-        //       organizer={i.nickName}
-        //       Dday={i.daysUntilEnd}
-        //       Iloveit={i.goodChk === 1 ? true : false}
-        //       loveit={i.goodsCount}
-        //       comment={i.replyCount}
-        //       title={i.title}
-        //     ></Contest>
-        //   );
-        // })
+        hostData &&
+        hostData.map((i) => {
+          return (
+            <Contest
+              boardId={i.boardId}
+              category={Number(i.category)}
+              key={i.boardId}
+              organizer={i.nickName}
+              Dday={i.daysUntilEnd}
+              Iloveit={i.goodChk === 1 ? true : false}
+              loveit={i.goodsCount}
+              comment={i.replyCount}
+              title={i.title}
+            ></Contest>
+          );
+        })
       )}
     </div>
   );

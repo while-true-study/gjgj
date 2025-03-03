@@ -11,12 +11,13 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  reactStrictMode: false, // reactStrictMode는 nextConfig 내부로 이동
+  reactStrictMode: false,
   webpack: (config) => {
     config.resolve.alias["@"] = path.join(__dirname, "app");
     config.resolve.alias["@redux"] = path.join(__dirname, "redux");
     return config;
   },
+  output: "export",
 };
 
 export default nextConfig;
