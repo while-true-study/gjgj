@@ -8,6 +8,7 @@ import { Button } from "../components/button/button";
 import axios from "axios";
 import CategoryBox from "./components/categoryBox/CategoryBox";
 import Cookies from "js-cookie";
+import { redirect } from "next/navigation";
 
 interface Category {
   categoryId: number;
@@ -22,7 +23,6 @@ const ContentHost = () => {
   const [content, setcontent] = useState<string>(""); // 공모전 내용
   const [images, setImages] = useState<string[]>([]); // 사진
   const [category, setCategory] = useState<Category[]>([]); // 카테고리 get한거
-  // const endDate = new Date(selectedDate);
 
   const today = new Date();
   const formatToday = new Intl.DateTimeFormat("ko-KR", {
@@ -58,13 +58,14 @@ const ContentHost = () => {
     formData.append("board_files", JSON.stringify(boardFilesArray));
 
     try {
-      await axios.post("http://211.188.52.119:8080/api/board", formData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`, // Bearer
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("성공");
+      await axios
+        .post("http://211.188.52.119:8080/api/board", formData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, // Bearer
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(() => (window.location.href = "/complete?complete=주최"));
     } catch (err) {
       console.log("실패", err);
     }
@@ -201,7 +202,7 @@ const ContentHost = () => {
             }}
           >
             <div className={styles.initBox}>
-              <img src="contentHost/camera2.svg"></img>
+              <img src="/contentHost/camera2.svg"></img>
               <span>{images.length}/5</span>
             </div>
             {images.map((image, index) => (

@@ -1,12 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
 import styles from "./mypage.module.css";
 import MenuBar from "./components/menuBar/MenuBar";
 import Profile from "./components/profile/Profile";
+import axios from "axios";
+import Cookies from "js-cookie";
+
+interface mypage {
+  point: number;
+  nickName: string;
+}
 
 const Page = () => {
+  const accessToken = Cookies.get("accessToken");
+  const [mypageState, setMypageState] = useState(false); // 로그인 여부
+  const [mypageData, setMypageData] = useState<mypage | null>(null);
+
+  useEffect(() => {
+    if (!accessToken) {
+      // 없으면
+      setMypageState(false);
+      console.log(mypageState);
+    }
+    axios
+      .get("http://211.188.52.119:8080/api/mypage/profile", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        setMypageState(true);
+        setMypageData(res.data.result);
+      });
+  }, []);
+
   // const loginClick = () => {
   //   console.log("로그인하기");
   // };
@@ -14,7 +41,7 @@ const Page = () => {
     <>
       <div className={`${styles.content} overflow-auto scrollbar-hide`}>
         <div>
-          <Profile name="아이스크림먹고싶다" profileNum={4}></Profile>
+          <Profile name={mypageData?.nickName || ""} profileNum={4}></Profile>
           {/* <button className={styles.loginbutton} onClick={loginClick}>
           로그인
         </button> */}
@@ -22,7 +49,7 @@ const Page = () => {
         <div className={styles.cashBox}>
           <div className={styles.cashbar}>
             <span>보유캐시</span>
-            <span>0</span>
+            <span>{mypageData?.point}</span>
           </div>
           <div className="mt-3">
             <button>충전하기</button>

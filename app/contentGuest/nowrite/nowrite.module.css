@@ -1,0 +1,100 @@
+.content {
+  padding: 20px;
+  height: 100%;
+}
+
+.exhibit {
+  width: 100%;
+  height: 150px;
+  resize: none;
+  padding: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.title {
+  margin-top: 30px;
+  color: #231f20;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 21px;
+}
+
+.exhibit::placeholder {
+  font-size: 15px;
+}
+
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  color: #231f20;
+  line-height: 21px;
+}
+
+.imgInput {
+  display: none; /* 기본 input을 숨김 */
+}
+
+.inputButton {
+  display: block;
+  width: 138px;
+  padding: 8px 12px;
+  background-color: #3744fb;
+  border-radius: 8px;
+  margin-top: 52px;
+}
+
+.inputButton span {
+  color: #fff;
+}
+
+.imgBox {
+  position: relative;
+  width: 100px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.flexBox {
+  display: flex;
+  gap: 4px;
+}
+
+.imgBox button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.initBox {
+  border: 1px solid #d0d2d3;
+  border-radius: 8px;
+  width: 100px;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.initBox span {
+  color: #d0d2d3;
+}
+
+.categoryBox {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  row-gap: 14px;
+  margin-top: -12px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 50px;
+}

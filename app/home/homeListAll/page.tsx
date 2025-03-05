@@ -5,6 +5,7 @@ import styles from "./homeListAll.module.css";
 import axios from "axios";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import Contest from "@/app/components/Contest/Contest";
+import Cookies from "js-cookie";
 
 interface HomeListItem {
   boardId: number;
@@ -21,15 +22,17 @@ interface HomeListItem {
 
 const Page = () => {
   const [data, setData] = useState<HomeListItem[]>([]);
+  const accessToken = Cookies.get("accessToken");
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/home/homeListAll`, {
+      .get(`http://211.188.52.119:8080/api/board/home_list`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
         params: {
           listType: 5,
         },
       })
       .then((res) => {
-        setData(res.data.result);
+        setData(res.data.result.homeList);
         console.log(data);
       })
       .catch((err) => {
@@ -40,7 +43,7 @@ const Page = () => {
   return (
     <div className={styles.content}>
       <BackHeader></BackHeader>
-      {data ? (
+      {data.length > 0 ? (
         data.map((i) => {
           return (
             <Contest
@@ -49,15 +52,15 @@ const Page = () => {
               key={i.boardId}
               organizer={i.nickName}
               Dday={i.endCount}
-              Iloveit={i.goodChk === 1 ? true : false}
+              Iloveit={i.goodChk === 1}
               loveit={i.goodCount}
               comment={i.replyCount}
               title={i.title}
-            ></Contest>
+            />
           );
         })
       ) : (
-        <>로딩중</>
+        <p>로딩중...</p> // 데이터가 없을 때 로딩 중 표시
       )}
     </div>
   );

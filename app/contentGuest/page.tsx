@@ -13,6 +13,8 @@ import { BoardData } from "@/types";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
+import ReplyCompo from "./components/Reply/Reply";
 
 const ContentGuest = () => {
   const [boardId, setBoardId] = useState<string | null>(null);
@@ -48,9 +50,7 @@ const ContentGuest = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const boardIdFromParams = urlParams.get("boardId");
-    setBoardId(boardIdFromParams); // boardId 상태를 업데이트
-    console.log(boardIdFromParams, boardId);
-
+    setBoardId(boardIdFromParams);
     if (boardIdFromParams) {
       axios
         .get("http://211.188.52.119:8080/api/board/detail", {
@@ -107,15 +107,36 @@ const ContentGuest = () => {
             <p>{contestData.boardDetail.content}</p>
           </div>
         </div>
+        {contestData.replyList.length > 0 ? (
+          contestData.replyList.map((reply, i) => (
+            <div key={i} className={`${styles.replyContainer}`}>
+              <ReplyCompo
+                reply={reply}
+                boardId={contestData.boardDetail.boardId}
+                heartClick={heartClick} // 상태 변환 함수
+              />
+            </div>
+          ))
+        ) : (
+          <p>댓글이 없습니다.</p>
+        )}
       </div>
       <div className={styles.footer}>
-        <Button label="출품하기"></Button>
+        {contestData.boardDetail.isWriter === 0 ? (
+          <Link href={`/contentGuest/nowrite?boardId=${boardId}`}>
+            <Button label="출품하기"></Button>
+          </Link>
+        ) : (
+          <Link href={`/contentGuest/nowrite?boardId=${boardId}`}>
+            <Button label="채택하기"></Button>
+          </Link>
+        )}
         <ContentNavigation
           scrapChk={contestData.boardDetail.scrapChk}
           boardId={contestData.boardDetail.boardId}
           iloveit={contestData.boardDetail.goodChk}
           heart={contestData.boardDetail.goodChk}
-          comment={contestData.boardDetail.replyCount}
+          comment={contestData.replyList.length}
           bookmark={contestData.boardDetail.scrapCount}
           naviChange={heartClick}
         ></ContentNavigation>

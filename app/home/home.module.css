@@ -3,6 +3,7 @@
   overflow: auto;
   margin-top: 70px;
   padding-bottom: 105px;
+  overflow-x: hidden;
 }
 
 .content::-webkit-scrollbar {

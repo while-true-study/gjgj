@@ -30,6 +30,7 @@ const Contest = ({
   loveChange,
 }: inputprops) => {
   const router = useRouter();
+  const accessToken = Cookies.get("accessToken");
   const categoryNames = [
     { categoryId: 1, categoryName: "슬로건" },
     { categoryId: 2, categoryName: "네이밍" },
@@ -41,7 +42,7 @@ const Contest = ({
   const categoryName = categoryNames.find(
     (item) => item.categoryId === category
   )?.categoryName;
-  const accessToken = Cookies.get("accessToken");
+
   const commentClick = () => {
     if (!accessToken) {
       router.push("/login/input");
@@ -59,7 +60,7 @@ const Contest = ({
     axios
       .post(
         "http://211.188.52.119:8080/api/good",
-        { objectId: boardId, type: "board", goodChk: Iloveit ? 1 : 0 },
+        { objectId: boardId, type: "board" },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
       .then((res) => {

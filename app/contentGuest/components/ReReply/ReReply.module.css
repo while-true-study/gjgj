@@ -1,0 +1,44 @@
+.content {
+  display: flex;
+  padding: 12px 20px 12px 40px;
+  width: 100%;
+}
+
+.nickName {
+  font-weight: 600;
+}
+
+.text {
+  font-size: 13px;
+  line-height: 17px;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.write {
+  color: #a6a8ab;
+  font-size: 11px;
+}
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  align-items: flex-start;
+  width: 200px;
+  flex-grow: 1;
+}
+
+.heartBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 59px;
+  gap: 5px;
+}
+
+.imgBox {
+  width: 36px;
+}

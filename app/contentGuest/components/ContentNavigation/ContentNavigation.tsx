@@ -5,6 +5,7 @@ import styles from "./ContentNavigation.module.css";
 import Cookies from "js-cookie";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 interface ContentNavi {
   boardId: number;
@@ -37,7 +38,7 @@ const ContentNavigation = ({
     axios
       .post(
         "http://211.188.52.119:8080/api/good",
-        { objectId: boardId, type: "board", goodChk: iloveit ? 1 : 0 },
+        { objectId: boardId, type: "board" },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
       .then((res) => {
@@ -68,7 +69,7 @@ const ContentNavigation = ({
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
       .then((res) => {
-        console.log("좋아요 성공", res);
+        console.log("북마크 성공", res);
         if (naviChange) {
           naviChange();
         }
@@ -95,7 +96,9 @@ const ContentNavigation = ({
         {heart}
       </div>
       <div className={styles.commentbox} onClick={commentClick}>
-        <img className="cursor-pointer" src="/IngContests/coment.svg"></img>
+        <Link href={`contentGuest/replypage?boardId=${boardId}`}>
+          <img className="cursor-pointer" src="/IngContests/coment.svg"></img>
+        </Link>
         {comment}
       </div>
       <div className={styles.bookmarkbox} onClick={bookmarkClick}>
