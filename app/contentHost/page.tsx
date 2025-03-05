@@ -8,7 +8,6 @@ import { Button } from "../components/button/button";
 import axios from "axios";
 import CategoryBox from "./components/categoryBox/CategoryBox";
 import Cookies from "js-cookie";
-import { redirect } from "next/navigation";
 
 interface Category {
   categoryId: number;

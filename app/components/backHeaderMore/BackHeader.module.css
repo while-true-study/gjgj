@@ -1,0 +1,32 @@
+.navContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.backButton {
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon {
+  cursor: pointer;
+}
+
+.menuBox {
+  display: flex;
+  width: 148px;
+  height: 40px;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  right: 0px;
+  bottom: -40px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #f3f4f6;
+  background-color: #f3f4f6;
+  cursor: pointer;
+}

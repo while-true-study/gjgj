@@ -45,8 +45,6 @@ const Page = () => {
           },
         }
       );
-
-      // 성공하면 쿠키 삭제
       if (response.data.isSuccess) {
         Cookies.remove("accessToken");
         console.log("로그아웃 성공: 쿠키 삭제 완료");

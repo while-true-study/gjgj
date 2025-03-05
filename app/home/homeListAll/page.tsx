@@ -11,6 +11,7 @@ interface HomeListItem {
   boardId: number;
   boardPrize: number;
   categoryName: string;
+  categoryId: number;
   createdAt: string;
   endCount: number;
   goodChk: number;
@@ -48,7 +49,7 @@ const Page = () => {
           return (
             <Contest
               boardId={i.boardId}
-              category={1}
+              category={i.categoryId}
               key={i.boardId}
               organizer={i.nickName}
               Dday={i.endCount}

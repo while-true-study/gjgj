@@ -26,9 +26,11 @@ const ReplyCompo = ({
   color = 0,
   boardId,
   heartClick,
+  onReplyClick2,
 }: {
   reply: replyProps;
   onReplyClick?: (boardId: number, nickName: string) => void;
+  onReplyClick2?: (boardId: number) => void;
   color?: number;
   boardId?: number;
   heartClick: () => void;
@@ -45,6 +47,13 @@ const ReplyCompo = ({
       window.location.href = `/contentGuest/replypage?boardId=${boardId}`;
     }
   };
+
+  const handleButtonClick2 = () => {
+    if (onReplyClick2) {
+      onReplyClick2(reply.replyId);
+    }
+  };
+
   const heartHandle = () => {
     if (!accessToken) {
       router.push("/login/input");
@@ -73,16 +82,22 @@ const ReplyCompo = ({
 
   return (
     <>
-      <div className={`${styles.content} ${color === 1 ? styles.sel : ""}`}>
+      <div
+        onClick={handleButtonClick2}
+        className={`${styles.content} ${color === 1 ? styles.sel : ""}`}
+      >
         <div className={styles.imgBox}>
           <img
-            src="/profile/profile1.svg"
+            src={reply.userImg ?? "/profile/profile1.svg"}
             alt="프로필 이미지"
             width={24}
             height={24}
           />
         </div>
         <div className={styles.textBox}>
+          {reply.accChk === 1 ? (
+            <span className={styles.adopted}>채택</span>
+          ) : null}
           {/* 여기에 이미지 넣어야함 */}
           <p className={`${styles.nickName} ${styles.text}`}>
             {reply.nickName}
@@ -98,8 +113,8 @@ const ReplyCompo = ({
             onClick={heartHandle}
             src={
               reply.goodChk === 0
-                ? "/Ingcontests/noHeart.svg"
-                : "/Ingcontests/heart.svg"
+                ? "/IngContests/noHeart.svg"
+                : "/IngContests/heart.svg"
             }
             alt="하트"
             width={24}

@@ -46,3 +46,13 @@
 .sel {
   background-color: #f1f1f2;
 }
+
+.adopted {
+  background-color: #ff404033;
+  padding: 2px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #ff4040;
+  font-weight: 600;
+  line-height: 17px;
+}

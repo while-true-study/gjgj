@@ -17,4 +17,32 @@
   position: absolute;
   bottom: 0;
   padding: 20px;
+  width: 100%;
+}
+
+.selBox {
+  background-color: #f1f1f2;
+}
+
+.flexBox {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  text-align: center;
+}
+
+.cacnel {
+  background-color: #d0d2d3;
+}
+
+.sel {
+  background-color: #3744fb;
+}
+
+.button {
+  color: #fff;
+  cursor: pointer;
+  flex-grow: 1;
+  border-radius: 8px;
+  padding: 12px 0px;
 }

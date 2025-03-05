@@ -34,17 +34,20 @@ const Page = () => {
       });
   }, []);
 
-  // const loginClick = () => {
-  //   console.log("로그인하기");
-  // };
+  const loginClick = () => {
+    window.location.href = "/login/input";
+  };
   return (
     <>
       <div className={`${styles.content} overflow-auto scrollbar-hide`}>
         <div>
-          <Profile name={mypageData?.nickName || ""} profileNum={4}></Profile>
-          {/* <button className={styles.loginbutton} onClick={loginClick}>
-          로그인
-        </button> */}
+          {mypageState ? (
+            <Profile name={mypageData?.nickName || ""} profileNum={4}></Profile>
+          ) : (
+            <button className={styles.loginbutton} onClick={loginClick}>
+              로그인
+            </button>
+          )}
         </div>
         <div className={styles.cashBox}>
           <div className={styles.cashbar}>

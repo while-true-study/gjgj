@@ -26,7 +26,7 @@ const ReReplyCom = ({
         "http://211.188.52.119:8080/api/good",
         {
           objectId: reReply.reReplyId,
-          type: "reReply",
+          type: "rereply",
         },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       )
@@ -44,7 +44,7 @@ const ReReplyCom = ({
     <div className={styles.content}>
       <div className={styles.imgBox}>
         <img
-          src="/profile/profile1.svg"
+          src={reReply.userImg ?? "/profile/profile1.svg"}
           alt="프로필 이미지"
           width={24}
           height={24}

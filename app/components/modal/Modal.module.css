@@ -3,10 +3,12 @@
   height: 100%;
   position: absolute;
   top: 0px;
+  left: 0px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
 }
 
 .mainBox {
@@ -17,6 +19,7 @@
   flex-direction: column;
   border-radius: 8px;
   padding: 10px;
+  width: 300px;
 }
 
 .textBox p {
