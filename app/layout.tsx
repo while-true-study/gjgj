@@ -24,10 +24,7 @@ export default function RootLayout({
           defer
           src="https://cdn.swygbro.com/public/widget/swyg-widget.js"
         ></script>
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
+        <link rel="icon" href="/logo.svg" type="image/svg+xml"></link>
       </Head>
       <body className="flex justify-center items-center min-h-screen bg-gray-100">
         <ReduxProvider>

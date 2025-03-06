@@ -8,6 +8,7 @@ import Modal from "@/app/components/modal/Modal";
 import axios from "axios";
 import Complete from "@/app/components/Complete/Complete";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 const Page = () => {
   const [nickName, setNickName] = useState<string>("");
@@ -72,7 +73,23 @@ const Page = () => {
       ></Modal>
       <div className={styles.content}>
         <BackHeader></BackHeader>
-        <div className={styles.imgBox}></div>
+        <div className={styles.imgBox}>
+          <div className="relative">
+            <Image
+              src="/profile/profile1.svg"
+              alt="기본프로필"
+              height={80}
+              width={80}
+            ></Image>
+            <Image
+              className={styles.edit}
+              src="/mypage/edit.svg"
+              alt="수정"
+              height={32}
+              width={32}
+            ></Image>
+          </div>
+        </div>
         <Input
           maxLength={10}
           type="text"

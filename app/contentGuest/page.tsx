@@ -68,7 +68,7 @@ const ContentGuest = () => {
     axios
       .delete("http://211.188.52.119:8080/api/board", {
         headers: { Authorization: `Bearer ${accessToken}` },
-        data: {
+        params: {
           boardId: Number(boardId),
         },
       })
@@ -100,7 +100,7 @@ const ContentGuest = () => {
   }, [accessToken, naviState]);
 
   const sliderSettings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,

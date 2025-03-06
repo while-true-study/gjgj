@@ -9,10 +9,10 @@ import Cookies from "js-cookie";
 
 const Page = () => {
   const [exhibitContent, setExhibitContent] = useState<string>("");
-  const [images, setImages] = useState<string[]>([]); // 사진
+  const [images, setImages] = useState<File[]>([]); // 사진
   const [boardIdFromParams, setBoardIdFromParams] = useState<string | null>(
     null
-  ); // boardId 상태 추가
+  );
 
   const accessToken = Cookies.get("accessToken");
 
@@ -30,8 +30,9 @@ const Page = () => {
     const formData = new FormData();
     formData.append("boardId", boardIdFromParams || "");
     formData.append("content", exhibitContent);
-    const boardFilesArray = images.map((image) => image);
-    formData.append("board_files", JSON.stringify(boardFilesArray));
+    images.forEach((file) => {
+      formData.append("board_files", file);
+    });
     try {
       await axios.post("http://211.188.52.119:8080/api/reply", formData, {
         headers: {
@@ -52,8 +53,7 @@ const Page = () => {
         alert("최대 5개의 이미지만 업로드할 수 있습니다.");
         return;
       }
-      const newImages = selectedFiles.map((file) => URL.createObjectURL(file)); // URL 변환
-      setImages((prevImages) => [...prevImages, ...newImages]); // 추가
+      setImages((prevImages) => [...prevImages, ...selectedFiles]); // 추가
     }
   };
 
@@ -92,7 +92,7 @@ const Page = () => {
           {images.map((image, index) => (
             <div key={index} className={styles.imgBox}>
               <img
-                src={image}
+                src={URL.createObjectURL(image)}
                 alt={`preview ${index}`}
                 style={{ objectFit: "cover" }}
               />

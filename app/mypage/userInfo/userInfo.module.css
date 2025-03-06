@@ -46,3 +46,20 @@
   font-size: 13px;
   color: #6d6e70;
 }
+
+.imgBox {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.edit {
+  background-color: #f1f1f2;
+  padding: 4px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}

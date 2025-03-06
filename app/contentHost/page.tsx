@@ -20,7 +20,7 @@ const ContentHost = () => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null); // 카테고리 선택
   const [cash, setCash] = useState<string>(""); // 상금
   const [content, setcontent] = useState<string>(""); // 공모전 내용
-  const [images, setImages] = useState<string[]>([]); // 사진
+  const [images, setImages] = useState<File[]>([]); // 사진
   const [category, setCategory] = useState<Category[]>([]); // 카테고리 get한거
 
   const today = new Date();
@@ -53,8 +53,9 @@ const ContentHost = () => {
       "endAt",
       selectedDate ? new Date(selectedDate).toISOString().slice(0, 19) : ""
     );
-    const boardFilesArray = images.map((image) => image);
-    formData.append("board_files", JSON.stringify(boardFilesArray));
+    images.forEach((file) => {
+      formData.append("board_files", file);
+    });
 
     try {
       await axios
@@ -107,8 +108,7 @@ const ContentHost = () => {
         alert("최대 5개의 이미지만 업로드할 수 있습니다.");
         return;
       }
-      const newImages = selectedFiles.map((file) => URL.createObjectURL(file)); // URL 변환
-      setImages((prevImages) => [...prevImages, ...newImages]); // 추가
+      setImages((prevImages) => [...prevImages, ...selectedFiles]); // 추가
     }
   };
 
@@ -207,7 +207,7 @@ const ContentHost = () => {
             {images.map((image, index) => (
               <div key={index} className={styles.imgBox}>
                 <img
-                  src={image}
+                  src={URL.createObjectURL(image)}
                   alt={`preview ${index}`}
                   style={{ objectFit: "cover" }}
                 />

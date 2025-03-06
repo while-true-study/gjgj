@@ -8,6 +8,7 @@ const Page = () => {
       <div className={styles.content}>
         <BackHeader></BackHeader>
         <span>이용 약관</span>
+        
       </div>
     </>
   );
