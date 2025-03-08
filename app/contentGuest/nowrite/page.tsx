@@ -8,13 +8,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 const Page = () => {
+  const accessToken = Cookies.get("accessToken");
+
   const [exhibitContent, setExhibitContent] = useState<string>("");
   const [images, setImages] = useState<File[]>([]); // 사진
   const [boardIdFromParams, setBoardIdFromParams] = useState<string | null>(
     null
   );
-
-  const accessToken = Cookies.get("accessToken");
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -30,17 +30,19 @@ const Page = () => {
     const formData = new FormData();
     formData.append("boardId", boardIdFromParams || "");
     formData.append("content", exhibitContent);
+
     images.forEach((file) => {
       formData.append("board_files", file);
     });
     try {
-      await axios.post("http://211.188.52.119:8080/api/reply", formData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      window.location.href = "/complete?complete=출품";
+      await axios
+        .post("http://211.188.52.119:8080/api/reply", formData, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(() => (window.location.href = "/complete?complete=출품"));
     } catch (err) {
       console.log("실패", err);
     }

@@ -23,13 +23,14 @@ interface HomeListItem {
 
 const Page = () => {
   const [data, setData] = useState<HomeListItem[]>([]);
-  const accessToken = Cookies.get("accessToken");
+  // const accessToken = Cookies.get("accessToken");
+  const userId = Cookies.get("userId");
   useEffect(() => {
     axios
       .get(`http://211.188.52.119:8080/api/board/home_list`, {
-        headers: { Authorization: `Bearer ${accessToken}` },
         params: {
           listType: 5,
+          userId: userId === undefined ? null : userId,
         },
       })
       .then((res) => {

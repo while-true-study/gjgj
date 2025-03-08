@@ -1,0 +1,6 @@
+.hr {
+  position: absolute;
+  width: 100%;
+  border: 1px solid red;
+  top: 126px;
+}

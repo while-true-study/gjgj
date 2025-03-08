@@ -1,0 +1,12 @@
+.title {
+  color: #3744fb;
+  font-weight: 600;
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.img {
+  position: absolute;
+  right: 8px;
+  bottom: 10px;
+}

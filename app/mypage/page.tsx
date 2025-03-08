@@ -11,6 +11,7 @@ import Cookies from "js-cookie";
 interface mypage {
   point: number;
   nickName: string;
+  imgUrl: string;
 }
 
 const Page = () => {
@@ -23,6 +24,7 @@ const Page = () => {
       // 없으면
       setMypageState(false);
       console.log(mypageState);
+      return;
     }
     axios
       .get("http://211.188.52.119:8080/api/mypage/profile", {
@@ -42,7 +44,10 @@ const Page = () => {
       <div className={`${styles.content} overflow-auto scrollbar-hide`}>
         <div>
           {mypageState ? (
-            <Profile name={mypageData?.nickName || ""} profileNum={4}></Profile>
+            <Profile
+              name={mypageData?.nickName || ""}
+              imgUrl={mypageData?.imgUrl || ""}
+            ></Profile>
           ) : (
             <button className={styles.loginbutton} onClick={loginClick}>
               로그인
@@ -59,11 +64,32 @@ const Page = () => {
           </div>
         </div>
         <div className={styles.menuBox}>
-          <MenuBar title="주최한 공모전" linkTo="/mypage/host"></MenuBar>
-          <MenuBar title="출품한 공모전" linkTo="/mypage/guest"></MenuBar>
-          <MenuBar title="스크랩" linkTo="/mypage/scrap"></MenuBar>
-          <MenuBar title="계좌 관리" linkTo="/home" register={true}></MenuBar>
-          <MenuBar title="충전/인출" linkTo="/recharge"></MenuBar>
+          <MenuBar
+            title="주최한 공모전"
+            linkTo="/mypage/host"
+            login={mypageState}
+          ></MenuBar>
+          <MenuBar
+            title="출품한 공모전"
+            linkTo="/mypage/guest"
+            login={mypageState}
+          ></MenuBar>
+          <MenuBar
+            title="스크랩"
+            linkTo="/mypage/scrap"
+            login={mypageState}
+          ></MenuBar>
+          <MenuBar
+            title="계좌 관리"
+            linkTo="/home"
+            register={true}
+            login={mypageState}
+          ></MenuBar>
+          <MenuBar
+            title="충전/인출"
+            linkTo="/recharge"
+            login={mypageState}
+          ></MenuBar>
           <MenuBar title="공지사항" linkTo="/home"></MenuBar>
           <MenuBar title="고객센터" linkTo="/home"></MenuBar>
           <MenuBar

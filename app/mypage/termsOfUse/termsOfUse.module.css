@@ -9,10 +9,35 @@
   font-size: 24px;
   line-height: 32px;
   font-weight: 600;
+  margin: 20px 0px;
 }
 
 .content p {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 24px;
+}
+.content li {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.a {
+  list-style: lower-alpha !important;
+}
+
+.content ol {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.content h2 {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 24px;
+}
+
+.dis {
+  list-style: disc !important;
 }

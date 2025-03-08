@@ -44,11 +44,6 @@ const Contest = ({
   )?.categoryName;
 
   const commentClick = () => {
-    if (!accessToken) {
-      router.push("/login/input");
-      alert("로그인이 필요한 서비스입니다.");
-      return;
-    }
     router.push(`/contentGuest?boardId=${boardId}`);
   };
   const heratClick = () => {

@@ -39,6 +39,7 @@ const Page = () => {
               title={i.title}
               loveit={i.goodCount}
               comment={i.replyCount}
+              boardId={i.boardId}
             ></ContentBox>
           );
         })}

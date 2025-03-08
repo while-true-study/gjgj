@@ -21,6 +21,7 @@ import useBoardPatch from "../hooks/useBoardPatch";
 
 const ContentGuest = () => {
   const accessToken = Cookies.get("accessToken");
+  const userId = Cookies.get("userId");
   const [boardId, setBoardId] = useState<string | null>(null);
   const [selReply, setSelReply] = useState<number>(0);
   const handleReplyClick = (boardId: number) => {
@@ -67,9 +68,9 @@ const ContentGuest = () => {
   const deleteBoard = () => {
     axios
       .delete("http://211.188.52.119:8080/api/board", {
-        headers: { Authorization: `Bearer ${accessToken}` },
         params: {
           boardId: Number(boardId),
+          userId: userId,
         },
       })
       .then((res) => {
@@ -90,7 +91,7 @@ const ContentGuest = () => {
     if (boardIdFromParams) {
       axios
         .get("http://211.188.52.119:8080/api/board/detail", {
-          params: { boardId: Number(boardIdFromParams) },
+          params: { boardId: Number(boardIdFromParams), userId: userId },
           headers: { Authorization: `Bearer ${accessToken}` },
         })
         .then((res) => {
@@ -137,12 +138,16 @@ const ContentGuest = () => {
       <div className={`${styles.content} overflow-auto scrollbar-hide`}>
         {contestData.boardImages.length > 0 && (
           <Slider {...sliderSettings}>
-            {contestData.boardImages.slice(0, 5).map((image, index) => (
-              <div key={index}>
+            {contestData.boardImages.map((image, index) => (
+              <div key={index} className={styles.imgBox}>
                 <img
                   src={`http://211.188.52.119:8080/potoUrl/${image.potoName}`}
                   alt={`이미지 ${index}`}
-                  style={{ marginTop: "10px" }}
+                  style={{
+                    width: "100%",
+                    height: "280px",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
             ))}

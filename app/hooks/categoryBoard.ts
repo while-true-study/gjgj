@@ -17,12 +17,10 @@ const useCategoryBoard = (categoryId: string | null): UseBoardPatch => {
         .get("http://211.188.52.119:8080/api/board/categoryBoardList", {
           headers: {
             Authorization: accessToken ? `Bearer ${accessToken}` : "",
-            ...(userId !== null && userId !== undefined
-              ? { userId: userId.toString() }
-              : { userId: null }),
           },
           params: {
-            categoryId: Number(categoryId),
+            categoryId: Number(categoryId) + 1,
+            userId: userId,
           },
         })
         .then((res) => {

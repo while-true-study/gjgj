@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ContentBox.module.css";
+import { useRouter } from "next/navigation";
 
 interface contentBox {
   tag: string; // 카테고리
@@ -8,6 +9,7 @@ interface contentBox {
   title: string; // 공모전 이름
   loveit: number; // 하트 수
   comment: number; // 댓글 수
+  boardId: number;
 }
 
 const ContentBox = ({
@@ -17,7 +19,12 @@ const ContentBox = ({
   title,
   loveit,
   comment,
+  boardId,
 }: contentBox) => {
+  const router = useRouter();
+  const detailClick = () => {
+    router.push(`/contentGuest?boardId=${boardId}`);
+  };
   return (
     <div className={styles.outbox}>
       <div className={styles.firLine}>
@@ -27,7 +34,7 @@ const ContentBox = ({
         <span>{name}</span>
         <span>D-{dday}</span>
       </div>
-      <div className={styles.titleBox}>
+      <div className={styles.titleBox} onClick={detailClick}>
         <p>{title}</p>
       </div>
       <div className={styles.thiLine}>
@@ -35,7 +42,10 @@ const ContentBox = ({
           <img src="/IngContests/noHeart.svg" alt="좋아요수"></img>
           <span>{loveit}</span>
         </span>
-        <span className={styles.comment}>
+        <span
+          className={`${styles.comment} cursor-pointer`}
+          onClick={detailClick}
+        >
           <img src="/IngContests/coment.svg" alt="댓글수"></img>
           <span>{comment}</span>
         </span>

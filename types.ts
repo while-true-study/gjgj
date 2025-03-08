@@ -12,6 +12,7 @@ export interface HomeListItem {
   replyCount: number;
   categoryName: string;
   category: number;
+  categoryId: number;
   daysUntilEnd: number;
 }
 
@@ -86,4 +87,24 @@ export interface BoardImages {
   potoName: string;
   potoOrigin: string;
   type: "string";
+}
+
+//유저
+export interface User {
+  userId: number;
+  accountid: string;
+  nameKo: string;
+  password?: string;
+  nickName?: string;
+  email?: string;
+  point: number;
+  comment: string;
+}
+
+export interface ApiResponse {
+  result: {
+    addPointUserList: any[];
+    removePointUserList: any[];
+    userAllList: User[];
+  };
 }

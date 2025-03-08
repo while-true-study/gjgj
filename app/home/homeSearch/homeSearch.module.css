@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 150px;
+  margin-top: 20px;
 }
 
 .box {
@@ -51,6 +51,7 @@
   justify-content: center;
   width: 300px;
   height: 180px;
+  margin-top: 130px;
 }
 
 .box img {
@@ -67,4 +68,11 @@
 
 .searchBox {
   padding: 20px;
+}
+
+.searchText {
+  margin-top: 16px;
+  color: #a6a8ab;
+  font-size: 16px;
+  line-height: 100%;
 }

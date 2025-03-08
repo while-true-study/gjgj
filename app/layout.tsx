@@ -7,8 +7,8 @@ export const metadata: Metadata = {
   title: "끄적끄적",
   description: "",
   icons: {
-    apple: "/assets/img/logo_square_192.png",
-    icon: "/assets/img/logo_square_180.png",
+    apple: "/logo.svg",
+    icon: "/logo.svg",
   },
 };
 
