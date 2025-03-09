@@ -56,3 +56,29 @@
   font-weight: 600;
   line-height: 17px;
 }
+
+.imgBox2 {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.replyImg {
+  width: 60px;
+  height: 45px;
+  object-fit: contain;
+  background-color: black;
+}
+
+.imgDownload {
+  background-color: #231f20;
+  color: #f1f1f2;
+  padding: 4px 8px;
+  width: 100%;
+  border-radius: 4px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+}

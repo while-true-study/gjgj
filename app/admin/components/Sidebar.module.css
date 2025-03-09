@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 56px;
+  cursor: pointer;
 }
 
 .selbox {

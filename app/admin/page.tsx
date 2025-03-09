@@ -5,6 +5,8 @@ import styles from "./admin.module.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Table1 from "./components/Table1";
+import Table2 from "./components/Table2";
+import Table3 from "./components/Table3";
 
 const Page = () => {
   useLayoutEffect(() => {
@@ -31,9 +33,9 @@ const Page = () => {
         {pageState === 1 ? (
           <Table1></Table1>
         ) : pageState === 2 ? (
-          <p>2임</p>
+          <Table2></Table2>
         ) : (
-          <p>3임</p>
+          <Table3></Table3>
         )}
       </div>
     </div>

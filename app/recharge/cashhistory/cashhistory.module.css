@@ -1,0 +1,28 @@
+.titleBox {
+  width: 100%;
+  background-color: #3744fb;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 8px;
+  color: #f1f1f2;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 34px;
+}
+
+.selectBox {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.selBox {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.content {
+}

@@ -1,16 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./recharge.module.css";
 import BackHeader from "../components/backHeader/BackHeader";
 import RechargeMenu from "./components/RechargeMenu/RechargeMenu";
 import TakeOut from "./components/TakeOut/TakeOut";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const Recharge = () => {
+  const accessToken = Cookies.get("accessToken");
+  const [myCash, setMyCash] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<string>("충전");
   const recordClick = () => {
-    console.log("recordClick");
+    window.location.href = "/recharge/cashhistory";
   };
+
+  useEffect(() => {
+    axios
+      .get("http://211.188.52.119:8080/api/mypage/profile", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        setMyCash(res.data.result.point);
+      });
+  }, []);
+
   return (
     <>
       <div className={styles.content}>
@@ -39,7 +54,7 @@ const Recharge = () => {
           {activeTab === "충전" ? (
             <RechargeMenu></RechargeMenu>
           ) : (
-            <TakeOut money={5000}></TakeOut>
+            <TakeOut money={myCash}></TakeOut>
           )}
         </div>
 

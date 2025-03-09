@@ -10,3 +10,9 @@
   right: 8px;
   bottom: 10px;
 }
+
+.footer {
+  position: absolute;
+  bottom: 40px;
+  z-index: 0;
+}

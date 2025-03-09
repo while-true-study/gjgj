@@ -18,7 +18,7 @@ const IngContests = () => {
   };
 
   useEffect(() => {
-    const accessToken = Cookies.get("accessToken");
+    // const accessToken = Cookies.get("accessToken");
     const userId = Cookies.get("userId");
     axios
       .get(`http://211.188.52.119:8080/api/board/home_list`, {

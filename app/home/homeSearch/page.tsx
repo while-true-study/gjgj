@@ -49,7 +49,9 @@ const Page = () => {
         </button>
       </div>
       {data.length != 0 && (
-        <p className={styles.searchText}>'{query}'에 대한 검색 결과예요.</p>
+        <p className={styles.searchText}>
+          &apos;{query}&apos;에 대한 검색 결과예요.
+        </p>
       )}
       <div className={styles.content}>
         {hasSearched &&

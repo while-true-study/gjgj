@@ -101,10 +101,29 @@ export interface User {
   comment: string;
 }
 
+export interface PointTransaction {
+  pointId: number;
+  member: User;
+  changePoint: number;
+  pointType: "add" | "remove";
+  createdAt: string;
+  accAt: string | null;
+  comment: string | null;
+}
+
 export interface ApiResponse {
-  result: {
-    addPointUserList: any[];
-    removePointUserList: any[];
-    userAllList: User[];
-  };
+  addPointUserList: PointTransaction[];
+  removePointUserList: PointTransaction[];
+  userAllList: User[];
+}
+
+export interface HisUser {
+  AccAt: string;
+  changePoint: number;
+  comment: string;
+  createdAt: string;
+  userId: number;
+  member: User;
+  pointId: number;
+  pointType: string;
 }

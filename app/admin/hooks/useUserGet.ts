@@ -1,12 +1,20 @@
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { User } from "@/types";
+import { ApiResponse, User, PointTransaction } from "@/types";
 
 const useUserGet = () => {
-  const [data, setData] = useState<User[]>([]);
+  const [userAllList, setUserAllList] = useState<User[]>([]);
+  const [removePointUserList, setRemovePointUserList] = useState<
+    PointTransaction[]
+  >([]);
+  const [addPointUserList, setAddPointUserList] = useState<PointTransaction[]>(
+    []
+  );
+
   useEffect(() => {
     const accessToken = Cookies.get("accessToken");
+
     axios
       .get("http://211.188.52.119:8080/api/point/userList", {
         headers: {
@@ -14,11 +22,14 @@ const useUserGet = () => {
         },
       })
       .then((res) => {
-        setData(res.data.result.userAllList);
+        const result: ApiResponse = res.data.result;
+        setUserAllList(result.userAllList); // userAllList 저장
+        setRemovePointUserList(result.removePointUserList); // removePointUserList 저장
+        setAddPointUserList(result.addPointUserList);
       });
   }, []);
 
-  return { data };
+  return { userAllList, removePointUserList, addPointUserList };
 };
 
 export default useUserGet;

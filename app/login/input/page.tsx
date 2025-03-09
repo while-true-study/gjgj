@@ -40,9 +40,14 @@ export default function LoginInput() {
         console.log("Success:", res);
         const token = res.data.result.tokenVo.accessToken; // 직접 변수로 저장
         const userId = res.data.result.userId;
+        const role = res.data.result.tokenVo.role;
         Cookies.set("accessToken", token, { expires: 1 }); // 쿠키에 저장
         Cookies.set("userId", userId, { expires: 1 }); // 쿠키에 저장
-        router.push("/home");
+        if (role === "ADMIN") {
+          router.push("/admin");
+        } else {
+          router.push("/home");
+        }
       })
       .catch((err) => {
         setErrMsg(err.message);

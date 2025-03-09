@@ -32,7 +32,7 @@ const Page = () => {
     formData.append("content", exhibitContent);
 
     images.forEach((file) => {
-      formData.append("board_files", file);
+      formData.append("reply_files", file);
     });
     try {
       await axios

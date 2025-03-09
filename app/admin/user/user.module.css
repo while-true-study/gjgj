@@ -1,0 +1,70 @@
+.hr {
+  position: absolute;
+  width: 100%;
+  border: 1px solid red;
+  top: 126px;
+}
+
+.header {
+  display: flex;
+  color: #231f20;
+  font-size: 36px;
+  font-weight: 600;
+  gap: 16px;
+  margin-bottom: 120px;
+}
+
+.container {
+  min-width: 600px;
+}
+
+.formGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.label {
+  min-width: 150px;
+  max-width: 400px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.input {
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+  margin-left: 12px;
+}
+
+.button {
+  padding: 8px 27px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.blue {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.red {
+  background-color: #d0021b;
+  color: white;
+}
+
+.black {
+  background-color: black;
+  color: white;
+  margin-left: 12px;
+  width: 140px;
+}

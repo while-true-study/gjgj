@@ -6,6 +6,7 @@ import ReReplyCom from "../ReReply/ReReply";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import axios from "axios";
+import Image from "next/image";
 
 interface replyProps {
   accChk: number; //(채택된 댓글인지 확인 0 : 채택안됨. 1 : 채택됨)
@@ -27,6 +28,7 @@ const ReplyCompo = ({
   boardId,
   heartClick,
   onReplyClick2,
+  itsme,
 }: {
   reply: replyProps;
   onReplyClick?: (boardId: number, nickName: string) => void;
@@ -34,6 +36,7 @@ const ReplyCompo = ({
   color?: number;
   boardId?: number;
   heartClick: () => void;
+  itsme?: number;
 }) => {
   const router = useRouter();
   const accessToken = Cookies.get("accessToken");
@@ -80,6 +83,32 @@ const ReplyCompo = ({
       });
   };
 
+  const imgDownload = async () => {
+    try {
+      const response = await axios.get(
+        "http://211.188.52.119:8080/api/board/download",
+        {
+          params: {
+            boardId: boardId,
+            replyId: reply.replyId,
+          },
+          headers: { Authorization: `Bearer ${accessToken}` },
+          responseType: "blob",
+        }
+      );
+
+      const link = document.createElement("a");
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      link.href = url;
+      link.setAttribute("download", "images.zip");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("파일 다운로드 실패:", error);
+    }
+  };
+
   return (
     <>
       <div
@@ -87,7 +116,7 @@ const ReplyCompo = ({
         className={`${styles.content} ${color === 1 ? styles.sel : ""}`}
       >
         <div className={styles.imgBox}>
-          <img
+          <Image
             src={reply.userImg ?? "/profile/profile1.svg"}
             alt="프로필 이미지"
             width={24}
@@ -98,10 +127,31 @@ const ReplyCompo = ({
           {reply.accChk === 1 ? (
             <span className={styles.adopted}>채택</span>
           ) : null}
-          {/* 여기에 이미지 넣어야함 */}
+
           <p className={`${styles.nickName} ${styles.text}`}>
             {reply.nickName}
           </p>
+          {/* && reply.accChk == 1 && itsme === 1 */}
+          {reply.replyImages.length > 0 && reply.accChk == 1 && itsme === 1 && (
+            <span className={styles.imgDownload} onClick={imgDownload}>
+              이미지 저장
+            </span>
+          )}
+          <div className={styles.imgBox2}>
+            {reply.replyImages.length > 0 &&
+              reply.replyImages.map((img, i) => {
+                return (
+                  <Image
+                    className={styles.replyImg}
+                    key={i}
+                    src={`http://211.188.52.119:8080/potoUrl/${img.potoName}`}
+                    alt="댓글이미지"
+                    width={60}
+                    height={45}
+                  ></Image>
+                );
+              })}
+          </div>
           <p className={`${styles.title} ${styles.text}`}>{reply.content}</p>
           <span onClick={handleButtonClick} className={styles.write}>
             답글쓰기

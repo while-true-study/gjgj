@@ -1,13 +1,21 @@
 import React from "react";
 import styles from "./TakeOut.module.css";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 interface TakeOut {
   money: number;
 }
 
 const TakeOut = ({ money }: TakeOut) => {
+  const accessToken = Cookies.get("accessToken");
   const TakeOut = () => {
-    console.log("TakeOut");
+    const formData = new FormData();
+    formData.append("changePoint", money?.toString() ?? `${money}`);
+    formData.append("pointType", "remove");
+    axios.post("http://211.188.52.119:8080/api/point", formData, {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
   };
   return (
     <div className={styles.content}>

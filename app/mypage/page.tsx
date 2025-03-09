@@ -12,6 +12,7 @@ interface mypage {
   point: number;
   nickName: string;
   imgUrl: string;
+  resisterBank: boolean;
 }
 
 const Page = () => {
@@ -60,7 +61,14 @@ const Page = () => {
             <span>{mypageData?.point}</span>
           </div>
           <div className="mt-3">
-            <button>충전하기</button>
+            <button
+              className={`${
+                mypageData && mypageData?.point > 0 ? styles.charge : ""
+              }`}
+              onClick={() => (window.location.href = "/recharge")}
+            >
+              충전하기
+            </button>
           </div>
         </div>
         <div className={styles.menuBox}>
@@ -81,8 +89,8 @@ const Page = () => {
           ></MenuBar>
           <MenuBar
             title="계좌 관리"
-            linkTo="/home"
-            register={true}
+            linkTo="/mypage/noaccount"
+            register={!mypageData?.resisterBank}
             login={mypageState}
           ></MenuBar>
           <MenuBar

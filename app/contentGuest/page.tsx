@@ -52,7 +52,6 @@ const ContentGuest = () => {
     boardImages: [],
   });
   const [naviState, setNaviState] = useState(false);
-
   const [viewRealModal, setViewRealModal] = useState(false);
   const RealModalHandle = () => {
     setViewRealModal((prev) => !prev);
@@ -68,6 +67,7 @@ const ContentGuest = () => {
   const deleteBoard = () => {
     axios
       .delete("http://211.188.52.119:8080/api/board", {
+        headers: { Authorization: `Bearer ${accessToken}` },
         params: {
           boardId: Number(boardId),
           userId: userId,
@@ -102,7 +102,7 @@ const ContentGuest = () => {
 
   const sliderSettings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -112,6 +112,21 @@ const ContentGuest = () => {
 
   const ModalHandel = () => {
     setViewModal((prev) => !prev);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  // 이미지 클릭 핸들러 (모달 열기)
+  const openImageModal = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsModalOpen(true);
+  };
+
+  // 모달 닫기 핸들러
+  const closeImageModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
   };
 
   return (
@@ -135,11 +150,22 @@ const ContentGuest = () => {
           </>
         )}
       </div>
-      <div className={`${styles.content} overflow-auto scrollbar-hide`}>
+      <div
+        className={`${styles.content} overflow-auto scrollbar-hide overflow-x-hidden`}
+      >
         {contestData.boardImages.length > 0 && (
           <Slider {...sliderSettings}>
             {contestData.boardImages.map((image, index) => (
-              <div key={index} className={styles.imgBox}>
+              <div
+                key={image.potoName}
+                className={styles.imgBox}
+                onClick={() =>
+                  openImageModal(
+                    `http://211.188.52.119:8080/potoUrl/${image.potoName}`
+                  )
+                } // 이미지 클릭 이벤트 추가
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={`http://211.188.52.119:8080/potoUrl/${image.potoName}`}
                   alt={`이미지 ${index}`}
@@ -152,6 +178,32 @@ const ContentGuest = () => {
               </div>
             ))}
           </Slider>
+        )}
+        {isModalOpen && selectedImage && (
+          <>
+            <BackHeader></BackHeader>
+            <div
+              className={styles.modalOverlay}
+              onClick={closeImageModal} // 배경 클릭 시 모달 닫기
+            >
+              <div
+                className={styles.modalContent}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  className={styles.closeButton}
+                  onClick={closeImageModal}
+                >
+                  ✖
+                </button>
+                <img
+                  src={selectedImage}
+                  alt="확대된 이미지"
+                  className={styles.fullScreenImage}
+                />
+              </div>
+            </div>
+          </>
         )}
         <div className="p-5">
           <ContentHostBar
@@ -181,8 +233,9 @@ const ContentGuest = () => {
               <ReplyCompo
                 reply={reply}
                 boardId={contestData.boardDetail.boardId}
-                heartClick={heartClick} // 상태 변환 함수
+                heartClick={heartClick} // 상태 변환
                 onReplyClick2={handleReplyClick}
+                itsme={contestData.boardDetail.isWriter ?? 0}
               />
             </div>
           ))
@@ -206,7 +259,18 @@ const ContentGuest = () => {
       )}
       <div className={styles.footer}>
         {contestData.boardDetail.isWriter === 0 ? (
-          <Link href={`/contentGuest/nowrite?boardId=${boardId}`}>
+          <Link
+            href={
+              accessToken ? `/contentGuest/nowrite?boardId=${boardId}` : "#"
+            }
+            onClick={(e) => {
+              if (!accessToken) {
+                e.preventDefault(); // 기본 이동 방지
+                alert("로그인이 필요한 서비스입니다.");
+                window.location.href = "/login/input"; // 로그인 페이지로 이동
+              }
+            }}
+          >
             <Button label="출품하기"></Button>
           </Link>
         ) : contestData.replyList.length <= 2 ? ( // 2개 이하면

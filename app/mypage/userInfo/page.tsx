@@ -14,6 +14,10 @@ const Page = () => {
   const [nickName, setNickName] = useState<string>("");
   const [viewWithdraw, setViewWithdraw] = useState(false);
   const [viewComplete, setViewComplete] = useState(false);
+  const [showModal, setShowModal] = useState(false); // 프로필 선택 모달 상태
+  const [selectedProfile, setSelectedProfile] = useState(
+    "/profile/profile1.svg"
+  ); // 선택한 프로필 이미지
 
   const nickNameHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
@@ -58,6 +62,12 @@ const Page = () => {
     }
   };
 
+  // 프로필 선택 핸들러
+  const handleProfileSelect = (profile: string) => {
+    setSelectedProfile(profile); // 선택한 프로필 업데이트
+    setShowModal(false); // 모달 닫기
+  };
+
   return (
     <>
       {viewComplete && <Complete title="탈퇴"></Complete>}
@@ -71,23 +81,64 @@ const Page = () => {
         setClose={WithdrawButton} // 오른쪽버튼
         onClick={setViewModal} // 왼쪽버튼
       ></Modal>
+
+      {/* 프로필 선택 모달 */}
+      {showModal && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={styles.closeButton}
+              onClick={() => setShowModal(false)}
+            >
+              ✖
+            </button>
+            <p className={styles.modalTitle}>프로필 이미지를 선택해 주세요</p>
+
+            {/* 프로필 선택 목록 */}
+            <div className={styles.profileOptions}>
+              {[
+                "/profile/profile1.svg",
+                "/profile/profile2.svg",
+                "/profile/profile3.svg",
+              ].map((profile, index) => (
+                <img
+                  key={index}
+                  src={profile}
+                  alt={`프로필 ${index + 1}`}
+                  className={styles.profileOption}
+                  onClick={() => handleProfileSelect(profile)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className={styles.content}>
         <BackHeader></BackHeader>
         <div className={styles.imgBox}>
-          <div className="relative">
+          <div className="relative" onClick={() => setShowModal(true)}>
+            {" "}
+            {/* 클릭 시 모달 열기 */}
             <Image
-              src="/profile/profile1.svg"
+              src={selectedProfile} // 선택된 프로필 표시
               alt="기본프로필"
               height={80}
               width={80}
-            ></Image>
+            />
             <Image
               className={styles.edit}
               src="/mypage/edit.svg"
               alt="수정"
               height={32}
               width={32}
-            ></Image>
+            />
           </div>
         </div>
         <Input

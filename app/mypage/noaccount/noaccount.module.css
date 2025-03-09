@@ -6,3 +6,27 @@
   font-size: 20px;
   line-height: 100%;
 }
+
+.bankBar {
+  color: #000000;
+  font-size: 16px;
+  display: flex;
+  height: 40px;
+}
+
+.bank {
+  font-weight: 600;
+  gap: 4px;
+  display: flex;
+}
+
+.edit {
+  background-color: #f1f1f2;
+  padding: 4px 8px;
+  border-radius: 8px;
+  height: 26px;
+}
+
+.imgbox {
+  height: 40px;
+}

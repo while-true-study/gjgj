@@ -35,6 +35,12 @@ const Sidebar = ({
         >
           <p>인출</p>
         </div>
+        <div
+          className={`${styles.box}`}
+          onClick={() => (window.location.href = "/home")}
+        >
+          <p>홈으로</p>
+        </div>
       </div>
     </div>
   );
