@@ -16,10 +16,11 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 19px;
+  cursor: pointer;
 }
 
 .sel {
-  color: #7780fc;
+  color: #7780fc !important;
 }
 
 .paddingBox {

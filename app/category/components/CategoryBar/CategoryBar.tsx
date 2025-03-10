@@ -4,9 +4,16 @@ import styles from "./CategoryBar.module.css";
 interface CategoryProps {
   categoryId: number;
   changeCategory: (newCategoryId: number) => void;
+  listType: number;
+  chnageListType: (type: number) => void;
 }
 
-const CategoryBar = ({ categoryId, changeCategory }: CategoryProps) => {
+const CategoryBar = ({
+  categoryId,
+  changeCategory,
+  listType,
+  chnageListType,
+}: CategoryProps) => {
   const categoryImages = [
     {
       id: 0,
@@ -53,9 +60,24 @@ const CategoryBar = ({ categoryId, changeCategory }: CategoryProps) => {
         ))}
       </div>
       <div className={styles.sortbar}>
-        <span className={styles.sel}>마감임박순</span>
-        <span>좋아요순</span>
-        <span>상금높은순</span>
+        <span
+          className={listType === 1 ? styles.sel : ""}
+          onClick={() => chnageListType(1)}
+        >
+          마감임박순
+        </span>
+        <span
+          className={listType === 2 ? styles.sel : ""}
+          onClick={() => chnageListType(2)}
+        >
+          좋아요순
+        </span>
+        <span
+          className={listType === 3 ? styles.sel : ""}
+          onClick={() => chnageListType(3)}
+        >
+          상금높은순
+        </span>
       </div>
     </div>
   );

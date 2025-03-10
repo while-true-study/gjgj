@@ -1,22 +1,29 @@
 "use client";
 
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import styles from "./admin.module.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Table1 from "./components/Table1";
 import Table2 from "./components/Table2";
 import Table3 from "./components/Table3";
+import Cookies from "js-cookie";
 
 const Page = () => {
   useLayoutEffect(() => {
     document.body.className = "";
-
     const wrapperDiv = document.body.querySelector("body > div");
     if (wrapperDiv) {
       wrapperDiv.replaceWith(...wrapperDiv.childNodes);
     }
   }, []);
+
+  useEffect(() => {
+    const role = Cookies.get("role");
+    if (role != "ADMIN") {
+      alert("어드민이 아닙니다.");
+    }
+  });
 
   const [pageState, setPageState] = useState<number>(1);
 

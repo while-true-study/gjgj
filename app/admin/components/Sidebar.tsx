@@ -8,14 +8,7 @@ const Sidebar = ({
   pageState: number;
 }) => {
   return (
-    <div
-      style={{
-        width: "100px",
-        background: "black",
-        color: "white",
-        height: "100vh",
-      }}
-    >
+    <div className={styles.content}>
       <div className="mt-32">
         <div
           className={`${styles.box} ${pageState === 1 ? styles.selbox : ""}`}
@@ -37,7 +30,7 @@ const Sidebar = ({
         </div>
         <div
           className={`${styles.box}`}
-          onClick={() => (window.location.href = "/home")}
+          onClick={() => (window.location.href = "/home.html")}
         >
           <p>홈으로</p>
         </div>

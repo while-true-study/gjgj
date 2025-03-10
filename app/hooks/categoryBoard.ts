@@ -7,7 +7,10 @@ type UseBoardPatch = {
   data: HomeListItem[] | undefined;
 };
 
-const useCategoryBoard = (categoryId: string | null): UseBoardPatch => {
+const useCategoryBoard = (
+  categoryId: string | null,
+  listType: number | null
+): UseBoardPatch => {
   const [data, setData] = useState<HomeListItem[] | undefined>(undefined);
   useEffect(() => {
     const userId = Cookies.get("userId"); // 쿠키에서 userId 가져오기
@@ -21,6 +24,7 @@ const useCategoryBoard = (categoryId: string | null): UseBoardPatch => {
           params: {
             categoryId: Number(categoryId) + 1,
             userId: userId,
+            listType: listType, // 1마감 2 좋아요 3상금
           },
         })
         .then((res) => {
@@ -30,7 +34,7 @@ const useCategoryBoard = (categoryId: string | null): UseBoardPatch => {
           console.log("err");
         });
     }
-  }, [categoryId]);
+  }, [categoryId, listType]);
 
   return { data }; // 기본적으로 빈 데이터를 반환
 };

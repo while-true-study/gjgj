@@ -10,10 +10,15 @@ import useCategoryBoard from "../hooks/categoryBoard";
 
 const Page = () => {
   const [categoryId, setCategoryId] = useState<number>(0);
+  const [listType, setListType] = useState<number>(1);
   const changeCategoryId = (categoryId: number) => {
     setCategoryId(categoryId);
   };
-  const { data } = useCategoryBoard(categoryId.toString());
+
+  const changeListType = (type: number) => {
+    setListType(type);
+  };
+  const { data } = useCategoryBoard(categoryId.toString(), listType);
   return (
     <div className="h-full relative">
       <img src="/category/fullimg.svg" alt="사진" />
@@ -26,6 +31,8 @@ const Page = () => {
         <CategoryBar
           categoryId={categoryId}
           changeCategory={changeCategoryId}
+          listType={listType}
+          chnageListType={changeListType}
         ></CategoryBar>
       </div>
       <div className={`${styles.content} overflow-auto scrollbar-hide`}>

@@ -9,3 +9,14 @@
 .selbox {
   background-color: #3744fb;
 }
+
+.content {
+  width: 100px;
+  height: 100vh;
+  background: black;
+  color: #fff !important;
+}
+
+.content p {
+  color: #fff !important;
+}
