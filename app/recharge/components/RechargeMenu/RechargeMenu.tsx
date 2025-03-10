@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 const RechargeMenu = () => {
   const router = useRouter();
   const RechargeHandle = (cash: number) => {
-    router.push(`/recharge/priceselect?amount=${cash}`);
+    router.push(`/Recharge/priceselect?amount=${cash}`);
   };
 
   return (

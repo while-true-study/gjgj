@@ -15,10 +15,10 @@ function AuthHandler() {
     if (accessToken) {
       console.log("Access Token:", accessToken);
       Cookies.set("accessToken", accessToken, { expires: 7 });
-      router.push("/home"); // redirect 대신 router.push 사용
+      router.push("/home.html");
     } else {
       alert("로그인 실패");
-      router.push("/login/loginMain"); // redirect 대신 router.push 사용
+      router.push("/login/loginMain.html");
     }
   }, [router]);
 

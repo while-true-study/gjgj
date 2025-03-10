@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import styles from "./userInfo.module.css";
 import BackHeader from "@/app/components/backHeader/BackHeader";
@@ -9,15 +10,22 @@ import axios from "axios";
 import Complete from "@/app/components/Complete/Complete";
 import Cookies from "js-cookie";
 import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+import useUpdateProfile from "@/app/hooks/useUpdateProfile";
 
 const Page = () => {
+  const profileImage = [
+    "https://kr.object.ncloudstorage.com/profile-img/basic/B9CBB4D7-18A0-49BC-84A1-E0D5EC1F8112.png",
+    "https://kr.object.ncloudstorage.com/profile-img/basic/EEA39F71-0CA1-4FCA-A0DE-090EB3956767.png",
+    "https://kr.object.ncloudstorage.com/profile-img/basic/9957A943-220E-4BF1-B319-F3BA8D122599.png",
+    "https://kr.object.ncloudstorage.com/profile-img/basic/6C7CC82D-CA70-4894-968B-44A344A85C94.png",
+  ];
+
   const [nickName, setNickName] = useState<string>("");
   const [viewWithdraw, setViewWithdraw] = useState(false);
   const [viewComplete, setViewComplete] = useState(false);
   const [showModal, setShowModal] = useState(false); // 프로필 선택 모달 상태
-  const [selectedProfile, setSelectedProfile] = useState(
-    "/profile/profile1.svg"
-  ); // 선택한 프로필 이미지
+  const [selectedProfile, setSelectedProfile] = useState(profileImage[0]); // 선택한 프로필 이미지
 
   const nickNameHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
@@ -27,50 +35,59 @@ const Page = () => {
     setViewWithdraw(!viewWithdraw);
   };
 
-  const WithdrawButton = () => {
-    const accessToken = Cookies.get("accessToken");
-    axios.delete("http://211.188.52.119:8080/api/mypage/deleteMember", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    setViewComplete(true);
-    setViewModal();
+  const WithdrawButton = async () => {
+    try {
+      const accessToken = Cookies.get("accessToken");
+      const res = await axios.delete(
+        "http://211.188.52.119:8080/api/mypage/deleteMember",
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+
+      if (res.data.isSuccess) {
+        window.location.href = "/complete.html?complete=탈퇴";
+      }
+      setViewComplete(true);
+      setViewModal();
+    } catch (error) {
+      console.error("탈퇴 중 오류 발생", error);
+      alert("탈퇴 처리 중 문제가 발생했습니다.");
+    }
   };
 
   const logout = async () => {
-    const accessToken = Cookies.get("accessToken");
     try {
+      const accessToken = Cookies.get("accessToken");
       const response = await axios.post(
         "http://211.188.52.119:8080/api/logout",
         {},
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        }
+        { headers: { Authorization: `Bearer ${accessToken}` } }
       );
+
       if (response.data.isSuccess) {
         Cookies.remove("accessToken");
-        console.log("로그아웃 성공: 쿠키 삭제 완료");
         alert("로그아웃 되었습니다.");
-        window.location.href = "/home"; // 로그인 페이지 또는 메인 페이지로 이동
+        window.location.href = "/home.html";
       }
     } catch (error) {
-      console.log(error);
+      console.error("로그아웃 중 오류 발생", error);
       alert("로그아웃 중 오류가 발생했습니다.");
     }
   };
 
-  // 프로필 선택 핸들러
-  const handleProfileSelect = (profile: string) => {
-    setSelectedProfile(profile); // 선택한 프로필 업데이트
-    setShowModal(false); // 모달 닫기
+  const handleProfileSelect = (index: number) => {
+    setSelectedProfile(profileImage[index]);
+  };
+  const { updateProfile, error } = useUpdateProfile();
+
+  const handleSubmit = () => {
+    updateProfile({ nickName, selectedProfile });
   };
 
   return (
     <>
-      {viewComplete && <Complete title="탈퇴"></Complete>}
+      {viewComplete && <Complete title="탈퇴" />}
       <Modal
         title="끄적끄적을 떠나실 건가요?"
         fircontent="계정탈퇴 시 모든 개인정보가 삭제되며"
@@ -78,66 +95,83 @@ const Page = () => {
         buttonLabel="계속 이용하기"
         backLabel="탈퇴하기"
         setView={viewWithdraw}
-        setClose={WithdrawButton} // 오른쪽버튼
-        onClick={setViewModal} // 왼쪽버튼
-      ></Modal>
-
-      {/* 프로필 선택 모달 */}
-      {showModal && (
-        <div
-          className={styles.modalOverlay}
-          onClick={() => setShowModal(false)}
-        >
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className={styles.closeButton}
+        setClose={WithdrawButton}
+        onClick={setViewModal}
+      />
+      <AnimatePresence>
+        {showModal && (
+          <>
+            <motion.div
+              className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-80 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               onClick={() => setShowModal(false)}
+            />
+            <motion.div
+              className="absolute bottom-0 w-full max-w-md bg-white p-6 rounded-t-lg shadow-lg z-50"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
             >
-              ✖
-            </button>
-            <p className={styles.modalTitle}>프로필 이미지를 선택해 주세요</p>
+              <button
+                className={styles.closeButton}
+                onClick={() => setShowModal(false)}
+              >
+                ✖
+              </button>
+              <p className={styles.modalTitle}>프로필 이미지를 선택해 주세요</p>
+              <div className="grid grid-cols-2 gap-4 z-50 w-48 m-auto">
+                {[
+                  "/profile/profile1.svg",
+                  "/profile/profile2.svg",
+                  "/profile/profile3.svg",
+                  "/profile/profile4.svg",
+                ].map((profile, index) => {
+                  const displayProfile =
+                    selectedProfile === profileImage[index]
+                      ? profile.replace(".svg", "selected.svg")
+                      : profile;
 
-            {/* 프로필 선택 목록 */}
-            <div className={styles.profileOptions}>
-              {[
-                "/profile/profile1.svg",
-                "/profile/profile2.svg",
-                "/profile/profile3.svg",
-              ].map((profile, index) => (
-                <img
-                  key={index}
-                  src={profile}
-                  alt={`프로필 ${index + 1}`}
-                  className={styles.profileOption}
-                  onClick={() => handleProfileSelect(profile)}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
+                  return (
+                    <motion.div
+                      key={index}
+                      className={styles.profileOption}
+                      onClick={() => handleProfileSelect(index)}
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <Image
+                        src={displayProfile}
+                        alt={`프로필 ${index + 1}`}
+                        width={80}
+                        height={80}
+                      />
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
       <div className={styles.content}>
-        <BackHeader></BackHeader>
+        <BackHeader />
         <div className={styles.imgBox}>
           <div className="relative" onClick={() => setShowModal(true)}>
-            {" "}
-            {/* 클릭 시 모달 열기 */}
             <Image
-              src={selectedProfile} // 선택된 프로필 표시
-              alt="기본프로필"
-              height={80}
+              src={selectedProfile}
+              alt="프로필 이미지"
               width={80}
+              height={80}
             />
             <Image
               className={styles.edit}
               src="/mypage/edit.svg"
               alt="수정"
-              height={32}
               width={32}
+              height={32}
+              onClick={() => setShowModal(true)}
             />
           </div>
         </div>
@@ -148,14 +182,11 @@ const Page = () => {
           name="nickname"
           id="nickname"
           onChange={nickNameHandle}
-          rightBox={
-            <div className={styles.rightBox}>
-              <span>{nickName.length}/10</span>
-            </div>
-          }
+          rightBox={<div className={styles.rightBox}>{nickName.length}/10</div>}
         />
-        <p className={styles.help}>10자리 이내,문자/숫자로 작성해주세요.</p>
-        <Button label="저장하기"></Button>
+        <p className={styles.help}>10자리 이내, 문자/숫자로 작성해주세요.</p>
+        <p className={styles.errText}>{error}</p>
+        <Button label="저장하기" onClick={handleSubmit} />
         <div className={styles.footer}>
           <span className={`${styles.logout} ${styles.font}`} onClick={logout}>
             로그아웃

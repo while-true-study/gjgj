@@ -14,13 +14,13 @@
 .dday {
   font-size: 24px;
   font-weight: 600;
-  color: #7780fc;
+  color: #7780fc !important;
 }
 
 .ddayred {
   font-size: 24px;
   font-weight: 600;
-  color: #ff4040;
+  color: #ff4040 !important;
 }
 
 .profile {

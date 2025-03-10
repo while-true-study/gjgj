@@ -22,16 +22,22 @@ const Page = () => {
   };
 
   const saveClick = () => {
-    axios.patch(
-      "http://211.188.52.119:8080/api/mypage/bank-info",
-      {
-        bankCode: selBank,
-        bankAccount: accountNum,
-      },
-      {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      }
-    );
+    axios
+      .patch(
+        "http://211.188.52.119:8080/api/mypage/bank-info",
+        {
+          bankCode: selBank,
+          bankAccount: accountNum,
+        },
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      )
+      .then((res) => {
+        if (res.data.isSuccess) {
+          window.location.href = "/complete.html?complete=계좌등록";
+        }
+      });
   };
 
   return (

@@ -6,9 +6,9 @@ const TopBarHome = () => {
   const searchClick = () => {
     console.log("searchClick");
   };
-  const alarmClick = () => {
-    console.log("alarmClick");
-  };
+  // const alarmClick = () => {
+  //   console.log("alarmClick");
+  // };
 
   return (
     <div className={styles.topMenu}>
@@ -19,12 +19,12 @@ const TopBarHome = () => {
         <Link href="/home/homeSearch">
           <img src="/TopBarHome/search.svg" onClick={searchClick}></img>
         </Link>
-        <Link href="/home/homeNotice">
+        {/* <Link href="/home/homeNotice">
           <img
             src={false ? "/TopBarHome/notice.svg" : "/TopBarHome/alarm.svg"}
             onClick={alarmClick}
           ></img>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

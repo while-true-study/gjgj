@@ -58,7 +58,7 @@ export default function LoginMain() {
                   width={18}
                   height={16.8}
                 />
-                <span>네이버 로그인</span>
+                <span className={styles.naverText}>네이버 로그인</span>
               </div>
             }
             className={styles.naverButton}

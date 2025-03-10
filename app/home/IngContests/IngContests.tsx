@@ -45,7 +45,7 @@ const IngContests = () => {
         <div className="head">
           <div className={styles.TopBox}>
             <span className={styles.ing}>진행 중인 공모전🚀</span>
-            <Link href="/home/homeListAll">
+            <Link href="/home/homeListAll.html">
               <span className={styles.allview}>전체보기</span>
             </Link>
           </div>

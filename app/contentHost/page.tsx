@@ -65,7 +65,7 @@ const ContentHost = () => {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => (window.location.href = "/complete?complete=주최"));
+        .then(() => (window.location.href = "/complete.html?complete=주최"));
     } catch (err) {
       console.log("실패", err);
     }

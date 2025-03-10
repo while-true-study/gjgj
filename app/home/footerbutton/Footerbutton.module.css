@@ -5,11 +5,17 @@
   display: flex;
   border-radius: 20px;
   margin-bottom: 20px;
-  color: #fff;
   font-size: 16px;
   line-height: 26px;
   letter-spacing: 2%;
   justify-content: center;
   align-items: center;
   gap: 4px;
+  position: absolute;
+  bottom: 95px;
+  right: 20px;
+}
+
+.text {
+  color: #fff !important;
 }

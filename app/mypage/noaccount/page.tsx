@@ -74,8 +74,13 @@ const Page = () => {
             ></Image>
             <span>{bankInfo?.name}</span>
           </div>
-          <span>{bankData?.bankAccount}</span>
-          <span className={styles.edit}>수정</span>
+          <span className="flex-grow">{bankData?.bankAccount}</span>
+          <span
+            className={styles.edit}
+            onClick={() => (window.location.href = "/mypage/nowrite.html")}
+          >
+            수정
+          </span>
         </div>
       ) : (
         <Link href="/mypage/nowrite">

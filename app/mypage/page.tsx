@@ -7,6 +7,7 @@ import MenuBar from "./components/menuBar/MenuBar";
 import Profile from "./components/profile/Profile";
 import axios from "axios";
 import Cookies from "js-cookie";
+import Modal from "../components/modal/Modal";
 
 interface mypage {
   point: number;
@@ -19,6 +20,11 @@ const Page = () => {
   const accessToken = Cookies.get("accessToken");
   const [mypageState, setMypageState] = useState(false); // 로그인 여부
   const [mypageData, setMypageData] = useState<mypage | null>(null);
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   useEffect(() => {
     if (!accessToken) {
@@ -38,7 +44,7 @@ const Page = () => {
   }, []);
 
   const loginClick = () => {
-    window.location.href = "/login/input";
+    window.location.href = "/login/loginMain.html";
   };
   return (
     <>
@@ -65,7 +71,7 @@ const Page = () => {
               className={`${
                 mypageData && mypageData?.point > 0 ? styles.charge : ""
               }`}
-              onClick={() => (window.location.href = "/recharge")}
+              onClick={() => (window.location.href = "/recharge.html")}
             >
               충전하기
             </button>
@@ -76,30 +82,43 @@ const Page = () => {
             title="주최한 공모전"
             linkTo="/mypage/host"
             login={mypageState}
+            openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="출품한 공모전"
             linkTo="/mypage/guest"
             login={mypageState}
+            openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="스크랩"
             linkTo="/mypage/scrap"
             login={mypageState}
+            openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="계좌 관리"
             linkTo="/mypage/noaccount"
             register={!mypageData?.resisterBank}
             login={mypageState}
+            openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="충전/인출"
             linkTo="/recharge"
             login={mypageState}
+            openModal={() => setShowModal(true)}
           ></MenuBar>
-          <MenuBar title="공지사항" linkTo="/home"></MenuBar>
-          <MenuBar title="고객센터" linkTo="/home"></MenuBar>
+          <MenuBar
+            title="공지사항"
+            linkTo="/"
+            outLink="https://tin-brace-281.notion.site/1b226dab4391805297baf7ad9363bc03"
+          ></MenuBar>
+          <MenuBar
+            title="고객센터"
+            linkTo="/"
+            outLink="https://open.kakao.com/o/sa7QBSgh"
+          ></MenuBar>
           <MenuBar
             title="서비스 이용약관"
             linkTo="/mypage/termsOfUse"
@@ -110,6 +129,19 @@ const Page = () => {
           ></MenuBar>
         </div>
       </div>
+      {showModal ? (
+        <Modal
+          title="로그인이 필요한 서비스입니다"
+          fircontent="계속하시려면 로그인 해주세요."
+          buttonLabel="로그인"
+          backLabel="돌아가기"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          onClick={() => (window.location.href = "/login/loginMain.html")} // 오른쪽
+        ></Modal>
+      ) : (
+        ""
+      )}
       <NavigationBar state={3}></NavigationBar>
     </>
   );

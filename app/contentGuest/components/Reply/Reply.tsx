@@ -47,7 +47,7 @@ const ReplyCompo = ({
       onReplyClick(reply.replyId, reply.nickName);
     } else {
       // onReplyClick이 없다면 다른 작업 실행 (예: 페이지 이동)
-      window.location.href = `/contentGuest/replypage?boardId=${boardId}`;
+      window.location.href = `/contentGuest/replypage.html?boardId=${boardId}`;
     }
   };
 
@@ -158,7 +158,7 @@ const ReplyCompo = ({
           </span>
         </div>
         <div className={styles.heartBox}>
-          <img
+          <Image
             className="cursor-pointer"
             onClick={heartHandle}
             src={
@@ -169,7 +169,7 @@ const ReplyCompo = ({
             alt="하트"
             width={24}
             height={24}
-          ></img>
+          ></Image>
           <span>{reply.goodChk}</span>
         </div>
       </div>

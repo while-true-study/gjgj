@@ -42,7 +42,7 @@ const Page = () => {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => (window.location.href = "/complete?complete=출품"));
+        .then(() => (window.location.href = "/complete.html?complete=출품"));
     } catch (err) {
       console.log("실패", err);
     }

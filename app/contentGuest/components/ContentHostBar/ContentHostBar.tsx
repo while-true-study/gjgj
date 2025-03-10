@@ -17,8 +17,10 @@ const ContentHostBar = ({ name, dday, userImg }: HostBar) => {
       <div className={styles.name}>
         <span>{name}</span>
       </div>
-      <div className={dday <= 5 ? styles.ddayred : styles.dday}>
-        <span>D-{dday}</span>
+      <div>
+        <span className={dday <= 5 ? styles.ddayred : styles.dday}>
+          D-{dday}
+        </span>
       </div>
     </div>
   );

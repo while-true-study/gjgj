@@ -5,6 +5,10 @@ import useUserGet from "../hooks/useUserGet";
 const Table2 = () => {
   const { addPointUserList } = useUserGet();
 
+  const handleRowClick = (pointId: number) => {
+    window.location.href = `/admin/recharge.html?pointId=${pointId}`;
+  };
+
   return (
     <div style={{ paddingLeft: "56px", paddingRight: "56px" }}>
       <p style={{ marginBottom: "20px", fontWeight: "600", fontSize: "24px" }}>
@@ -34,7 +38,7 @@ const Table2 = () => {
         </thead>
         <tbody>
           {addPointUserList.map((row) => (
-            <tr key={row.pointId}>
+            <tr key={row.pointId} onClick={() => handleRowClick(row.pointId)}>
               <td
                 style={{
                   display: "flex",

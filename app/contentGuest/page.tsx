@@ -47,6 +47,7 @@ const ContentGuest = () => {
       deleteChk: 0,
       isWriter: 0, // 글쓴인가 아닌가
       replyCount: 0,
+      accChk: 0,
     },
     replyList: [],
     boardImages: [],
@@ -75,7 +76,7 @@ const ContentGuest = () => {
       })
       .then((res) => {
         if (res.data.isSuccess) {
-          window.location.href = "/complete?complete=취소";
+          window.location.href = "/complete.html?complete=취소";
         }
       });
   };
@@ -144,8 +145,8 @@ const ContentGuest = () => {
               buttonLabel="취소하기"
               backLabel="돌아가기"
               setView={viewModal}
-              setClose={ModalHandel} // 오른쪽버튼
-              onClick={deleteBoard} // 왼쪽버튼
+              setClose={ModalHandel}
+              onClick={deleteBoard}
             ></Modal>
           </>
         )}
@@ -267,19 +268,23 @@ const ContentGuest = () => {
               if (!accessToken) {
                 e.preventDefault(); // 기본 이동 방지
                 alert("로그인이 필요한 서비스입니다.");
-                window.location.href = "/login/input"; // 로그인 페이지로 이동
+                window.location.href = "/login/input.html"; // 로그인 페이지로 이동
               }
             }}
           >
             <Button label="출품하기"></Button>
           </Link>
         ) : contestData.replyList.length <= 2 ? ( // 2개 이하면
-          <div className={styles.flexBox}>
-            <span className={`${styles.cacnel} ${styles.button}`}>
-              취소하기
-            </span>
-            <span className={`${styles.sel} ${styles.button}`}>채택하기</span>
-          </div>
+          contestData.boardDetail.accChk === 1 ? (
+            <></>
+          ) : (
+            <div className={styles.flexBox}>
+              <span className={`${styles.cacnel} ${styles.button}`}>
+                취소하기
+              </span>
+              <span className={`${styles.sel} ${styles.button}`}>채택하기</span>
+            </div>
+          )
         ) : (
           // 3개 이상
           <Button

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useLayoutEffect } from "react";
-import styles from "./user.module.css";
+import styles from "./cash.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useUserGet from "../hooks/useUserGet";
@@ -19,7 +19,7 @@ const Page = () => {
 
   const accessToken = Cookies.get("accessToken");
   const router = useRouter();
-  const { userAllList } = useUserGet();
+  const { removePointUserList } = useUserGet();
 
   const [userId, setUserId] = useState(""); // 유저 아이디
   const [userName, setUserName] = useState(""); // 유저 이름
@@ -27,6 +27,7 @@ const Page = () => {
   const [bankAccount, setBankAccount] = useState(""); // 계좌
   const [cash, setCash] = useState<number>(0); // 보유 캐시
   const [note, setNote] = useState(""); // 비고
+  const [changePoint, setChangePoint] = useState(0); // 충전 요청 금액
   const [realId, setRealId] = useState("");
 
   const changeNote = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -39,21 +40,23 @@ const Page = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const userIdFromURL = params.get("userId") || "";
+    const userIdFromURL = params.get("pointId") || "";
     if (userIdFromURL) {
       setUserId(userIdFromURL);
-      const userData = userAllList.find(
-        (user) => user.userId.toString() === userIdFromURL
+      const userData = removePointUserList.find(
+        (user) => user.pointId.toString() === userIdFromURL
       );
       if (userData) {
-        setRealId(userData.accountid);
-        setUserName(userData.nameKo);
-        setBankName(userData.bankName);
-        setBankAccount(userData.bankAccount);
-        setCash(userData.point);
+        setRealId(userData.member.accountid);
+        setUserName(userData.member.nameKo);
+        setBankName(userData.member.bankName);
+        setBankAccount(userData.member.bankAccount);
+        setCash(userData.member.point);
+        setChangePoint(userData.changePoint);
+        setNote(userData.member.comment);
       }
     }
-  }, [userAllList]);
+  }, [removePointUserList]);
 
   const noteSave = () => {
     const formData = new FormData();
@@ -69,7 +72,7 @@ const Page = () => {
   };
 
   return (
-    <div>
+    <>
       <hr className={styles.hr}></hr>
       <div className="px-40 pt-16">
         <div className={styles.header}>
@@ -82,6 +85,7 @@ const Page = () => {
           />
           <span>User 관리</span>
         </div>
+
         <div className={styles.container}>
           <div className={styles.formGroup}>
             <label className={styles.label}>유저 아이디</label>
@@ -102,7 +106,15 @@ const Page = () => {
               readOnly
             />
           </div>
-
+          <div className={styles.formGroup}>
+            <label className={styles.label}>충전 요청 금액</label>
+            <input
+              type="text"
+              className={styles.input}
+              value={changePoint}
+              readOnly
+            />
+          </div>
           <div className={styles.formGroup}>
             <label className={styles.label}>계좌 정보</label>
             <input
@@ -126,9 +138,6 @@ const Page = () => {
               <button className={`${styles.button} ${styles.blue}`}>
                 캐시 충전하기
               </button>
-              <button className={`${styles.button} ${styles.red}`}>
-                캐시 차감하기
-              </button>
             </div>
           </div>
 
@@ -138,7 +147,7 @@ const Page = () => {
               className={styles.textinput}
               cols={70}
               onChange={changeNote}
-              value={note}
+              value={note || ""}
             ></textarea>
             <button
               className={`${styles.button} ${styles.black}`}
@@ -149,7 +158,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

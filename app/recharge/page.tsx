@@ -13,7 +13,7 @@ const Recharge = () => {
   const [myCash, setMyCash] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<string>("충전");
   const recordClick = () => {
-    window.location.href = "/recharge/cashhistory";
+    window.location.href = "/Recharge/cashhistory.html";
   };
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Recharge = () => {
 
         <div className={styles.record} onClick={recordClick}>
           <img src="/Recharge/history.svg"></img>
-          <span>내역</span>
+          <span className={styles.text}>내역</span>
         </div>
       </div>
     </>

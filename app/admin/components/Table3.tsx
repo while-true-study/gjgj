@@ -5,6 +5,10 @@ import useUserGet from "../hooks/useUserGet";
 const Table3 = () => {
   const { removePointUserList } = useUserGet();
 
+  const handleRowClick = (userId: number) => {
+    window.location.href = `/admin/cash.html?pointId=${userId}`;
+  };
+
   return (
     <div style={{ paddingLeft: "56px", paddingRight: "56px" }}>
       <p style={{ marginBottom: "20px", fontWeight: "600", fontSize: "24px" }}>
@@ -34,7 +38,7 @@ const Table3 = () => {
         </thead>
         <tbody>
           {removePointUserList.map((row) => (
-            <tr key={row.member.accountid}>
+            <tr key={row.pointId} onClick={() => handleRowClick(row.pointId)}>
               <td
                 style={{
                   display: "flex",

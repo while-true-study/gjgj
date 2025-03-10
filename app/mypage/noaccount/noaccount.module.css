@@ -12,12 +12,16 @@
   font-size: 16px;
   display: flex;
   height: 40px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .bank {
   font-weight: 600;
   gap: 4px;
   display: flex;
+  align-items: center;
+  margin-right: 8px;
 }
 
 .edit {

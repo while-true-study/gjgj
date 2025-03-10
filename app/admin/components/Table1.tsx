@@ -5,6 +5,10 @@ import useUserGet from "../hooks/useUserGet";
 const Table1 = () => {
   const { userAllList } = useUserGet();
 
+  const handleRowClick = (userId: number) => {
+    window.location.href = `/admin/user.html?userId=${userId}`;
+  };
+
   return (
     <div style={{ paddingLeft: "56px", paddingRight: "56px" }}>
       <p style={{ marginBottom: "20px", fontWeight: "600", fontSize: "24px" }}>
@@ -32,7 +36,7 @@ const Table1 = () => {
         </thead>
         <tbody>
           {userAllList.map((row) => (
-            <tr key={row.accountid}>
+            <tr key={row.accountid} onClick={() => handleRowClick(row.userId)}>
               <td>{row.accountid}</td>
               <td>{row.nameKo}</td>
               <td>{row.point}</td>

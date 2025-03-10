@@ -5,7 +5,7 @@ import styles from "./Modal.module.css";
 interface modal {
   title: string; // 제목
   fircontent: string; // modal 첫째줄
-  seccontent: string; // modal 둘째줄
+  seccontent?: string; // modal 둘째줄
   buttonLabel: string; // 이벤트 버튼 라벨
   backLabel: string; // 돌아가는 label
   setView: boolean; // 렌더할지말지
@@ -28,7 +28,7 @@ const Modal = ({
     <div className={styles.backBox}>
       <div className={styles.mainBox}>
         <div className={styles.textBox}>
-          <span className="text-lg font-semibold pb-2">{title}</span>
+          <span className="text-base font-semibold pb-2">{title}</span>
           <p>{fircontent}</p>
           <p>{seccontent}</p>
         </div>

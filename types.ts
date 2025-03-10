@@ -71,6 +71,7 @@ export interface BoardDetail {
   isWriter: number;
   replyCount: number;
   scrapCount: number;
+  accChk: number;
 }
 
 // BoardData 타입 (게시글 및 관련된 데이터)
@@ -99,6 +100,8 @@ export interface User {
   email?: string;
   point: number;
   comment: string;
+  bankAccount: string;
+  bankName: string;
 }
 
 export interface PointTransaction {

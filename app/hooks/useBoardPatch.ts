@@ -38,7 +38,7 @@ const useBoardPatch = (
         console.log("err");
         setData(false); // 오류 발생 시 data를 false로 설정
       });
-  }, [boardId, replyId, accessToken]);
+  }, [boardId, accessToken]);
 
   return { data }; // 반환값
 };

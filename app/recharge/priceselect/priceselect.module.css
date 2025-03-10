@@ -4,14 +4,15 @@
 
 .title {
   margin-top: 40px;
-  color: #3744fb;
+}
+.titletext {
+  color: #3744fb !important;
   font-size: 20px;
   font-weight: 600;
   line-height: 27px;
 }
 
 .bankname {
-  margin-top: 40px;
   display: flex;
   gap: 8px;
   align-items: center;
@@ -48,4 +49,13 @@
   font-size: 16px;
   line-height: 21px;
   cursor: pointer;
+}
+
+.warning {
+  color: #231f20 !important;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin-top: 8px;
+  margin-bottom: 14px;
 }

@@ -13,9 +13,15 @@ const TakeOut = ({ money }: TakeOut) => {
     const formData = new FormData();
     formData.append("changePoint", money?.toString() ?? `${money}`);
     formData.append("pointType", "remove");
-    axios.post("http://211.188.52.119:8080/api/point", formData, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    axios
+      .post("http://211.188.52.119:8080/api/point", formData, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        if (res.data.isSuccess) {
+          window.location.href = "/complete.html?complete=인출";
+        }
+      });
   };
   return (
     <div className={styles.content}>

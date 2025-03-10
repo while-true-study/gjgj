@@ -45,7 +45,14 @@ export default function LoginMain() {
                   height: "100%",
                   objectFit: "cover",
                   borderRadius: "8px",
+                  cursor: "pointer",
                 }}
+                onClick={() =>
+                  window.open(
+                    "https://tin-brace-281.notion.site/1b226dab439180d488c0e2c75ba12355",
+                    "_blank"
+                  )
+                }
               />
             </div>
             <div>
@@ -57,7 +64,13 @@ export default function LoginMain() {
                   height: "100%",
                   objectFit: "cover",
                   borderRadius: "8px",
+                  cursor: "pointer",
                 }}
+                onClick={() =>
+                  window.open(
+                    "https://tin-brace-281.notion.site/1b226dab43918079af49ea88363bbf3e?pvs=4"
+                  )
+                }
               />
             </div>
           </Slider>

@@ -1,10 +1,11 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Contest.module.css";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import Modal from "../modal/Modal";
 
 interface inputprops {
   boardId: number;
@@ -46,10 +47,17 @@ const Contest = ({
   const commentClick = () => {
     router.push(`/contentGuest?boardId=${boardId}`);
   };
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
   const heratClick = () => {
     if (!accessToken) {
-      router.push("/login/input");
-      alert("로그인이 필요한 서비스입니다.");
+      // router.push("/login/input");
+      // alert("로그인이 필요한 서비스입니다.");
+      setShowModal(true);
       return;
     }
     axios
@@ -111,6 +119,19 @@ const Contest = ({
           <span>{comment}</span>
         </div>
       </div>
+      {showModal ? (
+        <Modal
+          title="로그인이 필요한 서비스입니다"
+          fircontent="계속하시려면 로그인 해주세요."
+          buttonLabel="로그인"
+          backLabel="돌아가기"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          onClick={() => (window.location.href = "/login/loginMain.html")} // 오른쪽
+        ></Modal>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
