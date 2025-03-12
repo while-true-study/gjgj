@@ -86,7 +86,13 @@ const Contest = ({
         </div>
         <div className={styles.titleBox} onClick={commentClick}>
           <div className={styles.titleBox1}>
-            <span className={`${Dday <= 5 ? styles.red : ""}`}>D-{Dday}</span>
+            <span className={`${Dday <= 5 ? styles.red : ""}`}>
+              {Dday > 0
+                ? `D-${Dday}`
+                : Dday === 0
+                ? "D-day"
+                : `D+${Math.abs(Dday)}`}
+            </span>
           </div>
           <div className={styles.titleBox2}>
             <span>{title}</span>

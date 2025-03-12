@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import styles from "./Reply.module.css";
 import { ReplyImage, ReReply } from "@/types";
 import ReReplyCom from "../ReReply/ReReply";
@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import axios from "axios";
 import Image from "next/image";
+import Modal from "@/app/components/modal/Modal";
 
 interface replyProps {
   accChk: number; //(채택된 댓글인지 확인 0 : 채택안됨. 1 : 채택됨)
@@ -40,13 +41,21 @@ const ReplyCompo = ({
 }) => {
   const router = useRouter();
   const accessToken = Cookies.get("accessToken");
+  const [showModal, setShowModal] = useState<boolean>(false);
 
+  const closeModal = () => {
+    setShowModal(false);
+  };
   const handleButtonClick = () => {
+    if (!accessToken) {
+      // router.push("/login/input");
+      // alert("로그인이 필요한 서비스입니다.");
+      setShowModal(true);
+      return;
+    }
     if (onReplyClick) {
-      // onReplyClick이 전달되었으면 해당 함수 실행
-      onReplyClick(reply.replyId, reply.nickName);
+      onReplyClick(reply.replyId, reply.nickName); // 없어짐 이제
     } else {
-      // onReplyClick이 없다면 다른 작업 실행 (예: 페이지 이동)
       window.location.href = `/contentGuest/replypage.html?boardId=${boardId}`;
     }
   };
@@ -178,6 +187,19 @@ const ReplyCompo = ({
           <ReReplyCom key={index} reReply={reReply} heartClick={heartClick} />
         ))}
       </div>
+      {showModal ? (
+        <Modal
+          title="로그인이 필요한 서비스입니다"
+          fircontent="계속하시려면 로그인 해주세요."
+          buttonLabel="로그인"
+          backLabel="돌아가기"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          onClick={() => (window.location.href = "/login/loginMain.html")} // 오른쪽
+        ></Modal>
+      ) : (
+        ""
+      )}
     </>
   );
 };

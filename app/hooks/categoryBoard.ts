@@ -9,7 +9,8 @@ type UseBoardPatch = {
 
 const useCategoryBoard = (
   categoryId: string | null,
-  listType: number | null
+  listType: number | null,
+  contestType: boolean | null
 ): UseBoardPatch => {
   const [data, setData] = useState<HomeListItem[] | undefined>(undefined);
   useEffect(() => {
@@ -34,7 +35,7 @@ const useCategoryBoard = (
           console.log("err");
         });
     }
-  }, [categoryId, listType]);
+  }, [categoryId, listType, contestType]);
 
   return { data }; // 기본적으로 빈 데이터를 반환
 };

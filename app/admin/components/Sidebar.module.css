@@ -12,6 +12,7 @@
 
 .content {
   width: 100px;
+  min-width: 65px;
   height: 100vh;
   background: black;
   color: #fff !important;

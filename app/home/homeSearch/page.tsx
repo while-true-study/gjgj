@@ -9,14 +9,20 @@ import { HomeListItem } from "@/types";
 import Contest from "@/app/components/Contest/Contest";
 
 const Page = () => {
-  const [query, setQuery] = useState<string>(""); // 입력된 검색어
+  const [query, setQuery] = useState<string>("");
   const [hasSearched, setHasSearched] = useState(false);
   // const accessToken = Cookies.get("accessToken");
   const userId = Cookies.get("userId");
   const [data, setData] = useState<HomeListItem[]>([]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   const handleSubmit = () => {
-    setHasSearched(true); // ✅ 검색 실행 여부 업데이트
+    setHasSearched(true);
     axios
       .get("http://211.188.52.119:8080/api/board/searchBoardList", {
         params: {
@@ -38,6 +44,7 @@ const Page = () => {
       </div>
       <div className={styles.searchBar}>
         <input
+          onKeyDown={handleKeyDown}
           className={styles.searchInput}
           type="text"
           value={query}

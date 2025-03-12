@@ -14,7 +14,7 @@ import Cookies from "js-cookie";
 
 export default function LoginMain() {
   const settings = {
-    dots: true, // dots 표시
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1, // 한 번에 한 개의 이미지만 표시

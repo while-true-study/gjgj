@@ -5,6 +5,7 @@ import styles from "./priceselect.module.css";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Button } from "@/app/components/button/button";
 
 const PriceselectPage = () => {
   const [amount, setAmount] = useState<string | null>(null); // 요청 금액
@@ -15,10 +16,9 @@ const PriceselectPage = () => {
   const accessToken = Cookies.get("accessToken");
 
   useEffect(() => {
-    // 클라이언트에서만 실행
     const urlParams = new URLSearchParams(window.location.search);
     const amountFromParams = urlParams.get("amount");
-    setAmount(amountFromParams); // amount 상태를 업데이트
+    setAmount(amountFromParams);
 
     axios
       .get("http://211.188.52.119:8080/api/mypage/bank-info", {
@@ -40,16 +40,23 @@ const PriceselectPage = () => {
       })
       .then((res) => {
         if (res.data.isSuccess) {
-          window.location.href = "/complete.html?complete=충전";
+          window.location.href = "/complete.html?complete=충전 요청&type=1";
         }
       });
   };
 
   const handleCopy = () => {
-    const textCopy = `${"카카오뱅크"} ${"3333282520931"}`;
-    navigator.clipboard.writeText(textCopy).then(() => {
-      alert("복사되었습니다!");
-    });
+    const textCopy = "카카오뱅크 3333282520931";
+
+    navigator.clipboard
+      .writeText(textCopy)
+      .then(() => {
+        alert("복사되었습니다!");
+      })
+      .catch((err) => {
+        console.error("복사 실패:", err);
+        alert("http 클립보드 접근이 차단되었습니다. 수동으로 복사해 주세요.");
+      });
   };
 
   return (
@@ -65,7 +72,7 @@ const PriceselectPage = () => {
       <div className={styles.bankname}>
         <span>{"카카오뱅크"}</span>
         <span>{"3333-28-2520931"}</span>
-        <div className={styles.copy} onClick={handleCopy}>
+        <div className={`${styles.copy} cursor-pointer`} onClick={handleCopy}>
           <img src="/Recharge/copy.svg" alt="복사" />
           <span>복사</span>
         </div>
@@ -77,9 +84,13 @@ const PriceselectPage = () => {
             {amount ? `${amount}원` : "로딩 중..."}
           </span>
         </div>
-        <span onClick={call} className={styles.call}>
-          인증요청
-        </span>
+      </div>
+      <div className={styles.footer}>
+        <Button
+          label="충전요청"
+          onClick={call}
+          className="font-semibold text-base"
+        ></Button>
       </div>
     </div>
   );

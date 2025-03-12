@@ -12,7 +12,7 @@ const NavigationBar = ({ state }: crrstate) => {
     <div className={styles.footerBox}>
       <div className={styles.NaviBar}>
         <div className={styles.NaviBox} onClick={() => console.log("1로 가기")}>
-          <Link href="/home">
+          <Link href="/home.html">
             <img
               src={
                 state === 1
@@ -23,7 +23,7 @@ const NavigationBar = ({ state }: crrstate) => {
           </Link>
         </div>
         <div className={styles.NaviBox} onClick={() => console.log("2로 가기")}>
-          <Link href="/category">
+          <Link href="/category.html">
             <img
               src={
                 state === 2
@@ -39,7 +39,7 @@ const NavigationBar = ({ state }: crrstate) => {
             console.log("3으로 가기");
           }}
         >
-          <Link href="/mypage">
+          <Link href="/mypage.html">
             <img
               src={
                 state === 3

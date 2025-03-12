@@ -17,6 +17,7 @@ const Table1 = () => {
       <table
         style={{
           width: "100%",
+          minWidth: "865px",
           borderCollapse: "collapse",
         }}
       >

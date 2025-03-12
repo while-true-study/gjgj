@@ -1,6 +1,5 @@
 .content {
   margin-top: 12px;
-  padding: 20px;
   flex-direction: column;
   display: flex;
 }
@@ -21,6 +20,7 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 24px;
+  color: black;
 }
 
 .a {
@@ -30,6 +30,13 @@
 .content ol {
   list-style-type: decimal;
   padding-left: 20px;
+  padding-right: 20px;
+  list-style-position: inside; /* 마커를 안쪽으로 이동 */
+}
+
+.content ol li {
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 .content h2 {

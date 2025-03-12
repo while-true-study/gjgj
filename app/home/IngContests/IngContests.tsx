@@ -79,7 +79,7 @@ const IngContests = () => {
               return (
                 <Contest
                   boardId={i.boardId}
-                  category={1}
+                  category={i.categoryId}
                   key={i.boardId}
                   organizer={i.nickName}
                   Dday={i.endCount}

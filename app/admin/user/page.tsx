@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import useUserGet from "../hooks/useUserGet";
 import axios from "axios";
 import Cookies from "js-cookie";
+import AdminModal from "../components/AdminModal/AdminModal";
 
 const Page = () => {
   useLayoutEffect(() => {
@@ -28,6 +29,16 @@ const Page = () => {
   const [cash, setCash] = useState<number>(0); // 보유 캐시
   const [note, setNote] = useState(""); // 비고
   const [realId, setRealId] = useState("");
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const closeModal = () => {
+    setShowModal(false);
+  };
+
+  const [showModal2, setShowModal2] = useState<boolean>(false);
+  const closeModal2 = () => {
+    setShowModal2(false);
+  };
 
   const changeNote = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote(e.target.value);
@@ -123,10 +134,16 @@ const Page = () => {
             <label className={styles.label}>보유 캐시</label>
             <input type="text" className={styles.input} value={cash} readOnly />
             <div className={styles.buttonGroup}>
-              <button className={`${styles.button} ${styles.blue}`}>
+              <button
+                className={`${styles.button} ${styles.blue}`}
+                onClick={() => setShowModal(true)}
+              >
                 캐시 충전하기
               </button>
-              <button className={`${styles.button} ${styles.red}`}>
+              <button
+                className={`${styles.button} ${styles.red}`}
+                onClick={() => setShowModal2(true)}
+              >
                 캐시 차감하기
               </button>
             </div>
@@ -149,6 +166,34 @@ const Page = () => {
           </div>
         </div>
       </div>
+      {showModal ? (
+        <AdminModal
+          title="캐시 충전하기"
+          buttonLabel="충전하기"
+          backLabel="돌아가기"
+          type="add"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          listtype="userAllList"
+          userId={userId}
+        ></AdminModal>
+      ) : (
+        ""
+      )}
+      {showModal2 ? (
+        <AdminModal
+          title="캐시 차감하기"
+          buttonLabel="차감하기"
+          backLabel="돌아가기"
+          type="remove"
+          setView={showModal2}
+          setClose={closeModal2} // 왼쪽
+          listtype="userAllList"
+          userId={userId}
+        ></AdminModal>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

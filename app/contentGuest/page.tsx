@@ -17,7 +17,6 @@ import Link from "next/link";
 import ReplyCompo from "./components/Reply/Reply";
 import BackHeaderMore from "../components/backHeaderMore/BackHeaderMore";
 import Modal from "../components/modal/Modal";
-import useBoardPatch from "../hooks/useBoardPatch";
 
 const ContentGuest = () => {
   const accessToken = Cookies.get("accessToken");
@@ -55,14 +54,29 @@ const ContentGuest = () => {
   const [naviState, setNaviState] = useState(false);
   const [viewRealModal, setViewRealModal] = useState(false);
   const RealModalHandle = () => {
-    setViewRealModal((prev) => !prev);
+    setViewRealModal(!viewRealModal);
   };
-  const { data } = useBoardPatch(accessToken, boardId, selReply);
 
   const BoardPatch = () => {
-    if (data) {
-      window.location.href = "/complete?complete=채택";
-    }
+    axios
+      .patch(
+        `http://211.188.52.119:8080/api/board`,
+        {}, // 바디 데이터가 없다면 빈 객체를 보냄
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          params: {
+            boardId: Number(boardId),
+            replyId: Number(selReply),
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.isSuccess) {
+          window.location.href = "/complete?complete=채택";
+        }
+      });
   };
 
   const deleteBoard = () => {
@@ -118,16 +132,24 @@ const ContentGuest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  // 이미지 클릭 핸들러 (모달 열기)
+  // 모달 열기
   const openImageModal = (imageUrl: string) => {
     setSelectedImage(imageUrl);
     setIsModalOpen(true);
   };
 
-  // 모달 닫기 핸들러
+  // 모달 닫기
   const closeImageModal = () => {
     setIsModalOpen(false);
     setSelectedImage(null);
+  };
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const closeModal = () => {
+    setShowModal(false);
+  };
+  const openModal = () => {
+    setShowModal(true);
   };
 
   return (
@@ -215,6 +237,7 @@ const ContentGuest = () => {
           <ContentTitleBar
             contentTitle={contestData.boardDetail.title}
             category={contestData.boardDetail.categoryName}
+            categoryId={contestData.boardDetail.categoryId}
             posttime={contestData.boardDetail.createdElapsed}
             money={contestData.boardDetail.boardPrize}
           ></ContentTitleBar>
@@ -259,10 +282,13 @@ const ContentGuest = () => {
         <p></p>
       )}
       <div className={styles.footer}>
-        {contestData.boardDetail.isWriter === 0 ? (
+        {contestData.boardDetail.accChk === 1 ? null : contestData.boardDetail
+            .isWriter === 0 ? (
           <Link
             href={
-              accessToken ? `/contentGuest/nowrite?boardId=${boardId}` : "#"
+              accessToken && boardId
+                ? `/contentGuest/nowrite?boardId=${boardId}`
+                : "#"
             }
             onClick={(e) => {
               if (!accessToken) {
@@ -274,35 +300,53 @@ const ContentGuest = () => {
           >
             <Button label="출품하기"></Button>
           </Link>
-        ) : contestData.replyList.length <= 2 ? ( // 2개 이하면
-          contestData.boardDetail.accChk === 1 ? (
-            <></>
-          ) : (
-            <div className={styles.flexBox}>
-              <span className={`${styles.cacnel} ${styles.button}`}>
-                취소하기
-              </span>
-              <span className={`${styles.sel} ${styles.button}`}>채택하기</span>
-            </div>
-          )
+        ) : contestData.replyList.length <= 2 ? (
+          <div className={styles.flexBox}>
+            <span
+              className={`${styles.cacnel} ${styles.button}`}
+              onClick={ModalHandel}
+            >
+              취소하기
+            </span>
+            <span
+              className={`${styles.sel} ${styles.button}`}
+              onClick={RealModalHandle}
+            >
+              채택하기
+            </span>
+          </div>
         ) : (
-          // 3개 이상
           <Button
             label="채택하기"
             onClick={RealModalHandle}
             isActive={selReply != 0}
           ></Button>
         )}
+
         <ContentNavigation
           scrapChk={contestData.boardDetail.scrapChk}
           boardId={contestData.boardDetail.boardId}
           iloveit={contestData.boardDetail.goodChk}
           heart={contestData.boardDetail.goodChk}
-          comment={contestData.replyList.length}
+          comment={contestData.boardDetail.replyCount} // totalReplies
           bookmark={contestData.boardDetail.scrapCount}
           naviChange={heartClick}
+          setShowModal={openModal}
         ></ContentNavigation>
       </div>
+      {showModal ? (
+        <Modal
+          title="로그인이 필요한 서비스입니다"
+          fircontent="계속하시려면 로그인 해주세요."
+          buttonLabel="로그인"
+          backLabel="돌아가기"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          onClick={() => (window.location.href = "/login/loginMain.html")} // 오른쪽
+        ></Modal>
+      ) : (
+        ""
+      )}
     </>
   );
 };

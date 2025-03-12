@@ -25,6 +25,10 @@ const Page = () => {
   const [data, setData] = useState<HomeListItem[]>([]);
   // const accessToken = Cookies.get("accessToken");
   const userId = Cookies.get("userId");
+  const [pageState, setPageState] = useState<boolean>(false);
+  const chagePageState = () => {
+    setPageState(!pageState);
+  };
   useEffect(() => {
     axios
       .get(`http://211.188.52.119:8080/api/board/home_list`, {
@@ -40,30 +44,33 @@ const Page = () => {
       .catch((err) => {
         console.log("Get Error", err);
       });
-  }, []);
+  }, [pageState]);
 
   return (
     <div className={styles.content}>
       <BackHeader></BackHeader>
-      {data.length > 0 ? (
-        data.map((i) => {
-          return (
-            <Contest
-              boardId={i.boardId}
-              category={i.categoryId}
-              key={i.boardId}
-              organizer={i.nickName}
-              Dday={i.endCount}
-              Iloveit={i.goodChk === 1}
-              loveit={i.goodCount}
-              comment={i.replyCount}
-              title={i.title}
-            />
-          );
-        })
-      ) : (
-        <p>로딩중...</p> // 데이터가 없을 때 로딩 중 표시
-      )}
+      <div className={styles.contentBox}>
+        {data.length > 0 ? (
+          data.map((i) => {
+            return (
+              <Contest
+                boardId={i.boardId}
+                category={i.categoryId}
+                key={i.boardId}
+                organizer={i.nickName}
+                Dday={i.endCount}
+                Iloveit={i.goodChk === 1}
+                loveit={i.goodCount}
+                comment={i.replyCount}
+                title={i.title}
+                loveChange={chagePageState}
+              />
+            );
+          })
+        ) : (
+          <p>로딩중...</p> // 데이터가 없을 때 로딩 중 표시
+        )}
+      </div>
     </div>
   );
 };

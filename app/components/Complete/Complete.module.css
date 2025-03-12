@@ -17,6 +17,16 @@
   line-height: 32px;
   font-weight: 600;
 }
+.marginbox {
+  margin-top: 16px;
+}
+
+.body p {
+  color: #231f20;
+  font-size: 13px;
+  line-height: 140%;
+  font-weight: 500;
+}
 
 .body {
   flex-grow: 1;
@@ -25,4 +35,5 @@
   justify-content: center;
   align-items: center;
   padding-bottom: 0px;
+  text-align: center;
 }

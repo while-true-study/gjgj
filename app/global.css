@@ -42,6 +42,7 @@ body {
 }
 
 span,
+label,
 p {
   font-family: "NotoSans";
   color: black;

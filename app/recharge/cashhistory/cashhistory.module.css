@@ -5,11 +5,15 @@
   display: flex;
   justify-content: space-between;
   border-radius: 8px;
-  color: #f1f1f2;
+
   font-weight: 600;
   font-size: 20px;
   margin-top: 30px;
   margin-bottom: 34px;
+}
+
+.titletext {
+  color: #f1f1f2 !important;
 }
 
 .selectBox {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./userInfo.module.css";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import Input from "@/app/components/input/Input";
@@ -14,6 +14,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import useUpdateProfile from "@/app/hooks/useUpdateProfile";
 
 const Page = () => {
+  const accessToken = Cookies.get("accessToken");
+
   const profileImage = [
     "https://kr.object.ncloudstorage.com/profile-img/basic/B9CBB4D7-18A0-49BC-84A1-E0D5EC1F8112.png",
     "https://kr.object.ncloudstorage.com/profile-img/basic/EEA39F71-0CA1-4FCA-A0DE-090EB3956767.png",
@@ -30,6 +32,17 @@ const Page = () => {
   const nickNameHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickName(e.target.value);
   };
+
+  useEffect(() => {
+    axios
+      .get("http://211.188.52.119:8080/api/mypage/profile", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((res) => {
+        setNickName(res.data.result.nickName);
+        setSelectedProfile(res.data.result.imgUrl);
+      });
+  }, []);
 
   const setViewModal = () => {
     setViewWithdraw(!viewWithdraw);
@@ -67,6 +80,8 @@ const Page = () => {
 
       if (response.data.isSuccess) {
         Cookies.remove("accessToken");
+        Cookies.remove("role");
+        Cookies.remove("userId");
         alert("로그아웃 되었습니다.");
         window.location.href = "/home.html";
       }
@@ -181,6 +196,7 @@ const Page = () => {
           label="닉네임"
           name="nickname"
           id="nickname"
+          value={nickName}
           onChange={nickNameHandle}
           rightBox={<div className={styles.rightBox}>{nickName.length}/10</div>}
         />

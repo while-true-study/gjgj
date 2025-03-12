@@ -38,7 +38,6 @@ const banks = [
 
 const Page = () => {
   const accessToken = Cookies.get("accessToken");
-  const [accState, setAccState] = useState<boolean>(false); // true면 있는거
   const [bankData, setBankData] = useState<{
     bankCode: string;
     bankAccount: string;
@@ -49,7 +48,6 @@ const Page = () => {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((res) => {
-        setAccState(res.data.isSuccess);
         setBankData(res.data.result);
       });
   }, []);
@@ -59,10 +57,10 @@ const Page = () => {
     <div className="p-5">
       <BackHeader></BackHeader>
       <div className={styles.title}>
-        <p>채택 시 상금을 수여할</p>
-        <p>계좌번호를 입력해 주세요</p>
+        <p className={styles.titleText}>채택 시 상금을 수여할</p>
+        <p className={styles.titleText}>계좌번호를 입력해 주세요</p>
       </div>
-      {accState ? (
+      {bankData?.bankCode != "000" ? (
         <div className={styles.bankBar}>
           <div className={styles.bank}>
             <Image

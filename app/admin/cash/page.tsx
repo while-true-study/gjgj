@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import useUserGet from "../hooks/useUserGet";
 import axios from "axios";
 import Cookies from "js-cookie";
+import AdminModal from "../components/AdminModal/AdminModal";
 
 const Page = () => {
   useLayoutEffect(() => {
@@ -29,6 +30,12 @@ const Page = () => {
   const [note, setNote] = useState(""); // 비고
   const [changePoint, setChangePoint] = useState(0); // 충전 요청 금액
   const [realId, setRealId] = useState("");
+  const [pointId, setPointId] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const changeNote = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNote(e.target.value);
@@ -53,7 +60,8 @@ const Page = () => {
         setBankAccount(userData.member.bankAccount);
         setCash(userData.member.point);
         setChangePoint(userData.changePoint);
-        setNote(userData.member.comment);
+        setNote(userData.comment ?? "");
+        setPointId(userData.pointId);
       }
     }
   }, [removePointUserList]);
@@ -62,19 +70,24 @@ const Page = () => {
     const formData = new FormData();
 
     formData.append("comment", note);
-    formData.append("listType", "userAllList");
+    formData.append("listType", "removePointUserList");
     formData.append("userId", userId);
-    axios.post("http://211.188.52.119:8080/api/point/updateComment", formData, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    formData.append("pointId", pointId.toString());
+    axios
+      .post("http://211.188.52.119:8080/api/point/updateComment", formData, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        alert(res.data.message);
+      });
   };
 
   return (
-    <>
+    <div className="">
       <hr className={styles.hr}></hr>
-      <div className="px-40 pt-16">
+      <div className="px-40 pt-16 relative">
         <div className={styles.header}>
           <Image
             src="/back.svg"
@@ -83,7 +96,7 @@ const Page = () => {
             height={30}
             onClick={handleBackClick}
           />
-          <span>User 관리</span>
+          <span>캐시 인출 관리</span>
         </div>
 
         <div className={styles.container}>
@@ -135,8 +148,11 @@ const Page = () => {
             <label className={styles.label}>보유 캐시</label>
             <input type="text" className={styles.input} value={cash} readOnly />
             <div className={styles.buttonGroup}>
-              <button className={`${styles.button} ${styles.blue}`}>
-                캐시 충전하기
+              <button
+                className={`${styles.button} ${styles.blue}`}
+                onClick={() => setShowModal(true)}
+              >
+                캐시 차감하기
               </button>
             </div>
           </div>
@@ -158,7 +174,22 @@ const Page = () => {
           </div>
         </div>
       </div>
-    </>
+      {showModal ? (
+        <AdminModal
+          title="캐시 차감하기"
+          buttonLabel="차감할 금액"
+          backLabel="돌아가기"
+          type="remove"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          listtype="removePointUserList"
+          userId={userId}
+          pointId={pointId.toString()}
+        ></AdminModal>
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
 

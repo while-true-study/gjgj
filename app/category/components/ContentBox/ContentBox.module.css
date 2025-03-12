@@ -37,6 +37,10 @@
   color: #3744fb;
 }
 
+.red {
+  color: #ff4040 !important;
+}
+
 .thiLine {
   display: flex;
   gap: 4px;

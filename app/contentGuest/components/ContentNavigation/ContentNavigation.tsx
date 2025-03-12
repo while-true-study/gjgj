@@ -4,8 +4,6 @@ import React from "react";
 import styles from "./ContentNavigation.module.css";
 import Cookies from "js-cookie";
 import axios from "axios";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 interface ContentNavi {
   boardId: number;
@@ -15,6 +13,7 @@ interface ContentNavi {
   bookmark: number;
   scrapChk: number;
   naviChange: () => void;
+  setShowModal: () => void;
 }
 
 const ContentNavigation = ({
@@ -25,14 +24,13 @@ const ContentNavigation = ({
   comment,
   bookmark,
   naviChange,
+  setShowModal,
 }: ContentNavi) => {
-  const router = useRouter();
   const accessToken = Cookies.get("accessToken");
 
   const heartClick = () => {
     if (!accessToken) {
-      router.push("/login/input");
-      alert("로그인이 필요한 서비스입니다.");
+      setShowModal();
       return;
     }
     axios
@@ -53,13 +51,16 @@ const ContentNavigation = ({
   };
 
   const commentClick = () => {
-    // 댓글 전체보기
-    console.log("commentClick");
+    if (!accessToken) {
+      setShowModal();
+      return;
+    }
+    window.location.href = `contentGuest/replypage.html?boardId=${boardId}`;
   };
+
   const bookmarkClick = () => {
     if (!accessToken) {
-      router.push("/login/input");
-      alert("로그인이 필요한 서비스입니다.");
+      setShowModal();
       return;
     }
     axios
@@ -78,8 +79,18 @@ const ContentNavigation = ({
         console.error("실패", err);
       });
   };
+
   const shareClick = () => {
-    console.log("shareClick");
+    const currentURL = window.location.href;
+    navigator.clipboard
+      .writeText(currentURL)
+      .then(() => {
+        alert("복사되었습니다!");
+      })
+      .catch((err) => {
+        console.error("복사 실패:", err);
+        alert("http 클립보드 접근이 차단되었습니다. 수동으로 복사해 주세요.");
+      });
   };
 
   return (
@@ -93,13 +104,15 @@ const ContentNavigation = ({
               : "/IngContests/noHeart.svg"
           }
         ></img>
-        {heart}
+        <span className={styles.text}>{heart}</span>
       </div>
       <div className={styles.commentbox} onClick={commentClick}>
-        <Link href={`contentGuest/replypage?boardId=${boardId}`}>
-          <img className="cursor-pointer" src="/IngContests/coment.svg"></img>
-        </Link>
-        {comment}
+        <img
+          className="cursor-pointer"
+          src="/IngContests/coment.svg"
+          onClick={commentClick}
+        ></img>
+        <span className={styles.text}>{comment}</span>
       </div>
       <div className={styles.bookmarkbox} onClick={bookmarkClick}>
         <img
@@ -110,7 +123,7 @@ const ContentNavigation = ({
               : "/contentGuest/nobookmark.svg"
           }
         ></img>
-        {bookmark}
+        <span className={styles.bookmarkbox}>{bookmark}</span>
       </div>
       <div className={styles.sharebox} onClick={shareClick}>
         <img className="cursor-pointer" src="/contentGuest/share.svg"></img>

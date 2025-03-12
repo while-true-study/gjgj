@@ -55,6 +55,12 @@ export default function LoginInput() {
       });
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && isButtonActive) {
+      buttonClick();
+    }
+  };
+
   return (
     <div className="flex flex-col h-full p-5 ">
       <BackHeader></BackHeader>
@@ -77,6 +83,7 @@ export default function LoginInput() {
           classname=""
           type={viewPW ? "text" : "password"}
           label="비밀번호"
+          onKeyDown={handleKeyDown} // ✅ 추가
           name="password"
           id="pw"
           rightBox={

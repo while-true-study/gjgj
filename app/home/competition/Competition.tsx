@@ -55,7 +55,7 @@ const Competition = ({ competData, loveChange }: CompetitionProps) => {
               Iloveit={i.goodChk}
               boardId={i.boardId}
               key={i.boardId} // key 추가
-              category={1}
+              category={i.categoryId}
               nickName={i.nickName}
               title={i.title}
               goodCount={i.goodCount}

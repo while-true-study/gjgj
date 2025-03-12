@@ -33,8 +33,12 @@ const Page = () => {
     <div className="p-5">
       <BackHeader />
       <div className={styles.titleBox}>
-        <span>보유캐시</span>
-        <span>0</span>
+        <span className={styles.titletext}>보유캐시</span>
+        <span className={styles.titletext}>
+          {hisData.length > 0
+            ? hisData[0].member.point.toLocaleString("ko-KR")
+            : "0"}
+        </span>
       </div>
       <div className={styles.selBox}>
         <select

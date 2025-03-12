@@ -4,6 +4,7 @@ import styles from "./ContentTitleBar.module.css";
 interface TitleBar {
   contentTitle: string;
   category: string;
+  categoryId: number;
   posttime: string;
   money: number;
 }
@@ -11,6 +12,7 @@ interface TitleBar {
 const ContentTitleBar = ({
   contentTitle,
   category,
+  categoryId,
   posttime,
   money,
 }: TitleBar) => {
@@ -21,7 +23,16 @@ const ContentTitleBar = ({
         <p>{contentTitle}</p>
       </div>
       <div className={styles.categoryBar}>
-        <span className={styles.category}>{category}</span>
+        <span
+          className={`${styles.category} cursor-pointer`}
+          onClick={() => {
+            window.location.href = `/category.html?categoryId=${
+              categoryId - 1
+            }`;
+          }}
+        >
+          {category}
+        </span>
         <span className={styles.posttime}>{posttime}</span>
       </div>
       {/* date-fns dayjs/ */}

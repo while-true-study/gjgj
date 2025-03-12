@@ -71,7 +71,13 @@ const Page = () => {
               className={`${
                 mypageData && mypageData?.point > 0 ? styles.charge : ""
               }`}
-              onClick={() => (window.location.href = "/recharge.html")}
+              onClick={() => {
+                if (mypageState) {
+                  window.location.href = "/recharge.html";
+                } else {
+                  setShowModal(true);
+                }
+              }}
             >
               충전하기
             </button>
@@ -80,32 +86,32 @@ const Page = () => {
         <div className={styles.menuBox}>
           <MenuBar
             title="주최한 공모전"
-            linkTo="/mypage/host"
+            linkTo="/mypage/host.html"
             login={mypageState}
             openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="출품한 공모전"
-            linkTo="/mypage/guest"
+            linkTo="/mypage/guest.html"
             login={mypageState}
             openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="스크랩"
-            linkTo="/mypage/scrap"
+            linkTo="/mypage/scrap.html"
             login={mypageState}
             openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="계좌 관리"
-            linkTo="/mypage/noaccount"
+            linkTo="/mypage/noaccount.html"
             register={!mypageData?.resisterBank}
             login={mypageState}
             openModal={() => setShowModal(true)}
           ></MenuBar>
           <MenuBar
             title="충전/인출"
-            linkTo="/recharge"
+            linkTo="/recharge.html"
             login={mypageState}
             openModal={() => setShowModal(true)}
           ></MenuBar>
@@ -121,11 +127,11 @@ const Page = () => {
           ></MenuBar>
           <MenuBar
             title="서비스 이용약관"
-            linkTo="/mypage/termsOfUse"
+            linkTo="/mypage/termsOfUse.html"
           ></MenuBar>
           <MenuBar
             title="개인 처리 방침"
-            linkTo="/mypage/personalPolicy"
+            linkTo="/mypage/personalPolicy.html"
           ></MenuBar>
         </div>
       </div>
