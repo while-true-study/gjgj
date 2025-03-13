@@ -8,9 +8,9 @@ import Link from "next/link";
 
 export default function LoginMain() {
   const kakaoUrl =
-    "http://211.188.52.119:8080/oauth2/authorization/kakao?redirect_uri=http://gjgj-front.s3-website.ap-northeast-2.amazonaws.com/#/home&mode=login";
+    "http://211.188.52.119:8080/oauth2/authorization/kakao?redirect_uri=http://gjgj-front.s3-website.ap-northeast-2.amazonaws.com/home&mode=login";
   const naverUrl =
-    "http://211.188.52.119:8080/oauth2/authorization/naver?redirect_uri=http://gjgj-front.s3-website.ap-northeast-2.amazonaws.com/#/home&mode=login";
+    "http://211.188.52.119:8080/oauth2/authorization/naver?redirect_uri=http://gjgj-front.s3-website.ap-northeast-2.amazonaws.com/&mode=login";
 
   const handleKaKaoLogin = () => {
     window.location.href = kakaoUrl;
@@ -66,7 +66,7 @@ export default function LoginMain() {
           />
         </div>
         <div className={styles.email}>
-          <Link href="/login/input">
+          <Link href="/login/input.html">
             <Button
               label="이메일 로그인"
               className={styles.emailButton}

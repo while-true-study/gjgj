@@ -50,7 +50,7 @@ const Page = () => {
           }`}
           disabled={isButtonDisabled}
           onClick={() => {
-            redirect("/login/signUp");
+            redirect("/login/signUp.html");
           }}
         >
           동의하고 계속하기

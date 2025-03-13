@@ -30,22 +30,22 @@ const Page = () => {
       {load ? (
         <div>불러오는 중...</div>
       ) : (
-        guestData &&
-        guestData.map((i) => {
-          return (
-            <Contest
-              boardId={i.boardId}
-              category={Number(i.category)}
-              key={i.reply_id}
-              organizer={i.nickName}
-              Dday={i.daysUntilEnd}
-              Iloveit={i.goodChk === 1 ? true : false}
-              loveit={i.goodsCount}
-              comment={i.replyCount}
-              title={i.title}
-            ></Contest>
-          );
-        })
+        <div className={styles.contestBox}>
+          {guestData &&
+            guestData.map((i) => (
+              <Contest
+                boardId={i.board_id}
+                category={Number(i.category)}
+                key={i.reply_id}
+                organizer={i.nickName}
+                Dday={i.daysUntilEnd}
+                Iloveit={i.goodChk === 1}
+                loveit={i.goodsCount}
+                comment={i.replyCount}
+                title={i.title}
+              />
+            ))}
+        </div>
       )}
     </div>
   );

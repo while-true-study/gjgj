@@ -14,13 +14,12 @@
 .title {
   width: 160px;
   word-wrap: break-word;
-  overflow-wrap: break-word; /* 안전한 줄 바꿈 */
-  white-space: normal; /* 자동 줄 바꿈 허용 */
+  overflow-wrap: break-word;
+  white-space: normal;
   font-size: 14px;
   text-align: left;
   font-weight: 600;
   line-height: 19px;
-  margin-bottom: 20px;
 }
 
 .headline {

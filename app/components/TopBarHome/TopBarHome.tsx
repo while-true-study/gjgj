@@ -16,7 +16,7 @@ const TopBarHome = () => {
         끄적끄적
       </span>
       <div className={styles.rigthbox}>
-        <Link href="/home/homeSearch">
+        <Link href="/home/homeSearch.html">
           <img src="/TopBarHome/search.svg" onClick={searchClick}></img>
         </Link>
         {/* <Link href="/home/homeNotice">

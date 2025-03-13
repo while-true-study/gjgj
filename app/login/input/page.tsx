@@ -42,8 +42,8 @@ export default function LoginInput() {
         const userId = res.data.result.userId;
         const role = res.data.result.tokenVo.role;
         Cookies.set("accessToken", token, { expires: 1 });
-        Cookies.set("userId", userId, { expires: 1 }); // 쿠키에 저장
-        Cookies.set("role", role, { expires: 1 }); // 쿠키에 저장
+        Cookies.set("userId", userId, { expires: 1 });
+        Cookies.set("role", role, { expires: 1 });
         if (role === "ADMIN") {
           router.push("/admin");
         } else {
@@ -51,7 +51,11 @@ export default function LoginInput() {
         }
       })
       .catch((err) => {
-        setErrMsg(err.message);
+        if (err.response) {
+          setErrMsg(err.response.data.message); // 서버 응답이 있는 경우
+        } else {
+          setErrMsg("로그인 요청 중 오류 발생"); // 서버 응답이 없는 경우
+        }
       });
   };
 
@@ -108,7 +112,7 @@ export default function LoginInput() {
         <div
           className={`${styles.footerbox} ${styles.box} ${styles.rightline}`}
         >
-          <Link href="/login/missingId">
+          <Link href="/login/missingId.html">
             <span>아이디 찾기</span>
           </Link>
         </div>
@@ -116,13 +120,13 @@ export default function LoginInput() {
         <div
           className={`${styles.footerbox} ${styles.box} ${styles.rightline}`}
         >
-          <Link href="/login/missingPw">
+          <Link href="/login/missingPw.html">
             <span>비번 찾기</span>
           </Link>
         </div>
 
         <div className={`${styles.footerbox} ${styles.box}`}>
-          <Link href="/login/agree">
+          <Link href="/login/agree.html">
             <span>회원가입</span>
           </Link>
         </div>

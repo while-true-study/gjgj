@@ -13,8 +13,10 @@ interface modal {
   type: string;
   listtype: string;
   setClose: (open: boolean) => void; // 닫기
-  userId: string;
+  userId: number;
   pointId?: string;
+  placeholder: string;
+  changePoint?: number;
 }
 
 const AdminModal = ({
@@ -27,6 +29,8 @@ const AdminModal = ({
   listtype,
   userId,
   pointId,
+  placeholder,
+  changePoint,
 }: // chageAddCash,
 modal) => {
   const [cash, setCash] = useState(0);
@@ -40,9 +44,9 @@ modal) => {
     formData.append("listType", listtype);
     if (listtype !== "userAllList") {
       formData.append("pointId", pointId ?? "");
-      formData.append("userId", userId);
+      formData.append("userId", userId.toString());
     } else {
-      formData.append("userId", userId);
+      formData.append("userId", userId.toString());
     }
     axios
       .post(`http://211.188.52.119:8080/api/point/updatePoint`, formData, {
@@ -66,8 +70,9 @@ modal) => {
         <div className={styles.inputLine}>
           <label>충전할 금액</label>
           <input
-            placeholder="충전할 금액"
+            placeholder={placeholder}
             onChange={(e) => setCash(Number(e.target.value))}
+            value={changePoint}
           ></input>
         </div>
         <div className={styles.buttonBox}>

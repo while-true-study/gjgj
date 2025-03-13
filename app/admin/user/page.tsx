@@ -90,6 +90,7 @@ const Page = () => {
             width={30}
             height={30}
             onClick={handleBackClick}
+            className="cursor-pointer"
           />
           <span>User 관리</span>
         </div>
@@ -168,6 +169,7 @@ const Page = () => {
       </div>
       {showModal ? (
         <AdminModal
+          placeholder="충전할 금액"
           title="캐시 충전하기"
           buttonLabel="충전하기"
           backLabel="돌아가기"
@@ -175,13 +177,14 @@ const Page = () => {
           setView={showModal}
           setClose={closeModal} // 왼쪽
           listtype="userAllList"
-          userId={userId}
+          userId={Number(userId)}
         ></AdminModal>
       ) : (
         ""
       )}
       {showModal2 ? (
         <AdminModal
+          placeholder="차감할 금액"
           title="캐시 차감하기"
           buttonLabel="차감하기"
           backLabel="돌아가기"
@@ -189,7 +192,7 @@ const Page = () => {
           setView={showModal2}
           setClose={closeModal2} // 왼쪽
           listtype="userAllList"
-          userId={userId}
+          userId={Number(userId)}
         ></AdminModal>
       ) : (
         ""

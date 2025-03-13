@@ -25,7 +25,11 @@ const AgreeBar = ({ title, onChange, type }: AgreeBarProps) => {
         alt="check-box"
       />
       <p>{title}</p>
-      <Link href={type === 1 ? "/mypage/termsOfUse" : "/mypage/personalPolicy"}>
+      <Link
+        href={
+          type === 1 ? "/mypage/termsOfUse.html" : "/mypage/personalPolicy.html"
+        }
+      >
         <img src="/down.svg" alt="down-arrow" />
       </Link>
     </div>

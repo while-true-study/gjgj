@@ -33,7 +33,7 @@ const ContentBox = ({
   const router = useRouter();
   const accessToken = Cookies.get("accessToken");
   const detailClick = () => {
-    router.push(`/contentGuest?boardId=${boardId}`);
+    router.push(`/contentGuest.html?boardId=${boardId}`);
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);

@@ -1,4 +1,5 @@
 export interface HomeListItem {
+  board_id: number;
   title: string;
   boardId: number;
   reply_id: number;

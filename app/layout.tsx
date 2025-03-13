@@ -2,6 +2,7 @@ import ReduxProvider from "@/redux/provider";
 import "@/app/global.css";
 import { Metadata } from "next";
 import Head from "next/head";
+import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
   title: "끄적끄적",
@@ -28,7 +29,9 @@ export default function RootLayout({
       </Head>
       <body className="flex justify-center items-center min-h-screen bg-gray-100">
         <ReduxProvider>
-          <div className="w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative">
+          <div
+            className={`${styles.reative} w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative`}
+          >
             {children}
           </div>
         </ReduxProvider>

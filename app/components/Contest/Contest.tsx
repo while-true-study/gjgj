@@ -45,7 +45,7 @@ const Contest = ({
   )?.categoryName;
 
   const commentClick = () => {
-    router.push(`/contentGuest?boardId=${boardId}`);
+    router.push(`/contentGuest.html?boardId=${boardId}`);
   };
 
   const [showModal, setShowModal] = useState<boolean>(false);

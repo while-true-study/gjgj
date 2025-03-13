@@ -1,11 +1,12 @@
 .footerBox {
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   left: 0;
   width: 100%;
   background-color: #fff;
   height: 95px;
   border-top: 1px solid #d0d2d3;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .NaviBar {

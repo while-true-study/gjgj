@@ -32,6 +32,7 @@ const Page = () => {
   const [realId, setRealId] = useState("");
   const [pointId, setPointId] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [realUserId, setRealUserId] = useState<number>(0);
 
   const closeModal = () => {
     setShowModal(false);
@@ -54,6 +55,7 @@ const Page = () => {
         (user) => user.pointId.toString() === userIdFromURL
       );
       if (userData) {
+        setRealUserId(userData.member.userId);
         setRealId(userData.member.accountid);
         setUserName(userData.member.nameKo);
         setBankName(userData.member.bankName);
@@ -95,6 +97,7 @@ const Page = () => {
             width={30}
             height={30}
             onClick={handleBackClick}
+            className="cursor-pointer"
           />
           <span>캐시 인출 관리</span>
         </div>
@@ -176,6 +179,7 @@ const Page = () => {
       </div>
       {showModal ? (
         <AdminModal
+          placeholder="차감할 금액"
           title="캐시 차감하기"
           buttonLabel="차감할 금액"
           backLabel="돌아가기"
@@ -183,8 +187,9 @@ const Page = () => {
           setView={showModal}
           setClose={closeModal} // 왼쪽
           listtype="removePointUserList"
-          userId={userId}
+          userId={realUserId}
           pointId={pointId.toString()}
+          changePoint={changePoint}
         ></AdminModal>
       ) : (
         ""

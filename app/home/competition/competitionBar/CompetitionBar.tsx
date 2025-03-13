@@ -85,9 +85,11 @@ const CompetitionBar = ({
         </span>
         <span className={`${styles.nickname} ${styles.font}`}>{nickName}</span>
       </div>
-      <p onClick={detailClick} className={styles.title}>
-        {title}
-      </p>
+      <div className="h-full">
+        <p onClick={detailClick} className={styles.title}>
+          {title}
+        </p>
+      </div>
       <div className={styles.footer}>
         <img
           onClick={heratClick}

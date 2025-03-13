@@ -61,7 +61,7 @@ const ContentGuest = () => {
     axios
       .patch(
         `http://211.188.52.119:8080/api/board`,
-        {}, // 바디 데이터가 없다면 빈 객체를 보냄
+        {},
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -74,7 +74,7 @@ const ContentGuest = () => {
       )
       .then((res) => {
         if (res.data.isSuccess) {
-          window.location.href = "/complete?complete=채택";
+          window.location.href = "/complete.html?complete=채택";
         }
       });
   };
@@ -287,7 +287,7 @@ const ContentGuest = () => {
           <Link
             href={
               accessToken && boardId
-                ? `/contentGuest/nowrite?boardId=${boardId}`
+                ? `/contentGuest/nowrite.html?boardId=${boardId}`
                 : "#"
             }
             onClick={(e) => {
@@ -327,7 +327,7 @@ const ContentGuest = () => {
           scrapChk={contestData.boardDetail.scrapChk}
           boardId={contestData.boardDetail.boardId}
           iloveit={contestData.boardDetail.goodChk}
-          heart={contestData.boardDetail.goodChk}
+          heart={contestData.boardDetail.goodCount}
           comment={contestData.boardDetail.replyCount} // totalReplies
           bookmark={contestData.boardDetail.scrapCount}
           naviChange={heartClick}

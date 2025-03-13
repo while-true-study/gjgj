@@ -8,6 +8,7 @@ import { Button } from "../components/button/button";
 import axios from "axios";
 import CategoryBox from "./components/categoryBox/CategoryBox";
 import Cookies from "js-cookie";
+import Modal from "../components/modal/Modal";
 
 interface Category {
   categoryId: number;
@@ -22,6 +23,11 @@ const ContentHost = () => {
   const [content, setcontent] = useState<string>(""); // 공모전 내용
   const [images, setImages] = useState<File[]>([]); // 사진
   const [category, setCategory] = useState<Category[]>([]); // 카테고리 get한거
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const today = new Date();
   const formatToday = new Intl.DateTimeFormat("ko-KR", {
@@ -65,7 +71,13 @@ const ContentHost = () => {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(() => (window.location.href = "/complete.html?complete=주최"));
+        .then((res) => {
+          if (res.data.result) {
+            window.location.href = "/complete.html?complete=주최";
+          } else {
+            setShowModal(true);
+          }
+        });
     } catch (err) {
       console.log("실패", err);
     }
@@ -134,6 +146,7 @@ const ContentHost = () => {
   return (
     <div className="p-5">
       <BackHeader></BackHeader>
+
       <form className={`${styles.content} mt-7`}>
         <ContentHostBar
           id="title"
@@ -233,7 +246,20 @@ const ContentHost = () => {
           </label>
         </div>
       </form>
-
+      {showModal ? (
+        <Modal
+          title="캐시를 충전해 주세요"
+          fircontent="공모전 주최를 위한"
+          seccontent="캐시가 부족합니다."
+          buttonLabel="충전하기"
+          backLabel="돌아가기"
+          setView={showModal}
+          setClose={closeModal} // 왼쪽
+          onClick={() => (window.location.href = "/Recharge.html")} // 오른쪽
+        ></Modal>
+      ) : (
+        ""
+      )}
       <Button
         label="주최하기"
         isActive={buttonVal}
