@@ -30,6 +30,7 @@ const ReplyCompo = ({
   heartClick,
   onReplyClick2,
   itsme,
+  openImageModal,
 }: {
   reply: replyProps;
   onReplyClick?: (boardId: number, nickName: string) => void;
@@ -38,6 +39,7 @@ const ReplyCompo = ({
   boardId?: number;
   heartClick: () => void;
   itsme?: number;
+  openImageModal?: (imageUrl: string) => void;
 }) => {
   const router = useRouter();
   const accessToken = Cookies.get("accessToken");
@@ -157,6 +159,11 @@ const ReplyCompo = ({
                     alt="댓글이미지"
                     width={60}
                     height={45}
+                    onClick={() =>
+                      openImageModal?.(
+                        `http://211.188.52.119:8080/potoUrl/${img.potoName}`
+                      )
+                    }
                   ></Image>
                 );
               })}
@@ -179,7 +186,7 @@ const ReplyCompo = ({
             width={24}
             height={24}
           ></Image>
-          <span>{reply.goodChk}</span>
+          <span>{reply.goodCount}</span>
         </div>
       </div>
       <div className={styles.reReplyContainer}>

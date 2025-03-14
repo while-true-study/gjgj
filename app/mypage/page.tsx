@@ -20,7 +20,6 @@ const Page = () => {
   const accessToken = Cookies.get("accessToken");
   const [mypageState, setMypageState] = useState(false); // 로그인 여부
   const [mypageData, setMypageData] = useState<mypage | null>(null);
-
   const [showModal, setShowModal] = useState<boolean>(false);
   const closeModal = () => {
     setShowModal(false);

@@ -196,6 +196,7 @@ const ContentGuest = () => {
                     width: "100%",
                     height: "280px",
                     objectFit: "contain",
+                    cursor: "pointer",
                   }}
                 />
               </div>
@@ -260,6 +261,7 @@ const ContentGuest = () => {
                 heartClick={heartClick} // 상태 변환
                 onReplyClick2={handleReplyClick}
                 itsme={contestData.boardDetail.isWriter ?? 0}
+                openImageModal={openImageModal}
               />
             </div>
           ))

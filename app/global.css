@@ -47,3 +47,7 @@ p {
   font-family: "NotoSans";
   color: black;
 }
+
+input {
+  color: black;
+}
