@@ -19,7 +19,7 @@ export default function LoginMain() {
     speed: 500,
     slidesToShow: 1, // 한 번에 한 개의 이미지만 표시
     slidesToScroll: 1, // 한 번에 한 개의 이미지씩 넘김
-    // dotsClass: `${styles.customDots}`, // customDots 클래스를 사용하여 위치 조정
+    // dotsClass: `${styles.customDots}`,
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function LoginMain() {
   });
 
   return (
-    <div className="relative w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="relative w-[375px] max-h-[812px] h-[90vh] min-h-[500px] bg-white shadow-lg rounded-lg overflow-hidden">
       <TopBarHome></TopBarHome>
       <div className={styles.content}>
         <div className="p-5">

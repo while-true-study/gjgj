@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className="flex justify-center items-center min-h-screen bg-gray-100">
         <ReduxProvider>
           <div
-            className={`${styles.reative} w-[375px] h-[812px] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative`}
+            className={`${styles.reative} w-[375px] max-h-[812px] h-[90vh] min-h-[50vh] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative`}
           >
             {children}
           </div>
