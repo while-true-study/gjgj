@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styles from "./AgreeBar.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 interface AgreeBarProps {
   title: string;
@@ -20,17 +21,19 @@ const AgreeBar = ({ title, onChange, type }: AgreeBarProps) => {
 
   return (
     <div className={styles.main} onClick={checkClick}>
-      <img
+      <Image
         src={check ? `/agreecheck.svg` : "/agreenocheck.svg"}
         alt="check-box"
-      />
+        width={24}
+        height={25}
+      ></Image>
       <p>{title}</p>
       <Link
         href={
           type === 1 ? "/mypage/termsOfUse.html" : "/mypage/personalPolicy.html"
         }
       >
-        <img src="/down.svg" alt="down-arrow" />
+        <Image src="/down.svg" alt="down-arrow" width={24} height={24}></Image>
       </Link>
     </div>
   );

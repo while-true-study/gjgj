@@ -5,7 +5,8 @@ import Input from "@/app/components/input/Input";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import { Button } from "@/app/components/button/button";
 import { useState } from "react";
-import axios from "axios";
+import api from "@/app/lib/api";
+import Image from "next/image";
 
 export default function MissingId() {
   const [email, setEmail] = useState("");
@@ -20,32 +21,37 @@ export default function MissingId() {
   const verEmailHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setVerEmail(e.target.value);
   };
-
-  const handleCertification = () => {
-    console.log("인증요청");
-    axios
-      .post(`http://211.188.52.119:8080/api/emails `, { email }) // /api/proxy?url=${encodeURIComponent("https://211.188.52.119:8080/api/emails)"
-      .then((res) => {
-        setMsg(res.data.result);
-        setIsSuccess(res.data.isSuccess);
-      });
+  const handleCertification = async () => {
+    try {
+      console.log("인증요청");
+      const res = await api.post(`/api/emails`, { email }); // /api/proxy?url=${encodeURIComponent("https://211.188.52.119:8080/api/emails)"
+      setMsg(res.data.result);
+      setIsSuccess(res.data.isSuccess);
+    } catch (error) {
+      console.error("인증 요청 실패:", error);
+    }
   };
-  const handleOkay = () => {
-    axios
-      .post(`http://211.188.52.119:8080/api/emails/verify`, {
-        //  /api/proxy?url=${encodeURIComponent("https://211.188.52.119:8080/api/emails/verify")}
+
+  const handleOkay = async () => {
+    try {
+      const res = await api.post(`/api/emails/verify`, {
+        // /api/proxy?url=${encodeURIComponent("https://211.188.52.119:8080/api/emails/verify")}
         accountId: email,
         authCode: verEmail,
-      })
-      .then((res) => {
-        setVerify(res.data.isSuccess);
       });
+      setVerify(res.data.isSuccess);
+    } catch (error) {
+      console.error("인증 확인 실패:", error);
+    }
   };
 
-  const buttonClick = () => {
-    axios.post(`http://211.188.52.119:8080/api/emails/password`, { email });
+  const buttonClick = async () => {
+    try {
+      await api.post(`/api/emails/password`, { email });
+    } catch (error) {
+      console.error("비밀번호 전송 실패:", error);
+    }
   };
-
   return (
     <div className={styles.container}>
       <BackHeader />
@@ -80,7 +86,13 @@ export default function MissingId() {
           rightBox={
             <div className={styles.Reqcall} onClick={handleOkay}>
               {verify && (
-                <img className={styles.checkimg} src="/smallcheck.svg" />
+                <Image
+                  className={styles.checkimg}
+                  src="/smallcheck.svg"
+                  alt="체크 이미지"
+                  width={24}
+                  height={24}
+                ></Image>
               )}
               <span>확인</span>
             </div>

@@ -5,9 +5,9 @@ import styles from "./cash.module.css";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useUserGet from "../hooks/useUserGet";
-import axios from "axios";
 import Cookies from "js-cookie";
 import AdminModal from "../components/AdminModal/AdminModal";
+import api from "@/app/lib/api";
 
 const Page = () => {
   useLayoutEffect(() => {
@@ -75,7 +75,7 @@ const Page = () => {
     formData.append("listType", "removePointUserList");
     formData.append("userId", userId);
     formData.append("pointId", pointId.toString());
-    axios
+    api
       .post("http://211.188.52.119:8080/api/point/updateComment", formData, {
         headers: {
           Authorization: `Bearer ${accessToken}`,

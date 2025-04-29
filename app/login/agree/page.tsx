@@ -5,6 +5,7 @@ import styles from "./agree.module.css";
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import AgreeBar from "../components/agreeBar/AgreeBar";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 
 const Page = () => {
   const [isChecked1, setIsChecked1] = useState(false);
@@ -30,7 +31,13 @@ const Page = () => {
           <p className="pb-4">누군가의 영감으로</p>
           <span>끄적끄적</span>
         </div>
-        <img className="pb-24" src="/agree.svg" alt="agree" />
+        <Image
+          className="pb-24"
+          src="/agree.svg"
+          alt="agree"
+          width={200}
+          height={200}
+        ></Image>
         <div className={styles.agreeBox}>
           <AgreeBar
             type={1}

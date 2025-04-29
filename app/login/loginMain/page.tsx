@@ -30,7 +30,13 @@ export default function LoginMain() {
         <p className={styles.line1}>당신의 한줄이</p>
         <p className={styles.line2}>누군가의 영감으로</p>
         <p className={styles.mainTitle}>끄적끄적</p>
-        <img src="/loginMain.svg" className={styles.mainLogo} />
+        <Image
+          src="/loginMain.svg"
+          alt="메인 로고"
+          className={styles.mainLogo}
+          width={200}
+          height={200}
+        ></Image>
         <div className={styles.kakao}>
           <Button
             label={
