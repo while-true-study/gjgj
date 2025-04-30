@@ -13,7 +13,7 @@ interface InputProps {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   maxLength?: number;
-  value?: string; // 추가: 부모 컴포넌트에서 value 관리
+  value?: string; // 부모 컴포넌트에서 value 관리
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
@@ -62,8 +62,8 @@ const Input = ({
       <input
         onKeyDown={onKeyDown}
         type={type}
-        value={value} // 부모에서 전달받은 값 사용
-        onChange={handleChange} // 수정된 핸들러 적용
+        value={value}
+        onChange={handleChange}
         className={`${styles.input} ${inputState ? styles.inputIn : ""}`}
         {...rest}
       />

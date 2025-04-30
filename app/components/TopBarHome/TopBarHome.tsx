@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./TopBarHome.module.css";
 import Link from "next/link";
+import Image from "next/image";
 
 const TopBarHome = () => {
   const searchClick = () => {
@@ -17,7 +18,14 @@ const TopBarHome = () => {
       </span>
       <div className={styles.rigthbox}>
         <Link href="/home/homeSearch.html">
-          <img src="/TopBarHome/search.svg" onClick={searchClick}></img>
+          {/* <img src="/TopBarHome/search.svg" onClick={searchClick}></img> */}
+          <Image
+            src="/TopBarHome/search.svg"
+            onClick={searchClick}
+            alt="검색 이미지"
+            width={30}
+            height={30}
+          ></Image>
         </Link>
         {/* <Link href="/home/homeNotice">
           <img

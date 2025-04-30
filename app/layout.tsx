@@ -27,7 +27,7 @@ export default function RootLayout({
         ></script>
         <link rel="icon" href="/logo.svg" type="image/svg+xml"></link>
       </Head>
-      <body className="flex justify-center items-center min-h-screen bg-gray-100">
+      <body className="flex justify-center items-center min-h-screen  bg-gray-200">
         <ReduxProvider>
           <div
             className={`${styles.reative} w-[375px] max-h-[812px] h-[90vh] min-h-[50vh] bg-white shadow-lg rounded-lg overflow-auto scrollbar-hide relative`}

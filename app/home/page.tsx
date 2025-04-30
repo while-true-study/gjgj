@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
+import Image from "next/image";
 
 export default function LoginMain() {
   const settings = {
@@ -37,7 +38,7 @@ export default function LoginMain() {
         <div className="p-5">
           <Slider {...settings}>
             <div>
-              <img
+              {/* <img
                 src="/home/service.svg"
                 alt="service 1"
                 style={{
@@ -53,12 +54,52 @@ export default function LoginMain() {
                     "_blank"
                   )
                 }
+              /> */}
+              <Image
+                src="/home/service.svg"
+                alt="service 1"
+                width={0}
+                height={0}
+                sizes="100vw"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                }}
+                onClick={() =>
+                  window.open(
+                    "https://tin-brace-281.notion.site/1b226dab439180d488c0e2c75ba12355",
+                    "_blank"
+                  )
+                }
               />
             </div>
+
             <div>
-              <img
+              {/* <img
                 src="/home/service2.svg"
                 alt="service 2"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                }}
+                onClick={() =>
+                  window.open(
+                    "https://tin-brace-281.notion.site/1b226dab43918079af49ea88363bbf3e?pvs=4"
+                  )
+                }
+              /> */}
+              <Image
+                src="/home/service2.svg"
+                alt="service 2"
+                width={0}
+                height={0}
+                sizes="100vw"
                 style={{
                   width: "100%",
                   height: "100%",

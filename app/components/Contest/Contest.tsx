@@ -2,10 +2,11 @@
 
 import React, { useState } from "react";
 import styles from "./Contest.module.css";
-import axios from "axios";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Modal from "../modal/Modal";
+import api from "@/app/lib/api";
+import Image from "next/image";
 
 interface inputprops {
   boardId: number;
@@ -28,8 +29,12 @@ const Contest = ({
   comment,
   Iloveit,
   category,
-  loveChange,
-}: inputprops) => {
+}: // loveChange,
+inputprops) => {
+  const [isLiking, setIsLiking] = useState(false); // 요청 중 여부
+  const [likeCount, setLikeCount] = useState(loveit); // 좋아요 수
+  const [isLiked, setIsLiked] = useState(Iloveit); // 내가 누른 상태
+
   const router = useRouter();
   const accessToken = Cookies.get("accessToken");
   const categoryNames = [
@@ -53,29 +58,55 @@ const Contest = ({
     setShowModal(false);
   };
 
-  const heratClick = () => {
+  const heartClick = async () => {
+    if (isLiking) return; // 연결중이면 나가기 (PV연산같음)
+    setIsLiking(true);
+
     if (!accessToken) {
       // router.push("/login/input");
       // alert("로그인이 필요한 서비스입니다.");
       setShowModal(true);
+      setIsLiking(false); // 로그인 안되있으면 false로 하고 나가기
       return;
     }
-    axios
-      .post(
-        "http://211.188.52.119:8080/api/good",
+    // optimistic update 방식
+    const prevLiked = isLiked;
+    const prevCount = likeCount;
+
+    setIsLiked(!isLiked);
+    setLikeCount((prev) => prev + (isLiked ? -1 : 1));
+
+    try {
+      api.post(
+        "/api/good",
         { objectId: boardId, type: "board" },
         { headers: { Authorization: `Bearer ${accessToken}` } }
-      )
-      .then((res) => {
-        console.log("좋아요 성공", res);
-        if (loveChange) {
-          loveChange();
-        }
-      })
-      .catch((err) => {
-        console.error("실패", err);
-      });
+      );
+    } catch (err) {
+      console.error("좋아요 실패", err);
+
+      setIsLiked(prevLiked);
+      setLikeCount(prevCount);
+    } finally {
+      setIsLiking(false); // 다 끝나면 돌려놓기
+    }
   };
+
+  // api
+  // .post(
+  //   "/api/good",
+  //   { objectId: boardId, type: "board" },
+  //   { headers: { Authorization: `Bearer ${accessToken}` } }
+  // )
+  // .then((res) => {
+  //   console.log("좋아요 성공", res);
+  //   if (loveChange) {
+  //     loveChange();
+  //   }
+  // })
+  // .catch((err) => {
+  //   console.error("실패", err);
+  // });
 
   return (
     <div className={styles.content}>
@@ -101,25 +132,44 @@ const Contest = ({
       </div>
       <div className={styles.rightBox}>
         <div className={styles.Box}>
-          <img
+          {/* <img
             className="cursor-pointer"
-            onClick={heratClick}
+            onClick={heartClick}
             src={
               Iloveit ? "/IngContests/heart.svg" : "/IngContests/noHeart.svg"
             }
             alt="하트"
-          ></img>
+          ></img> */}
+          <Image
+            className="cursor-pointer"
+            onClick={heartClick}
+            src={
+              // Iloveit ? "/IngContests/heart.svg" : "/IngContests/noHeart.svg"
+              isLiked ? "/IngContests/heart.svg" : "/IngContests/noHeart.svg"
+            }
+            alt="하트"
+            width={24}
+            height={24}
+          ></Image>
         </div>
         <div className={styles.Box}>
-          <span>{loveit}</span>
+          <span>{likeCount}</span>
         </div>
         <div className={styles.Box}>
-          <img
+          {/* <img
             onClick={commentClick}
             className="cursor-pointer"
             src="/IngContests/coment.svg"
             alt="댓글"
-          ></img>
+          ></img> */}
+          <Image
+            onClick={commentClick}
+            className="cursor-pointer"
+            src="/IngContests/coment.svg"
+            alt="댓글"
+            width={24}
+            height={24}
+          ></Image>
         </div>
         <div className={styles.Box}>
           <span>{comment}</span>

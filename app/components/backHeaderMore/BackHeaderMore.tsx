@@ -3,6 +3,7 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import styles from "./BackHeader.module.css";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface BackHeaderProps {
   setViewModal: Dispatch<SetStateAction<boolean>>;
@@ -27,18 +28,34 @@ const BackHeaderMore: React.FC<BackHeaderProps> = ({ setViewModal }) => {
   return (
     <div className={styles.navContainer}>
       <button className={styles.backButton} onClick={handleBackClick}>
-        <img src="/back.svg" alt="뒤로가기" className={styles.icon} />
+        {/* <img src="/back.svg" alt="뒤로가기" className={styles.icon} /> */}
+        <Image
+          src="/back.svg"
+          alt="뒤로가기"
+          className={styles.icon}
+          width={30}
+          height={30}
+        ></Image>
       </button>
-      <img
+      <Image
         src="/menu.svg"
         alt="메뉴"
         className={styles.icon}
         onClick={toggleMenu}
-      ></img>
+        width={30}
+        height={30}
+      ></Image>
+      {/* <img
+        src="/menu.svg"
+        alt="메뉴"
+        className={styles.icon}
+        onClick={toggleMenu}
+      ></img> */}
       {view && (
         <div onClick={handleMenuClick} className={styles.menuBox}>
           <span>삭제</span>
-          <img src="/delete.svg" alt="삭제" width={24}></img>
+          <Image src="/delete.svg" alt="삭제" width={24} height={24}></Image>
+          {/* <img src="/delete.svg" alt="삭제" width={24}></img> */}
         </div>
       )}
     </div>

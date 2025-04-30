@@ -11,7 +11,6 @@ import styles from "./signUp.module.css";
 
 export default function SignUp2() {
   const router = useRouter();
-
   const [step, setStep] = useState(1);
   const [form, setForm] = useState({
     name: "",
@@ -92,7 +91,6 @@ export default function SignUp2() {
   return (
     <div className="flex flex-col h-full p-5">
       <BackHeader />
-
       {step === 1 && (
         <>
           <div className="flex mr-auto items-center mt-8">
@@ -141,7 +139,13 @@ export default function SignUp2() {
               rightBox={
                 <div className={styles.Reqcall} onClick={verifyEmail}>
                   {verify && (
-                    <img className={styles.checkimg} src="/smallcheck.svg" />
+                    <Image
+                      className={styles.checkimg}
+                      src="/smallcheck.svg"
+                      alt="체크됨"
+                      width={24}
+                      height={24}
+                    ></Image>
                   )}
                   <span>확인</span>
                 </div>

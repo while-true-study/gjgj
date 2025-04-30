@@ -4,6 +4,7 @@ import React from "react";
 import styles from "./Complete.module.css";
 import Link from "next/link";
 import { Button } from "../button/button";
+import Image from "next/image";
 
 interface complete {
   title: string | null;
@@ -14,7 +15,7 @@ const Complete = ({ title, type }: complete) => {
   return (
     <div className={styles.content}>
       <div className={styles.body}>
-        <img src="/check.svg" alt="" />
+        <Image src="/check.svg" alt="체크됨" width={24} height={24}></Image>
         <span>{title} 완료</span>
         {type === 1 ? (
           <div className={styles.marginbox}>
