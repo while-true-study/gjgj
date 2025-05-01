@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
     config.resolve.alias["@redux"] = path.join(__dirname, "redux");
     return config;
   },
-  output: "export",
+  // output: "export",
   images: {
     unoptimized: true, // ✅ 이미지 최적화 비활성화
   },

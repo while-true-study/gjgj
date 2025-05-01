@@ -77,14 +77,13 @@ inputprops) => {
     setLikeCount((prev) => prev + (isLiked ? -1 : 1));
 
     try {
-      api.post(
+      await api.post(
         "/api/good",
         { objectId: boardId, type: "board" },
         { headers: { Authorization: `Bearer ${accessToken}` } }
       );
     } catch (err) {
       console.error("좋아요 실패", err);
-
       setIsLiked(prevLiked);
       setLikeCount(prevCount);
     } finally {
