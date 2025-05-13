@@ -3,38 +3,41 @@
 import BackHeader from "@/app/components/backHeader/BackHeader";
 import React, { useState } from "react";
 import styles from "./homeSearch.module.css";
-import axios from "axios";
 import Cookies from "js-cookie";
 import { HomeListItem } from "@/types";
 import Contest from "@/app/components/Contest/Contest";
+import api from "@/app/lib/api";
+import Image from "next/image";
 
 const Page = () => {
-  const [query, setQuery] = useState<string>("");
-  const [hasSearched, setHasSearched] = useState(false);
-  // const accessToken = Cookies.get("accessToken");
-  const userId = Cookies.get("userId");
-  const [data, setData] = useState<HomeListItem[]>([]);
+  const [query, setQuery] = useState<string>(""); // 검색하고자 하는 문자열 저장하는 곳
+  const [hasSearched, setHasSearched] = useState(false); // 검색 했나 안했나 처음은 false 검색 한번이라도 하면 true됌
+  const userId = Cookies.get("userId"); // userId확인
+  const [data, setData] = useState<HomeListItem[]>([]); // 검색 정보를 받을 배열
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Enter키도 검색 할 수 있도록
     if (e.key === "Enter") {
       handleSubmit();
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    // 검색하기
     setHasSearched(true);
-    axios
-      .get("http://211.188.52.119:8080/api/board/searchBoardList", {
+    try {
+      const res = await api.get("/api/board/searchBoardList", {
         params: {
           userId: userId,
           search: query,
         },
-      })
-      .then((res) => {
-        setData(res.data.result);
-        console.log(data);
       });
+      setData(res.data.result);
+    } catch (err) {
+      console.log("검색 실패함", err);
+    }
   };
+
   return (
     <div className={styles.searchBox}>
       <BackHeader></BackHeader>
@@ -52,7 +55,12 @@ const Page = () => {
           onChange={(e) => setQuery(e.target.value)}
         ></input>
         <button onClick={handleSubmit} className={styles.searchButton}>
-          <img src="/TopBarHome/search.svg" />
+          <Image
+            src="/TopBarHome/search.svg"
+            alt="검색하기 아이콘"
+            width={30}
+            height={30}
+          ></Image>
         </button>
       </div>
       {data.length != 0 && (
@@ -62,27 +70,36 @@ const Page = () => {
       )}
       <div className={styles.content}>
         {hasSearched &&
-          (data.length === 0 ? (
+          (data.length === 0 ? ( // data안이 없으면
             <div className={styles.box}>
-              <img src="/home/!.svg" alt="결과 없음" />
+              <Image
+                src="/home/!.svg"
+                alt="결과 없음"
+                width={120}
+                height={120}
+              ></Image>
               <p>검색 결과가 없어요.</p>
               <p>다른 키워드로 검색해 보세요.</p>
             </div>
           ) : (
             <div>
-              {data.map((i) => (
-                <Contest
-                  key={i.boardId}
-                  boardId={i.boardId}
-                  organizer={i.nickName}
-                  Dday={i.endCount}
-                  title={i.title}
-                  loveit={i.goodCount}
-                  comment={i.replyCount}
-                  Iloveit={i.goodChk === 0 ? false : true}
-                  category={i.categoryId}
-                />
-              ))}
+              {data.map(
+                (
+                  i // data안에 뭐라도 있게되면
+                ) => (
+                  <Contest
+                    key={i.boardId}
+                    boardId={i.boardId}
+                    organizer={i.nickName}
+                    Dday={i.endCount}
+                    title={i.title}
+                    loveit={i.goodCount}
+                    comment={i.replyCount}
+                    Iloveit={i.goodChk === 0 ? false : true}
+                    category={i.categoryId}
+                  />
+                )
+              )}
             </div>
           ))}
       </div>

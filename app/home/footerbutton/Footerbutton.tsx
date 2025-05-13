@@ -6,10 +6,10 @@ import Cookies from "js-cookie";
 import Modal from "@/app/components/modal/Modal";
 
 const Footerbutton = () => {
-  const accessToken = Cookies.get("accessToken");
-
-  const [showModal, setShowModal] = useState<boolean>(false);
+  const accessToken = Cookies.get("accessToken"); // Token확인하기
+  const [showModal, setShowModal] = useState<boolean>(false); // 모달 관리 State임 처음에는 false
   const closeModal = () => {
+    // 모달 닫기
     setShowModal(false);
   };
 
@@ -29,7 +29,7 @@ const Footerbutton = () => {
           <span className={styles.text}>공모전 열기</span>
         </div>
       </Link>
-      {showModal ? (
+      {showModal ? ( // showModal이 true면 모달이 뜸
         <Modal
           title="로그인이 필요한 서비스입니다"
           fircontent="계속하시려면 로그인 해주세요."

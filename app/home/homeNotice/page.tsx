@@ -4,6 +4,7 @@ import Notice from "../Notice/Notice";
 
 const Page = () => {
   return (
+    // 알람 페이지 지금 구현 X
     <div className="p-5">
       <BackHeader></BackHeader>
       <div className="pt-5">
